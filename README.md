@@ -14,7 +14,7 @@ Use the address below to access the test server. It's a simple proxy so we can w
 - [Get user balances (SubscribeBalance)](#get-user-balances-subscribebalance)
 
 ## Get Categories (SubscribeSports)
-Returns all active categories (have active markets).
+Returns all active categories (have active/inplay markets).
 
 Request:
 ```jsonc
@@ -63,7 +63,7 @@ Response:
 ````
 
 ## Get Competitions (SubscribeCompetitions)
-Returns all active competitions for all categories (have active markets).
+Returns all active competitions for all categories (have active/inplay markets).
 
 Request:
 ```jsonc
