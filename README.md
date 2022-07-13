@@ -6,12 +6,12 @@ Use the address below to access the test server. It's a simple proxy so we can w
 
 ## Index
 - [Get Categories (SubscribeSports)](#get-categories-subscribesports)
-
 - [Get Competitions (SubscribeCompetitions)](#get-competitions-subscribecompetitions)
-
 - [Get Markets and Orderbooks (SubscribeMarketsByFilter)](#get-markets-and-orderbooks-subscribemarketsbyfilter)
-
-- [Get user balances (SubscribeBalance)](#get-user-balances-subscribebalance)
+- [Get Market by ID (GetMarketByID)](#get-market-by-id-getmarketbyid)
+- [Get User Balances (SubscribeBalance)](#get-user-balances-subscribebalance)
+- [Get Matches (SubscribeMatches)](#get-matches-subscribematches)
+- [Get unmatched user orders (SubscribeUOrders)](#get-unmatched-user-orders-subscribeuorders)
 
 ## Get Categories (SubscribeSports)
 Returns all active categories (have active markets).
@@ -407,7 +407,7 @@ Response (Orderbook):
 ```
 
 
-## Get user balances (SubscribeBalance)
+## Get User Balances (SubscribeBalance)
 Returns all user balances and subscribe to future changes.
 
 Request:
@@ -457,3 +457,245 @@ Response (Error):
     "Error": "User does not exist"
 }
 ```
+
+## Get Matches (SubscribeMatches)
+
+Returns all matched user orders.
+
+Request:
+```jsonc
+{
+  "Type": "SubscribeMatches",
+  "Nonce": 5,
+  "RequestTime": "2022-07-13T18:54:23.5043806Z",
+  "UserID": 1,
+  "NodeID": 1,
+  "Data": {
+	"FromDate": "9999-12-31T23:59:59.9999999",
+    "ToDate": "9999-12-31T23:59:59.9999999",
+    "PageSize": 100,
+    "SubscribeUpdates": true
+  }
+}
+```
+
+Response:
+```jsonc
+{
+  "State": "Success",
+  "Type": "SubscribeMatches",
+  "Nonce": 5,
+  "Count": 1,
+  "Data": [
+    {
+      "UserOrder": {
+        "MarketID": "d81e889f-7b98-4229-941c-ffefac4ed7c3",
+        "OrderID": "aeda7c0a-5dbb-48f2-8ffa-f768b706c51b",
+        "Note": ";2"
+      },
+      "MatchedOrder": {
+        "ID": "aeda7c0a-5dbb-48f2-8ffa-f768b706c51b",
+        "State": 1,
+        "CreationDate": "2022-07-11T16:07:41.8473882Z",
+        "Price": 1.9,
+        "Amount": 1.0
+      }
+    }
+  ]
+}
+```
+
+Response (Error):
+```jsonc
+{
+    "State": "Error",
+    "Type": "SubscribeMatches",
+    "Error": "User does not exist"
+}
+```
+
+## Get unmatched user orders (SubscribeUOrders)
+
+Returns all unmatched user orders.
+
+Request:
+```jsonc
+{
+  "Type": "SubscribeUOrders",
+  "Nonce": 6,
+  "RequestTime": "2022-07-13T19:01:27.772938Z",
+  "UserID": 1,
+  "NodeID": 1,
+  "Data": {
+    "FromDate": "9999-12-31T23:59:59.9999999",
+    "ToDate": "9999-12-31T23:59:59.9999999",
+    "PageSize": 100,
+    "SubscribeUpdates": true,
+    "Types":[
+	    "Default",
+	    "Same"
+    ]
+  }
+}
+```
+Possible Types:
+
+* Default
+* PostOnly
+* KillOrFill
+* Same
+
+
+Response:
+```jsonc
+{
+  {
+    "State": "Success",
+    "Type": "SubscribeUOrders",
+    "Nonce": 6,
+    "Count": 1,
+    "Data": [
+      {
+        "UserOrder": {
+          "HiddenLUChange": 637931524616597824,
+          "MarketID": "d81e889f-7b98-4229-941c-ffefac4ed7c3",
+          "OrderID": "ce8bdedc-b345-44f3-b54e-11ea3f44975f"
+        },
+        "UnmatchedOrder": {
+          "SUID": "370567508BA10F0E42BD414AC93AC56A36C8702B7F94F32762E22970FCAE32DC",
+          "Price": 1.7,
+          "RemAmount": 2.0,
+          "Amount": 2.0,
+          "ID": "ce8bdedc-b345-44f3-b54e-11ea3f44975f",
+          "makerCT": 6000,
+          "UserID": 1
+        }
+      },
+      {
+        "UserOrder": {
+          "HiddenLUChange": 637931524616708953,
+          "Side": 1,
+          "MarketID": "d81e889f-7b98-4229-941c-ffefac4ed7c3",
+          "OrderID": "b26a4789-81d0-4a5d-842b-392aac17c4d2"
+        },
+        "UnmatchedOrder": {
+          "SUID": "1CFCC078DF55E3901DB706ED6BEB0A6781DC273D35EA1C7BECBDA9B9CF2A8AED",
+          "Price": 2.5,
+          "RemAmount": 3.0,
+          "Side": 1,
+          "Amount": 3.0,
+          "ID": "b26a4789-81d0-4a5d-842b-392aac17c4d2",
+          "makerCT": 6000,
+          "UserID": 1
+        }
+      },
+      {
+        "UserOrder": {
+          "HiddenLUChange": 637931524616219927,
+          "MarketID": "d81e889f-7b98-4229-941c-ffefac4ed7c3",
+          "OrderID": "c0c025a2-dc39-4c5a-afaf-40c975ac014e"
+        },
+        "UnmatchedOrder": {
+          "SUID": "4A4BC5B7477D1953B92D081D773CD6630846E78910EAE2DBE2B3F47835849B64",
+          "Price": 1.5,
+          "RemAmount": 3.0,
+          "Amount": 3.0,
+          "ID": "c0c025a2-dc39-4c5a-afaf-40c975ac014e",
+          "makerCT": 6000,
+          "UserID": 1
+        }
+      },
+      {
+        "UserOrder": {
+          "HiddenLUChange": 637931524616651548,
+          "Side": 1,
+          "MarketID": "d81e889f-7b98-4229-941c-ffefac4ed7c3",
+          "OrderID": "dfd965a8-554e-495f-9c96-fb9612e90d22"
+        },
+        "UnmatchedOrder": {
+          "SUID": "201540BE64FCE9D131AC3D5D123E9C47285DEFAB0192B7ACC9F583354EBDD759",
+          "Price": 2.3,
+          "RemAmount": 2.0,
+          "Side": 1,
+          "Amount": 2.0,
+          "ID": "dfd965a8-554e-495f-9c96-fb9612e90d22",
+          "makerCT": 6000,
+          "UserID": 1
+        }
+      }
+    ]
+  }
+}
+```
+
+Response (Error):
+```jsonc
+{
+    "State": "Error",
+    "Type": "SubscribeUOrders",
+    "Error": "User does not exist"
+}
+```
+
+## Get Market by ID (GetMarketByID)
+
+Returns a market.
+
+Request:
+```jsonc
+{
+  "Type": "GetMarketByID",
+  "Nonce": 8,
+  "RequestTime": "2022-07-13T19:16:03.0247397Z",
+  "UserID": -1,
+  "NodeID": 1,
+  "Data": { "mid": "d81e889f-7b98-4229-941c-ffefac4ed7c3" }
+}
+```
+
+Response:
+```jsonc
+{
+  "State": "Success",
+  "Type": "GetMarketByID",
+  "Nonce": 8,
+  "Data": {
+    "Margin": 103.268,
+    "ID": "d81e889f-7b98-4229-941c-ffefac4ed7c3",
+    "LastCh": "2022-07-11T16:07:42.1345748Z",
+    "LastSoftCh": "2022-07-11T16:07:42.1345748Z",
+    "MainNodeID": 1,
+    "Comp": "Testcompetition",
+    "Descr": "TestDescript",
+    "Title": "TestMarket",
+    "Cat": 12,
+    "ClosD": "2022-08-14T00:00:00",
+    "SettlD": "2022-08-15T00:00:00",
+    "Ru": [
+      {
+        "VolMatched": 1.9,
+        "Name": "ru1",
+        "mCT": 6000
+      },
+      {
+        "Name": "ru2",
+        "mCT": 6000
+      }
+    ],
+    "Period": 1,
+    "Creator": 1,
+    "Settler": { "1": true },
+    "SetFin": 24
+  }
+}
+```
+
+Response (Error):
+```jsonc
+{
+    "State": "Error",
+    "Type": "GetMarketByID",
+    "Error": "//TODO"
+}
+```
+
