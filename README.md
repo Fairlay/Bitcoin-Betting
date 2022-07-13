@@ -5,6 +5,8 @@ Use the address below to access the test server. It's a simple proxy so we can w
 > `wss://proxy-ws.fairlay.com`
 
 ## Index
+- [Server Time (ReturnHeartbeat)](#server-time-returnheartbeat)
+
 - [Get Categories (SubscribeSports)](#get-categories-subscribesports)
 
 - [Get Competitions (SubscribeCompetitions)](#get-competitions-subscribecompetitions)
@@ -12,6 +14,18 @@ Use the address below to access the test server. It's a simple proxy so we can w
 - [Get Markets and Orderbooks (SubscribeMarketsByFilter)](#get-markets-and-orderbooks-subscribemarketsbyfilter)
 
 - [Get user balances (SubscribeBalance)](#get-user-balances-subscribebalance)
+
+## Server Heartbeat (ReturnHeartbeat)
+Returns the current server time in ticks. First directly after connecting then with an interval of one minute. The server time is returned as the "Nonce" value.
+Response:
+```jsonc
+{
+    "State": "Success",
+    "Type": "ReturnHeartbeat",
+    "Nonce": "252345234523453245",
+    // Server time in ticks / 10
+}
+````
 
 ## Get Categories (SubscribeSports)
 Returns all active categories (have active markets).
