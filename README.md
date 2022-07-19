@@ -114,9 +114,8 @@ Response:
 ```
 
 ## Create an account (AccountCreation)
-Creates an account.
+Creating  an account is only possible through an existing account as a transaction fee is involved for creating it. The Nodes accept both ED25519 and ECDSA signatures. If you like to have an account that signs requests via ECDSA, set IsETH to true on account creation.
 
-Default value of "IsETH" is false, if it is not sent.
 
 Request:
 ```jsonc
@@ -125,9 +124,9 @@ Request:
   "Nonce": 1,
   "SignatureUser": "1HXMLy1s4zWDnu...SEFER+R2Mc/KMIfhY+OvDe8Nfuw34rECA==",
   "Data": {
-    "NewAccountID": 1,
+    "NewAccountID": 2,
     "PubKey": "3mVC3iAAQA...to2dk00ekGqojg==",
-    "IsETH":true,
+    "IsETH":false,
     "UserID": 1,
     "NodeID": 1,
     "CreatedByUser": "2022-07-19T11:01:25.8980825Z"
@@ -142,9 +141,9 @@ Response:
    "Type": "AccountCreation",
    "Nonce": 1,
    "Data": {
-     "NewAccountID": 1,
+     "NewAccountID": 2,
      "PubKey": "3mVC3iAAQAA8SYKHTVi1MMIf7L+EIJL5jIOov5oNto2dk00ekGqojg==",
-     "IsETH":true,
+     "IsETH":false,
      "UserID": 1,
      "NodeID": 1,
      "CreatedByUser": "2022-07-19T11:01:25.8980825Z"
@@ -602,7 +601,7 @@ Response (Orderbook):
 
 
 ## Get User Balances (SubscribeBalance)
-Returns all user balances and subscribe to future changes.
+Returns current user balance and subscribes to future balance changes. This does not require autentication.
 
 Request:
 ```jsonc
@@ -708,9 +707,9 @@ Response (Error):
 }
 ```
 
-## Get unmatched user orders (SubscribeUOrders)
+## Get unmatched orders (SubscribeUOrders)
 
-Returns all unmatched user orders.
+Returns unmatched orders. This does not require autentication.
 
 Request:
 ```jsonc
