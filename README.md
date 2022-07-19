@@ -6,7 +6,9 @@ Use the address below to access the test server. It's a simple proxy so we can w
 
 ## Index
 - [Server Time (ReturnHeartbeat)](#server-time-returnheartbeat)
-
+- [Create Market (MarketCreation)](#create-market-marketcreation)
+- [Create an account (AccountCreation)](#create-an-account-accountcreation)
+- [Order alteration (OrderAlteration)](#order-alteration)
 - [Get Categories (SubscribeSports)](#get-categories-subscribesports)
 - [Get Competitions (SubscribeCompetitions)](#get-competitions-subscribecompetitions)
 - [Get Markets and Orderbooks (SubscribeMarketsByFilter)](#get-markets-and-orderbooks-subscribemarketsbyfilter)
@@ -26,6 +28,184 @@ Response:
     // Server time in ticks / 10
 }
 ````
+
+## Create Market (MarketCreation)
+Creates a market.
+Request:
+```jsonc
+{
+  "Type": "MarketCreation",
+  "Nonce": 3,
+  "SignatureUser": "FOOuU5oibmQatnBx4VrxMvwA6...P8bqm7J+38gz+xP945a4Cg==",
+  "Data": {
+    "ID": "2646b51a-bd6b-498d-b246-ae80ecbc3f3c",
+    "Market": {
+      "ID": "d81e889f-7b98-4229-941c-ffefac4ed7c3",
+      "MainNodeID": 1,
+      "Comp": "Testcompetition",
+      "CreationDate": "2022-07-19T11:05:17.5852297Z",
+      "Descr": "TestDescript",
+      "Title": "TestMarket",
+      "Cat": 12,
+      "ClosD": "2022-08-15T00:00:00",
+      "SettlD": "2022-08-16T00:00:00",
+      "Ru": [
+        {
+          "Name": "ru1",
+          "mCT": 6000
+        },
+        {
+          "Name": "ru2",
+          "mCT": 6000
+        }
+      ],
+      "Period": 1,
+      "Creator": 1,
+      "Settler": { "1": true },
+      "ComRecip": { "1": 0.5 },
+      "SetFin": 24
+    },
+    "UserID": 1,
+    "NodeID": 1,
+    "CreatedByUser": "2022-07-19T11:05:17.5852297Z"
+  }
+}
+```
+
+Response:
+```jsonc
+  {
+    "State": "Success",
+    "Type": "MarketCreation",
+    "Nonce": 3,
+    "Data": {
+      "ID": "2646b51a-bd6b-498d-b246-ae80ecbc3f3c",
+      "Market": {
+        "ID": "d81e889f-7b98-4229-941c-ffefac4ed7c3",
+        "MainNodeID": 1,
+        "Comp": "Testcompetition",
+        "CreationDate": "2022-07-19T11:05:17.5852297Z",
+        "Descr": "TestDescript",
+        "Title": "TestMarket",
+        "Cat": 12,
+        "ClosD": "2022-08-15T00:00:00",
+        "SettlD": "2022-08-16T00:00:00",
+        "Ru": [
+          {
+            "Name": "ru1",
+            "mCT": 6000
+          },
+          {
+            "Name": "ru2",
+            "mCT": 6000
+          }
+        ],
+        "Period": 1,
+        "Creator": 1,
+        "Settler": { "1": true },
+        "ComRecip": { "1": 0.5 },
+        "SetFin": 24
+      },
+      "UserID": 1,
+      "NodeID": 1,
+      "CreatedByUser": "2022-07-19T11:05:17.5852297Z"
+    }
+  }
+```
+
+## Create an account (AccountCreation)
+Creates an account.
+
+Default value of "IsETH" is false, if it is not sent.
+
+Request:
+```jsonc
+{
+  "Type": "AccountCreation",
+  "Nonce": 1,
+  "SignatureUser": "1HXMLy1s4zWDnu...SEFER+R2Mc/KMIfhY+OvDe8Nfuw34rECA==",
+  "Data": {
+    "NewAccountID": 1,
+    "PubKey": "3mVC3iAAQA...to2dk00ekGqojg==",
+    "IsETH":true,
+    "UserID": 1,
+    "NodeID": 1,
+    "CreatedByUser": "2022-07-19T11:01:25.8980825Z"
+  }
+}
+```
+
+Response:
+```jsonc
+{
+   "State": "Success",
+   "Type": "AccountCreation",
+   "Nonce": 1,
+   "Data": {
+     "NewAccountID": 1,
+     "PubKey": "3mVC3iAAQAA8SYKHTVi1MMIf7L+EIJL5jIOov5oNto2dk00ekGqojg==",
+     "IsETH":true,
+     "UserID": 1,
+     "NodeID": 1,
+     "CreatedByUser": "2022-07-19T11:01:25.8980825Z"
+   }
+}
+```
+
+## Change or create an order (OrderAlteration)
+Used to create or change an order.
+
+Request:
+```jsonc
+{
+  "Type": "OrderAlteration",
+  "Nonce": 4,
+  "SignatureUser": "rvPmrUb/Sx/HpuQlKAvBD...LWFpOIsyah5XQL6APZW06mBE8CA==",
+  "Data": {
+    "UserOrder": {
+      "MarketID": "d81e889f-7b98-4229-941c-ffefac4ed7c3",
+      "OrderID": "c0c025a2-dc39-4c5a-afaf-40c975ac014e"
+    },
+    "UnmatchedOrder": {
+      "Price": 1.5,
+      "RemAmount": 3.0,
+      "Amount": 3.0,
+      "ID": "c0c025a2-dc39-4c5a-afaf-40c975ac014e",
+      "makerCT": 6000,
+      "UserID": 1
+    },
+    "UserID": 1,
+    "NodeID": 1,
+    "CreatedByUser": "2022-07-19T11:08:48.9997487Z"
+  }
+}
+```
+
+Response:
+```jsonc
+{
+    "State": "Success",
+    "Type": "OrderAlteration",
+    "Nonce": 4,
+    "Data": {
+      "UserOrder": {
+        "MarketID": "d81e889f-7b98-4229-941c-ffefac4ed7c3",
+        "OrderID": "c0c025a2-dc39-4c5a-afaf-40c975ac014e"
+      },
+      "UnmatchedOrder": {
+        "Price": 1.5,
+        "RemAmount": 3.0,
+        "Amount": 3.0,
+        "ID": "c0c025a2-dc39-4c5a-afaf-40c975ac014e",
+        "makerCT": 6000,
+        "UserID": 1
+      },
+      "UserID": 1,
+      "NodeID": 1,
+      "CreatedByUser": "2022-07-19T11:08:48.9997487Z"
+    }
+  }
+```
 
 ## Get Categories (SubscribeSports)
 Returns all active categories (have active markets).
