@@ -169,6 +169,7 @@ Request:
       "Price": 1.5,
       "RemAmount": 3.0,
       "Amount": 3.0,
+      "State":0,
       "ID": "c0c025a2-dc39-4c5a-afaf-40c975ac014e",
       "makerCT": 6000,
       "UserID": 1
@@ -204,6 +205,8 @@ Response:
       "CreatedByUser": "2022-07-19T11:08:48.9997487Z"
     }
   }
+  
+  State can be 0 (ACTIVE), 1 (CANCELLED), 2 (FULLYMATCHED), 3 (MATCHEDANDCANCELLED)
 ```
 
 ## Get Categories (SubscribeSports)
