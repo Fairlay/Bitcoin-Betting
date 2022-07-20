@@ -206,9 +206,11 @@ Response:
     }
   }
   
-  State can be 0 (ACTIVE), 1 (CANCELLED), 2 (FULLYMATCHED), 3 (MATCHEDANDCANCELLED)
 ```
 
+  State can be 0 (ACTIVE), 1 (CANCELLED), 2 (FULLYMATCHED), 3 (MATCHEDANDCANCELLED)
+  
+  
 ## Get Categories (SubscribeSports)
 Returns all active categories (have active markets).
 
