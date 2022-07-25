@@ -169,6 +169,7 @@ Request:
       "Price": 1.5,
       "RemAmount": 3.0,
       "Amount": 3.0,
+      "State":0,
       "ID": "c0c025a2-dc39-4c5a-afaf-40c975ac014e",
       "makerCT": 6000,
       "UserID": 1
@@ -204,8 +205,12 @@ Response:
       "CreatedByUser": "2022-07-19T11:08:48.9997487Z"
     }
   }
+  
 ```
 
+  State can be 0 (ACTIVE), 1 (CANCELLED), 2 (FULLYMATCHED), 3 (MATCHEDANDCANCELLED)
+  
+  
 ## Get Categories (SubscribeSports)
 Returns all active categories (have active/inplay markets).
 
@@ -757,7 +762,8 @@ Response:
         "UnmatchedOrder": {
           "SUID": "370567508BA10F0E42BD414AC93AC56A36C8702B7F94F32762E22970FCAE32DC",
           "Price": 1.7,
-          "RemAmount": 2.0,
+          "RemAmount": 0,
+          "State": 2,
           "Amount": 2.0,
           "ID": "ce8bdedc-b345-44f3-b54e-11ea3f44975f",
           "makerCT": 6000,
@@ -793,6 +799,7 @@ Response:
           "Price": 1.5,
           "RemAmount": 3.0,
           "Amount": 3.0,
+          "State": 0,
           "ID": "c0c025a2-dc39-4c5a-afaf-40c975ac014e",
           "makerCT": 6000,
           "UserID": 1
@@ -811,6 +818,7 @@ Response:
           "RemAmount": 2.0,
           "Side": 1,
           "Amount": 2.0,
+          "State": 1,
           "ID": "dfd965a8-554e-495f-9c96-fb9612e90d22",
           "makerCT": 6000,
           "UserID": 1
