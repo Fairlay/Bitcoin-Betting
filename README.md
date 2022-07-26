@@ -6,16 +6,18 @@ Use the address below to access the test server. It's a simple proxy so we can w
 
 ## Index
 - [Server Time (ReturnHeartbeat)](#server-time-returnheartbeat)
-- [Create Market (MarketCreation)](#create-market-marketcreation)
-- [Create an account (AccountCreation)](#create-an-account-accountcreation)
-- [Order alteration (OrderAlteration)](#order-alteration)
 - [Get Categories (SubscribeSports)](#get-categories-subscribesports)
 - [Get Competitions (SubscribeCompetitions)](#get-competitions-subscribecompetitions)
 - [Get Markets and Orderbooks (SubscribeMarketsByFilter)](#get-markets-and-orderbooks-subscribemarketsbyfilter)
 - [Get Market by ID (GetMarketByID)](#get-market-by-id-getmarketbyid)
+- [Get User ID from Public Key (GetUserIDFromPubKey)](#get-user-id-from-public-key-getuseridfrompubkey)
+- [Get Next Available User ID (GetFreeUserID)](#get-next-available-user-id-getfreeuserid)
+- [Create an account (AccountCreation)](#create-an-account-accountcreation)
 - [Get User Balances (SubscribeBalance)](#get-user-balances-subscribebalance)
 - [Get Matches (SubscribeMatches)](#get-matches-subscribematches)
 - [Get unmatched user orders (SubscribeUOrders)](#get-unmatched-user-orders-subscribeuorders)
+- [Order alteration (OrderAlteration)](#order-alteration)
+- [Create Market (MarketCreation)](#create-market-marketcreation)
 
 ## Server Heartbeat (ReturnHeartbeat)
 Returns the current server time in ticks. First directly after connecting then with an interval of one minute. The server time is returned as the "Nonce" value.
@@ -212,7 +214,7 @@ Response:
   
   
 ## Get Categories (SubscribeSports)
-Returns all active categories (have active markets).
+Returns all active categories (have active/inplay markets).
 
 Request:
 ```jsonc
@@ -261,7 +263,7 @@ Response:
 ````
 
 ## Get Competitions (SubscribeCompetitions)
-Returns all active competitions for all categories (have active markets).
+Returns all active competitions for all categories (have active/inplay markets).
 
 Request:
 ```jsonc
@@ -713,7 +715,6 @@ Response (Error):
 ```
 
 ## Get unmatched orders (SubscribeUOrders)
-
 Returns unmatched orders. This does not require autentication.
 
 Request:
@@ -839,7 +840,6 @@ Response (Error):
 ```
 
 ## Get Market by ID (GetMarketByID)
-
 Returns a market.
 
 Request:
@@ -900,3 +900,59 @@ Response (Error):
 }
 ```
 
+## Get User ID from Public Key (GetUserIDFromPubKey)
+Returns an integer if an account with the Public Key is found.
+
+Request:
+```jsonc
+{
+  "Type":"GetUserIDFromPubKey",
+  "RequestTime":"2022-07-23T00:20:41.0138136Z",
+  "UserID":-1,
+  "NodeID":1,
+  "Data":{
+    "PublicKey":"3mVC3iAAQAA8SYKHTVi1MMIf7L+EIJL5jIOov5oNto2dk00ekGqojg=="
+  }
+}
+```
+
+Response:
+```jsonc
+{
+  "State": "Success",
+  "Type": "GetUserIDFromPubKey",
+  "Data": 1
+  // UserID
+}
+```
+
+Response (error):
+```jsonc
+{
+  "State": "Error",
+  "Type": "GetUserIDFromPubKey",
+  "Error": "User Not Found"
+}
+```
+
+## Get Next Available User ID (GetFreeUserID)
+Returns an integer with the next available User ID to be used on account creation.
+
+Request:
+```jsonc
+{
+  "Type":"GetFreeUserID",
+  "RequestTime":"2022-07-23T00:20:41.0138136Z",
+  "UserID":-1,
+  "NodeID":1
+}
+```
+
+Response:
+```jsonc
+{
+  "State": "Success",
+  "Type": "GetFreeUserID",
+  "Data": 5
+}
+```
