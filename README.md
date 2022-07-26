@@ -6,16 +6,16 @@ Use the address below to access the test server. It's a simple proxy so we can w
 
 ## Index
 - [Server Time (ReturnHeartbeat)](#server-time-returnheartbeat)
-- [Create Market (MarketCreation)](#create-market-marketcreation)
-- [Create an account (AccountCreation)](#create-an-account-accountcreation)
-- [Order alteration (OrderAlteration)](#order-alteration)
 - [Get Categories (SubscribeSports)](#get-categories-subscribesports)
 - [Get Competitions (SubscribeCompetitions)](#get-competitions-subscribecompetitions)
 - [Get Markets and Orderbooks (SubscribeMarketsByFilter)](#get-markets-and-orderbooks-subscribemarketsbyfilter)
 - [Get Market by ID (GetMarketByID)](#get-market-by-id-getmarketbyid)
+- [Create Market (MarketCreation)](#create-market-marketcreation)
+- [Create an account (AccountCreation)](#create-an-account-accountcreation)
 - [Get User Balances (SubscribeBalance)](#get-user-balances-subscribebalance)
 - [Get Matches (SubscribeMatches)](#get-matches-subscribematches)
 - [Get unmatched user orders (SubscribeUOrders)](#get-unmatched-user-orders-subscribeuorders)
+- [Order alteration (OrderAlteration)](#order-alteration)
 
 ## Server Heartbeat (ReturnHeartbeat)
 Returns the current server time in ticks. First directly after connecting then with an interval of one minute. The server time is returned as the "Nonce" value.
