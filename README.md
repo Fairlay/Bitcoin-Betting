@@ -288,38 +288,23 @@ Response:
     "State": "Success",
 
     "Type": "SubscribeCompetitions",
+"Type": "SubscribeCompetitions",
 
-    "Data": {
-        "1": [
-            "Sweden - 2nd Div. Sodra Svealand",
-            "Ireland - Premier Corners",
-            "Argentina - Torneo Federal A",
-            "Germany - Berlin Liga",
-            "Poland - 3rd Liga Group 2"
-        ],
-        "2": [
-            "ITF Women Ceska Lipa - QF",
-            "ITF Women Madrid - R16",
-            "ATP Challenger Corrientes - R16",
-            "ITF Women Madrid - SF",
-            "ATP London - R16",
-            "ITF Men Santo Domingo - SF",
-            "ITF Men Martos - R16",
-            "ITF Men Santo Domingo - R16"
-        ],
-        "12": [
-            "Australia - NBL1 Women",
-            "WNBA",
-            "Puerto Rico - Superior Nacional",
-            "Serbia - Nasa Liga",
-            "Bolivia - Libobasquet",
-            "Spain - ACB",
-            "Paraguay - Primera",
-            "Brazil - LBF Women",
-            "New Zealand - NBL"
-        ],
-        "35": []
-    }
+"Data": {
+    "1": {
+        { "Sweden - 2nd Div. Sodra Svealand": 4 },
+        { "Ireland - Premier Corners": 5 },
+    },
+    "2": {
+        { "ITF Women Ceska Lipa - QF": 3 },
+    },
+    "12": {
+        { "Australia - NBL1 Women": 2 },
+        { "New Zealand - NBL": 6 }
+    },
+    "35": {}
+}
+
     // Dict where key is category ID with an array of competition names
 }
 ````
