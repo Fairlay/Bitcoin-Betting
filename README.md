@@ -6,21 +6,18 @@ Use the address below to access the test server. It's a simple proxy so we can w
 
 ## Index
 - [Server Time (ReturnHeartbeat)](#server-heartbeat-ReturnHeartbeat)
-
-> Categories / Competitions / Markets
+---
 - [Get Categories (SubscribeSports)](#get-categories-subscribesports)
 - [Get Competitions (SubscribeCompetitions)](#get-competitions-subscribecompetitions)
 - [Get Markets and Orderbooks (SubscribeMarketsByFilter)](#get-markets-and-orderbooks-subscribemarketsbyfilter)
 - [Get Market by ID (GetMarketByID)](#get-market-by-id-getmarketbyid)
 - [Create Market (MarketCreation)](#create-market-marketcreation)
-
-> User
+---
 - [Get Next Available User ID (GetFreeUserID)](#get-next-available-user-id-getfreeuserid)
 - [Get User ID from Public Key (GetUserIDFromPubKey)](#get-user-id-from-public-key-getuseridfrompubkey)
 - [Create an account (AccountCreation)](#create-an-account-accountcreation)
 - [Get User Balances (SubscribeBalance)](#get-user-balances-subscribebalance)
-
-> Orders
+---
 - [Get Unmatched Orders (SubscribeUOrders)](#get-unmatched-orders-subscribeuorders)
 - [Get Matched Orders (SubscribeMatches)](#get-matched-orders-subscribematches)
 - [Change/Create an Order (OrderAlteration)](#changecreate-an-order-orderalteration)
