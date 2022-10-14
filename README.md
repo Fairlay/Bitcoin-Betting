@@ -706,8 +706,17 @@ Response:
         "0": {
             "AvailableFunds": 9979.01,
 
-            "CreatorUsed": 20
+            "CreatorUsed": 20,  
             // Some collateral you have to pay when you create markets
+	    "ReservedFunds":0,  // TotalFunds   Total is 
+	     // Used  (Matched Orders)   + OnHold (Unfinalized settlements) + Staked + Collateral (Settlement Challenges) 
+	     // + CreatorUsed (For Creating Markets) + 	SettleUsed (for Settling markets as untrusted settler until settlement is finalized);
+	 "MaxFunds":0,   // MaxFunds to be gained	       
+         "UsedFunds":0,    //  ReservedFunds - AvailableFunds;
+         "SettleUsed":0, // Collateral for untrusted settlers	 
+         "OnHold":0,   // Amount of Money on Hold until Settlement is finalized    
+         "RemainingRequests":0,  -- Remaining API Requests
+     
         }
     }
 }
