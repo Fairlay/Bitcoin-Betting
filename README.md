@@ -746,12 +746,17 @@ Response:
         "UnmatchedOrder": {
           "SUID": "370567508BA10F0E42BD414AC93AC56A36C8702B7F94F32762E22970FCAE32DC",
           "Price": 1.7,
-          "RemAmount": 0,
-          "State": 2,
+          "RemAmount": 2.0,
+          "State": 2,   
           "Amount": 2.0,
           "ID": "ce8bdedc-b345-44f3-b54e-11ea3f44975f",
           "makerCT": 6000,
-          "UserID": 1
+          "UserID": 1,
+	  "Type" :1,
+	  "Side":1,
+	  "Note":"",
+	  "CancelAt": "2022-07-11T16:07:41.8473882Z",
+	  
         }
       },
       {
@@ -899,6 +904,7 @@ Request:
       "RemAmount": 3.0,
       "Amount": 3.0,
       "State":0,
+      "Side":1,
       "ID": "c0c025a2-dc39-4c5a-afaf-40c975ac014e",
       "makerCT": 6000,
       "UserID": 1
