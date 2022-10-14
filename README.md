@@ -214,11 +214,15 @@ Response (single market):
         "Margin": 106.211,
 
         "ID": "890f70d1-f6d7-49c1-a17f-94428df82a8e",
+	
 
         "LastCh": "2022-06-27T18:01:46.9028667Z",
         // Last Changed
 
         "LastSoftCh": "2022-06-27T18:01:46.9028667Z",
+        // Last Soft Changed (orderbook changed)
+	
+        "CreationDate": "2022-06-27T11:01:46.9028667Z",
         // Last Soft Changed (orderbook changed)
 
         "MainNodeID": 1,
@@ -226,6 +230,14 @@ Response (single market):
 
         "Comp": "CS:GO - REPUBLEAGUE",
         // Competition
+      //  ALL= 0, (do not use)        SOCCER = 1,        TENNIS = 2,        GOLF = 3,        CRICKET = 4,      
+      //    RUGBYUNION = 5,        BOXING = 6,        HORSERACING = 7,        MOTORSPORT = 8,        SPECIAL = 10,
+      //  RUGBYLEAGUE = 11,        BASKETBALL = 12,        AMERICANFOOTBALL = 13,        BASEBALL = 14,        HOCKEY = 30,
+     //   POLITICS = 15,        FINANCIAL = 16,        GREYHOUND = 17,        VOLLEYBALL = 18,        HANDBALL = 19,
+     //   DARTS = 20,        BANDY = 21,        WINTERSPORTS = 22,        BOWLS = 24,        POOL = 25,
+     //   SNOOKER = 26,        TABLETENNIS = 27,        CHESS = 28,        FUN = 31,        ESPORTS = 32,
+     //     RESERVED4 = 34,        MIXEDMARTIALARTS = 35,        RESERVED6 = 36,        RESERVED = 37,        CYCLING = 38,
+     //   RESERVED9 = 39,        BITCOIN = 40,        BADMINTON = 42,        DICE = 131,
 
         "Descr": "Total Away - 1st Map Over/Under 16.5",
         // Description
@@ -242,19 +254,15 @@ Response (single market):
         //Settle Date
 
         "Status": 1,
-        // enum:
-        //     ACTIVE,
-        //     INPLAY,
-        //     SUSPENDED,
-        //     CLOSED,
-        //     SETTLED,
-        //     CANCELLED
+     // ACTIVE,            INPLAY,            SUSPENDED,            CLOSED,            SETTLED,            FINALIZED,            CANCELLED
+        
         
         // Runners
         "Ru": [
             {
                 "Name": "Over 16.5 ",
-                "mCT": 8000
+                "mCT": 8000,
+		"RedA": 0  //Reduction Applied
             },
             {
                 "Name": "Under 16.5 ",
@@ -307,6 +315,20 @@ Response (single market):
 
         "SetFin": 24
         // The time when the settlement is considered final (in hours past settlement date)
+	"SettleProtocol":0,
+	"SettlT":0 ,  //            BINARY,            CFD,            CFDINVERSE,            EXCHANGE
+	"Comm":0.001,  //Commission of the market  going to the Com(mission)Recip(ients) of the market
+	 "ComRecip": {
+            "2": 0.5,
+	    "1":0.5
+        },
+	"MinVal":0,    //Minimum Allowed Price
+	"MaxVal":0,    // Maximum Allowed Price (0 means Infinity)
+	"Cur":0,      //  Quote Currency ID
+	"CurB":0,    // for Exchanges between Currencies, this is the Trade Currency ID
+	"Flag":0,    // BinaryFlags
+	"evID":12041151212, // Event ID
+        }
     }
     // Dict that represent a Market
 }
@@ -863,17 +885,25 @@ Response:
       "UserOrder": {
         "MarketID": "d81e889f-7b98-4229-941c-ffefac4ed7c3",
         "OrderID": "aeda7c0a-5dbb-48f2-8ffa-f768b706c51b",
-        "Note": ";2"
+        "Note": ";2",
+	  "Side":0,
+	  "RunnerID":0,
+	  "Note":null,
+	  "Insurance":false,
       },
       "MatchedOrder": {
         "ID": "aeda7c0a-5dbb-48f2-8ffa-f768b706c51b",
         "State": 1,
-        // State:
-        // ACTIVE=0, CANCELLED=1, FULLYMATCHED=2, MATCHEDANDCANCELLED=3
-
+        // State (MATCHEDORDER):  DEFAULT,            MATCHED,            RUNNERWON,            RUNNERHALFWON,            RUNNERLOST,       
+        //    RUNNERHALFLOST,            MAKERVOIDED,            VOIDED,            PENDING,            DECIMALRESULT,      
+        //    DECIMALRESULTTOBASE,            SETTLED
         "CreationDate": "2022-07-11T16:07:41.8473882Z",
         "Price": 1.9,
-        "Amount": 1.0
+        "Amount": 1.0,
+	"DecResult":0,  // used for markets with continuous settlement 
+	"R":0,   //  Used for Flags
+	"Red":0,  //Reduction. Used in special circumstances when the matched Price has to be reduced on settlement. (Used in Horse racing markets or with multibets)
+	"MakerCancelTime":0,  // time in milliseconds the maker of the bet is allowed to change the status of the bet from PENDING to MAKERVOIDED. Only used by 					//professional Market Makers.
       }
     }
   ]
