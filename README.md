@@ -741,7 +741,11 @@ Response:
         "UserOrder": {
           "HiddenLUChange": 637931524616597824,
           "MarketID": "d81e889f-7b98-4229-941c-ffefac4ed7c3",
-          "OrderID": "ce8bdedc-b345-44f3-b54e-11ea3f44975f"
+          "OrderID": "ce8bdedc-b345-44f3-b54e-11ea3f44975f",
+	  "Side":0,
+	  "RunnerID":0,
+	  "Note":null,
+	  "Insurance":false,
         },
         "UnmatchedOrder": {
           "SUID": "370567508BA10F0E42BD414AC93AC56A36C8702B7F94F32762E22970FCAE32DC",
