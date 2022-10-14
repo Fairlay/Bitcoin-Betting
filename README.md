@@ -160,34 +160,36 @@ Request:
             // Number of markets per page (websocket message)
         },
         // These are the options for MarketFilter object:
-        //     int Cat;
-        //     string Comp;
-        //     string Descr;
-        //     string Comp;
-        //     string Descr;
-        //     int TypeOR;
-        //     int PeriodOR;
-        //     int SettleOR;
-        //     bool ToSettle;
-        //     bool OnlyMyCreatedMarkets;
-        //     DateTime ChangedAfter;
-        //     DateTime SoftChangedAfter;
-        //     bool OnlyActive;
-        //     decimal MaxMargin;
-        //     bool NoZombie;
-        //     DateTime FromClosT;
-        //     DateTime ToClosT;
+        //     int Cat;        
+	//General searches in Runner, Title, Description and Competion
+        //HashSet<string> GeneralAND;
+        //HashSet<string> GeneralNOT;
+        //HashSet<string> GeneralOR;
 
-        //     General searches in Runner, Title, Description and Competition
-        //     string GeneralAND;
-        //     string GeneralNOT;
-        //     string GeneralOR;
-        //     string RunnerAND;
-        //     string TitleAND;
+       // HashSet<string> RunnerAND;
+       // HashSet<string> TitleAND;
+       // string Comp;
+        //string Descr;
 
-        //     int PageSize (defaults to 200);
-        //     int FromID;
-        //     int ToID;
+        //HashSet<Market.MarketTypes> TypeOR;
+        //HashSet<Market.MarketPeriods> PeriodOR;
+        //HashSet<Market.SettleTypes> SettleOR;
+        //bool ToSettle;
+        //bool OnlyMyCreatedMarkets;
+
+
+        //DateTime ChangedAfter;
+        //DateTime SoftChangedAfter;
+        // bool OnlyActive;
+        //decimal MaxMargin;
+        //bool NoZombie;
+
+        //DateTime FromClosT;
+        //DateTime ToClosT;
+
+        //int PageSize;
+        //int FromID;
+        //int ToID;
 
         //     Following is a propery to sort markets
         //     enum Sorting:
@@ -195,7 +197,6 @@ Request:
         //          MATCHEDVOLUME,
         //          CLOSING,
         //          OPENORDERSVOLUME
-        //     MIX formula: MatchedVolume  + Closing < 1h ? 10 : <3h ? 5: <12h  ? 3 : <24h ? 2 : <48h ? 1 :0 + OpenOrdersVolume >500 ? 10: >300
 
         "SubscribeOrderbooks": true
         // Set this option to true to get orderbook updates
