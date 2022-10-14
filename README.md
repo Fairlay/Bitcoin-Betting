@@ -957,7 +957,11 @@ Request:
     },
     "UserID": 1,
     "NodeID": 1,
-    "CreatedByUser": "2022-07-19T11:08:48.9997487Z"
+    "CreatedByUser": "2022-07-19T11:08:48.9997487Z",
+     "LayAsL":false,    //Set this to true if you place a lay order on a binary market and you like to have the Amount as Liability of the Order.
+    "Local":false,    //indicates whether the order shall be shared with all other nodes.   Local = true will require a lower Miner Fee
+       		 	     		// By default all markets are shared accross all nodes
+        
   }
 }
 ```
