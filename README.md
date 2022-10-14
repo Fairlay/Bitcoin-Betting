@@ -749,6 +749,7 @@ Request:
     "ToDate": "9999-12-31T23:59:59.9999999",
     "PageSize": 100,
     "SubscribeUpdates": true,
+    "AddMarketSummary":false,
     "Types":[
 	    "Default",
 	    "Same"
@@ -878,6 +879,7 @@ Request:
 	"FromDate": "9999-12-31T23:59:59.9999999",
     "ToDate": "9999-12-31T23:59:59.9999999",
     "PageSize": 100,
+    "AddMarketSummary":false,
     "SubscribeUpdates": true
   }
 }
