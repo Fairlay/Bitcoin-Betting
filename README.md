@@ -675,7 +675,7 @@ Response:
 ```
 
 ## Get User Balances (SubscribeBalance)
-Returns current user balance and subscribes to future balance changes. This does not require autentication.
+Returns current user balance and subscribes to future balance changes. This does not require authentication.
 
 Request:
 ```jsonc
