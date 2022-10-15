@@ -2,7 +2,6 @@
 
 Use the address below to access the test server. It's a simple proxy so we can work on a HTTPS environment. All requests are currently proxied to **`83.171.236.194:81`**.
 
-> `wss://proxy-ws.fairlay.com`
 
 ## Index
 - [Server Time (ReturnHeartbeat)](#server-heartbeat-ReturnHeartbeat)
