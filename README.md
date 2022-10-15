@@ -496,7 +496,7 @@ Response (Error):
 ```
 
 ## Create Market (MarketCreation)
-Creates a market.
+Creates a market.  For Create Requests all fields that have default values MUST be omitted. So putting "Period":0 for example will be rejected by any Node.
 Request:
 ```jsonc
 {
@@ -638,7 +638,7 @@ Response (error):
 
 ## Create an account (AccountCreation)
 Creating  an account is only possible through an existing account as a transaction fee is involved for creating it. The Nodes accept both ED25519 and ECDSA signatures. If you like to have an account that signs requests via ECDSA, set IsETH to true on account creation.
-
+For Create Requests all fields that have default values MUST be omitted. 
 
 Request:
 ```jsonc
@@ -933,6 +933,7 @@ Response (Error):
 
 ## Change/Create an Order (OrderAlteration)
 Used to create or change an order.
+For Create Requests all fields that have default values MUST be omitted. Putting "State":0 for example will be rejected by any Node. 
 
 Request:
 ```jsonc
@@ -949,7 +950,7 @@ Request:
       "Price": 1.5,
       "RemAmount": 3.0,
       "Amount": 3.0,
-      "State":0,
+    //  "State":0,
       "Side":1,
       "ID": "c0c025a2-dc39-4c5a-afaf-40c975ac014e",
       "makerCT": 6000,
@@ -958,8 +959,8 @@ Request:
     "UserID": 1,
     "NodeID": 1,
     "CreatedByUser": "2022-07-19T11:08:48.9997487Z",
-     "LayAsL":false,    //Set this to true if you place a lay order on a binary market and you like to have the Amount as Liability of the Order.
-    "Local":false,    //indicates whether the order shall be shared with all other nodes.   Local = true will require a lower Miner Fee
+    // "LayAsL":false,    //Set this to true if you place a lay order on a binary market and you like to have the Amount as Liability of the Order.
+   // "Local":false,    //indicates whether the order shall be shared with all other nodes.   Local = true will require a lower Miner Fee
        		 	     		// By default all markets are shared accross all nodes
         
   }
