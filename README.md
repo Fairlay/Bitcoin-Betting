@@ -1,6 +1,6 @@
 # Websocket API documentation
 
-Use the address below to access the test server. It's a simple proxy so we can work on a HTTPS environment. All requests are currently proxied to **`83.171.236.194:81`**.
+All requests can currently be sent to **`83.171.236.194:81`**.
 
 
 ## Index
