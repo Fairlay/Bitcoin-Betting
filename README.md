@@ -14,19 +14,19 @@ It is also possible to run your own node.
 - [Get Competitions (SubscribeCompetitions)](#get-competitions-subscribecompetitions)
 - [Get Markets and Orderbooks (SubscribeMarketsByFilter)](#get-markets-and-orderbooks-subscribemarketsbyfilter)
 - [Get Market by ID (GetMarketByID)](#get-market-by-id-getmarketbyid)
-- [Create Market (MarketCreation)](#create-market-marketcreation)
-- [Change Closing Time (ChangeMarketTimes)](#change-Market-closing-time-changemarkettimes)
-- [Signing](#signing-example)
 ---
 - [Get Next Available User ID (GetFreeUserID)](#get-next-available-user-id-getfreeuserid)
 - [Get User ID from Public Key (GetUserIDFromPubKey)](#get-user-id-from-public-key-getuseridfrompubkey)
-- [Create an account (AccountCreation)](#create-an-account-accountcreation)
 - [Get User Balances (SubscribeBalance)](#get-user-balances-subscribebalance)
 ---
 - [Get Unmatched Orders (SubscribeUOrders)](#get-unmatched-orders-subscribeuorders)
 - [Get Matched Orders (SubscribeMatches)](#get-matched-orders-subscribematches)
+---
+- [Signing](#signing-example)
+- [Create an account (AccountCreation)](#create-an-account-accountcreation)
+- [Create Market (MarketCreation)](#create-market-marketcreation)
+- [Change Closing Time (ChangeMarketTimes)](#change-Market-closing-time-changemarkettimes)
 - [Change/Create an Order (OrderAlteration)](#changecreate-an-order-orderalteration)
-
 
 ## Server Heartbeat (ReturnHeartbeat)
 Returns the current server time in ticks. First directly after connecting then with an interval of one minute. The server time is returned as the "Nonce" value.
@@ -622,19 +622,6 @@ Error Response:
   }
 ```
 
-## Signing (Example)
-
-In order to provide a valid signature, sort the Data Object alphabetically and sign it with Ed25519 (or ECDSA if your Account is flagged as "isETH") to provide it as "SignatureUser" inside the Storage Unit you send to the Node.  For signing, all fields that have default values MUST be omitted.   The creation date of the Data object provided as CreatedByUser  may not deviate more than 15 seconds from the Node time or the request might get rejected.
-
-
-For example, sign the following Data object of a ChangeMarketTimes Request:  
-
-{"ClosD":"2022-11-20T19:50:00Z","CreatedByUser":"2022-11-20T19:35:45.4294401Z","Mid":"c91d1993-7115-49f1-b3cd-ab9dc88821a2","NodeID":1,"SetlD":"2022-11-20T21:50:00Z","UserID":2}
-
-send the following Request to the Node:
-
-{"Type":"ChangeMarketTimes","Nonce":63804569790630801,"SignatureUser":"/khiPwpPNk8gFSyrp81t1ZcbUNmF8w233bQCvhz4U5PzCcALbPiipsvWqR+AQ+cJJVHtk0RMtihpM3DHdMxSBg==","Data":{"Mid":"c91d1993-7115-49f1-b3cd-ab9dc88821a2","ClosD":"2022-11-20T19:50:00Z",
-"SetlD":"2022-11-20T21:50:00Z","UserID":2,"NodeID":1,"CreatedByUser":"2022-11-20T19:35:45.4294401Z"}}
 
 
 
@@ -695,43 +682,6 @@ Response (error):
 }
 ```
 
-## Create an account (AccountCreation)
-Creating  an account is only possible through an existing account as a transaction fee is involved for creating it. The Nodes accept both ED25519 and ECDSA signatures. If you like to have an account that signs requests via ECDSA, set IsETH to true on account creation.
-For Create Requests all fields that have default values MUST be omitted. 
-
-Request:
-```jsonc
-{
-  "Type": "AccountCreation",
-  "Nonce": 1,
-  "SignatureUser": "1HXMLy1s4zWDnu...SEFER+R2Mc/KMIfhY+OvDe8Nfuw34rECA==",
-  "Data": {
-    "NewAccountID": 2,
-    "PubKey": "3mVC3iAAQA...to2dk00ekGqojg==",
-    "IsETH":false,
-    "UserID": 1,
-    "NodeID": 1,
-    "CreatedByUser": "2022-07-19T11:01:25.8980825Z"
-  }
-}
-```
-
-Response:
-```jsonc
-{
-   "State": "Success",
-   "Type": "AccountCreation",
-   "Nonce": 1,
-   "Data": {
-     "NewAccountID": 2,
-     "PubKey": "3mVC3iAAQAA8SYKHTVi1MMIf7L+EIJL5jIOov5oNto2dk00ekGqojg==",
-     "IsETH":false,
-     "UserID": 1,
-     "NodeID": 1,
-     "CreatedByUser": "2022-07-19T11:01:25.8980825Z"
-   }
-}
-```
 
 ## Get User Balances (SubscribeBalance)
 Returns current user balance and subscribes to future balance changes. This does not require authentication.
@@ -1052,3 +1002,58 @@ Response:
   }
   
 ```
+
+## Signing (Example)
+
+In order to provide a valid signature, sort the Data Object alphabetically and sign it with Ed25519 (or ECDSA if your Account is flagged as "isETH") to provide it as "SignatureUser" inside the Storage Unit you send to the Node.  For signing, all fields that have default values MUST be omitted.   The creation date of the Data object provided as CreatedByUser  may not deviate more than 15 seconds from the Node time or the request might get rejected.
+
+
+For example, sign the following Data object of a ChangeMarketTimes Request:  
+
+{"ClosD":"2022-11-20T19:50:00Z","CreatedByUser":"2022-11-20T19:35:45.4294401Z","Mid":"c91d1993-7115-49f1-b3cd-ab9dc88821a2","NodeID":1,"SetlD":"2022-11-20T21:50:00Z","UserID":2}
+
+send the following Request to the Node:
+
+{"Type":"ChangeMarketTimes","Nonce":63804569790630801,"SignatureUser":"/khiPwpPNk8gFSyrp81t1ZcbUNmF8w233bQCvhz4U5PzCcALbPiipsvWqR+AQ+cJJVHtk0RMtihpM3DHdMxSBg==","Data":{"Mid":"c91d1993-7115-49f1-b3cd-ab9dc88821a2","ClosD":"2022-11-20T19:50:00Z",
+"SetlD":"2022-11-20T21:50:00Z","UserID":2,"NodeID":1,"CreatedByUser":"2022-11-20T19:35:45.4294401Z"}}
+
+
+
+## Create an account (AccountCreation)
+Creating  an account is only possible through an existing account as a transaction fee is involved for creating it. The Nodes accept both ED25519 and ECDSA signatures. If you like to have an account that signs requests via ECDSA, set IsETH to true on account creation.
+For Create Requests all fields that have default values MUST be omitted. 
+
+Request:
+```jsonc
+{
+  "Type": "AccountCreation",
+  "Nonce": 1,
+  "SignatureUser": "1HXMLy1s4zWDnu...SEFER+R2Mc/KMIfhY+OvDe8Nfuw34rECA==",
+  "Data": {
+    "NewAccountID": 2,
+    "PubKey": "3mVC3iAAQA...to2dk00ekGqojg==",
+    "IsETH":false,
+    "UserID": 1,
+    "NodeID": 1,
+    "CreatedByUser": "2022-07-19T11:01:25.8980825Z"
+  }
+}
+```
+
+Response:
+```jsonc
+{
+   "State": "Success",
+   "Type": "AccountCreation",
+   "Nonce": 1,
+   "Data": {
+     "NewAccountID": 2,
+     "PubKey": "3mVC3iAAQAA8SYKHTVi1MMIf7L+EIJL5jIOov5oNto2dk00ekGqojg==",
+     "IsETH":false,
+     "UserID": 1,
+     "NodeID": 1,
+     "CreatedByUser": "2022-07-19T11:01:25.8980825Z"
+   }
+}
+```
+
