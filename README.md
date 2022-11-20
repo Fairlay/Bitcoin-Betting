@@ -145,7 +145,7 @@ Request:
     "UserID": -1,
     // This will be a "short" integer ID (1k to 1m)
     // No user identity necessary
-
+    "MaxResults": 1000,
     "NodeID": 1,
     // This will be the same as the User ID who is running the node
 
@@ -187,8 +187,7 @@ Request:
         //DateTime ToClosT;
 
         //int PageSize;
-        //int FromID;
-        //int ToID;
+        //int MaxResults;
 
         //     Following is a propery to sort markets
         //     enum Sorting:
