@@ -191,6 +191,7 @@ Request:
         //DateTime ToClosT;
 
         //int PageSize;
+	//limit the number of Markets returned
         //int MaxResults;
 
         //     Following is a propery to sort markets
@@ -619,7 +620,7 @@ Error Response:
   }
 ```
 
-## Signing 
+## Signing (Example)
 
 In order to provide a valid signature, sort the Data Object alphabetically and sign it with Ed25519 (or ECDSA if your Account is flagged as "isETH") to provide it as "SignatureUser" inside the Storage Unit you send to the Node.  For signing, all fields that have default values MUST be omitted.   The creation date of the Data object provided as CreatedByUser  may not deviate more than 15 seconds from the Node time or the request might get rejected.
 
