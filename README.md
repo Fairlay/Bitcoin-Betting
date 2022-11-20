@@ -13,7 +13,7 @@ All requests can currently be sent to **`83.171.236.194:81`**.
 - [Get Markets and Orderbooks (SubscribeMarketsByFilter)](#get-markets-and-orderbooks-subscribemarketsbyfilter)
 - [Get Market by ID (GetMarketByID)](#get-market-by-id-getmarketbyid)
 - [Create Market (MarketCreation)](#create-market-marketcreation)
-- [Change Closing Time (ChangeMarketTimes)](#change-market-time)
+- [Change Closing Time (ChangeMarketTimes)](#change-Market-closing-time-changemarkettimes)
 - [Signing](#signing-example)
 ---
 - [Get Next Available User ID (GetFreeUserID)](#get-next-available-user-id-getfreeuserid)
