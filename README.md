@@ -1,8 +1,10 @@
 # Websocket API documentation
 
-All requests can currently be sent to **`83.171.236.194:81`**.
+All JSON requests can be sent (with UTF8 encoding) to any node of the network. The following public node are available  
 
+**`83.171.236.194:81`**
 
+It is also possible to run your own node.
 
 
 ## Index
