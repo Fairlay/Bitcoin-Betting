@@ -3,6 +3,8 @@
 All requests can currently be sent to **`83.171.236.194:81`**.
 
 
+
+
 ## Index
 - [Server Time (ReturnHeartbeat)](#server-heartbeat-ReturnHeartbeat)
 ---
@@ -11,6 +13,8 @@ All requests can currently be sent to **`83.171.236.194:81`**.
 - [Get Markets and Orderbooks (SubscribeMarketsByFilter)](#get-markets-and-orderbooks-subscribemarketsbyfilter)
 - [Get Market by ID (GetMarketByID)](#get-market-by-id-getmarketbyid)
 - [Create Market (MarketCreation)](#create-market-marketcreation)
+- [Change Closing Time (ChangeMarketTimes)](#change-market-time)
+- [Signing](#signing-example)
 ---
 - [Get Next Available User ID (GetFreeUserID)](#get-next-available-user-id-getfreeuserid)
 - [Get User ID from Public Key (GetUserIDFromPubKey)](#get-user-id-from-public-key-getuseridfrompubkey)
@@ -543,7 +547,6 @@ Response:
     "Type": "MarketCreation",
     "Nonce": 3,
     "Data": {
-      "ID": "2646b51a-bd6b-498d-b246-ae80ecbc3f3c",
       "Market": {
         "ID": "d81e889f-7b98-4229-941c-ffefac4ed7c3",
         "MainNodeID": 1,
@@ -576,6 +579,61 @@ Response:
     }
   }
 ```
+
+## Change Market Closing Time (ChangeMarketTimes)
+Changes Closing and Settlement Date for any market that was created by the same user. For Create Requests all fields that have default values MUST be omitted. So putting "Period":0 for example will be rejected by any Node.
+Request:
+```jsonc
+{
+  "Type": "ChangeMarketTimes",
+  "Nonce": 63804569790630801,
+  "SignatureUser": "FOOuU5oibmQatnBx4VrxMvwA6...P8bqm7J+38gz+xP945a4Cg==",
+  "Data": {
+    "ID": "2646b51a-bd6b-498d-b246-ae80ecbc3f3c",
+    "ClosD":"2022-11-20T19:50:00Z",
+    "SetlD":"2022-11-20T21:50:00Z",
+    "UserID": 1,
+    "NodeID": 1,
+    "CreatedByUser": "2022-07-19T11:05:17.5852297Z"
+  }
+}
+```
+
+Response:
+```jsonc
+  {
+    "State": "Success",
+    "Type": "ChangeMarketTimes",
+    "Nonce": 63804569790630801,
+    "Data": ""
+  }
+```
+
+Error Response:
+```jsonc
+  {
+    "State": "Error",
+    "Type": "ChangeMarketTimes",
+    "Nonce": 63804569790630801,
+    "Data": "Market already settled."
+  }
+```
+
+## Signing 
+
+In order to provide a valid signature, sort the Data Object alphabetically and sign it with Ed25519 (or ECDSA if your Account is flagged as "isETH") to provide it as "SignatureUser" inside the Storage Unit you send to the Node.  For signing, all fields that have default values MUST be omitted.   The creation date of the Data object provided as CreatedByUser  may not deviate more than 15 seconds from the Node time or the request might get rejected.
+
+
+For example, sign the following Data object of a ChangeMarketTimes Request:  
+
+{"ClosD":"2022-11-20T19:50:00Z","CreatedByUser":"2022-11-20T19:35:45.4294401Z","Mid":"c91d1993-7115-49f1-b3cd-ab9dc88821a2","NodeID":1,"SetlD":"2022-11-20T21:50:00Z","UserID":2}
+
+send the following Request to the Node:
+
+{"Type":"ChangeMarketTimes","Nonce":63804569790630801,"SignatureUser":"/khiPwpPNk8gFSyrp81t1ZcbUNmF8w233bQCvhz4U5PzCcALbPiipsvWqR+AQ+cJJVHtk0RMtihpM3DHdMxSBg==","Data":{"Mid":"c91d1993-7115-49f1-b3cd-ab9dc88821a2","ClosD":"2022-11-20T19:50:00Z",
+"SetlD":"2022-11-20T21:50:00Z","UserID":2,"NodeID":1,"CreatedByUser":"2022-11-20T19:35:45.4294401Z"}}
+
+
 
 ## Get Next Available User ID (GetFreeUserID)
 Returns an integer with the next available User ID to be used on account creation.
