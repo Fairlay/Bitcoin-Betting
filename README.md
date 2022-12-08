@@ -27,6 +27,7 @@ It is also possible to run your own node.
 - [Create Market (MarketCreation)](#create-market-marketcreation)
 - [Change Closing Time (ChangeMarketTimes)](#change-Market-closing-time-changemarkettimes)
 - [Change/Create an Order (OrderAlteration)](#changecreate-an-order-orderalteration)
+- [Transfer/Burn/Withdraw (Transfer)](#transfer)
 
 ## Server Heartbeat (ReturnHeartbeat)
 Returns the current server time in ticks. First directly after connecting then with an interval of one minute. The server time is returned as the "Nonce" value.
@@ -500,129 +501,6 @@ Response (Error):
 }
 ```
 
-## Create Market (MarketCreation)
-Creates a market.  For Create Requests all fields that have default values MUST be omitted. So putting "Period":0 for example will be rejected by any Node.
-Request:
-```jsonc
-{
-  "Type": "MarketCreation",
-  "Nonce": 3,
-  "SignatureUser": "FOOuU5oibmQatnBx4VrxMvwA6...P8bqm7J+38gz+xP945a4Cg==",
-  "Data": {
-    "ID": "2646b51a-bd6b-498d-b246-ae80ecbc3f3c",
-    "Market": {
-      "ID": "d81e889f-7b98-4229-941c-ffefac4ed7c3",
-      "MainNodeID": 1,
-      "Comp": "Testcompetition",
-      "CreationDate": "2022-07-19T11:05:17.5852297Z",
-      "Descr": "TestDescript",
-      "Title": "TestMarket",
-      "Cat": 12,
-      "ClosD": "2022-08-15T00:00:00",
-      "SettlD": "2022-08-16T00:00:00",
-      "Ru": [
-        {
-          "Name": "ru1",
-          "mCT": 6000
-        },
-        {
-          "Name": "ru2",
-          "mCT": 6000
-        }
-      ],
-      "Period": 1,
-      "Creator": 1,
-      "Settler": { "1": true },
-      "ComRecip": { "1": 0.5 },
-      "SetFin": 24
-    },
-    "UserID": 1,
-    "NodeID": 1,
-    "CreatedByUser": "2022-07-19T11:05:17.5852297Z"
-  }
-}
-```
-
-Response:
-```jsonc
-  {
-    "State": "Success",
-    "Type": "MarketCreation",
-    "Nonce": 3,
-    "Data": {
-      "Market": {
-        "ID": "d81e889f-7b98-4229-941c-ffefac4ed7c3",
-        "MainNodeID": 1,
-        "Comp": "Testcompetition",
-        "CreationDate": "2022-07-19T11:05:17.5852297Z",
-        "Descr": "TestDescript",
-        "Title": "TestMarket",
-        "Cat": 12,
-        "ClosD": "2022-08-15T00:00:00",
-        "SettlD": "2022-08-16T00:00:00",
-        "Ru": [
-          {
-            "Name": "ru1",
-            "mCT": 6000
-          },
-          {
-            "Name": "ru2",
-            "mCT": 6000
-          }
-        ],
-        "Period": 1,
-        "Creator": 1,
-        "Settler": { "1": true },
-        "ComRecip": { "1": 0.5 },
-        "SetFin": 24
-      },
-      "UserID": 1,
-      "NodeID": 1,
-      "CreatedByUser": "2022-07-19T11:05:17.5852297Z"
-    }
-  }
-```
-
-## Change Market Closing Time (ChangeMarketTimes)
-Changes Closing and Settlement Date for any market that was created by the same user. For Create Requests all fields that have default values MUST be omitted. So putting "Period":0 for example will be rejected by any Node.
-Request:
-```jsonc
-{
-  "Type": "ChangeMarketTimes",
-  "Nonce": 63804569790630801,
-  "SignatureUser": "FOOuU5oibmQatnBx4VrxMvwA6...P8bqm7J+38gz+xP945a4Cg==",
-  "Data": {
-    "ID": "2646b51a-bd6b-498d-b246-ae80ecbc3f3c",
-    "ClosD":"2022-11-20T19:50:00Z",
-    "SetlD":"2022-11-20T21:50:00Z",
-    "UserID": 1,
-    "NodeID": 1,
-    "CreatedByUser": "2022-07-19T11:05:17.5852297Z"
-  }
-}
-```
-
-Response:
-```jsonc
-  {
-    "State": "Success",
-    "Type": "ChangeMarketTimes",
-    "Nonce": 63804569790630801,
-    "Data": ""
-  }
-```
-
-Error Response:
-```jsonc
-  {
-    "State": "Error",
-    "Type": "ChangeMarketTimes",
-    "Nonce": 63804569790630801,
-    "Data": "Market already settled."
-  }
-```
-
-
 
 
 ## Get Next Available User ID (GetFreeUserID)
@@ -1019,6 +897,7 @@ send the following Request to the Node:
 
 
 
+
 ## Create an account (AccountCreation)
 Creating  an account is only possible through an existing account as a transaction fee is involved for creating it. The Nodes accept both ED25519 and ECDSA signatures. If you like to have an account that signs requests via ECDSA, set IsETH to true on account creation.
 For Create Requests all fields that have default values MUST be omitted. 
@@ -1056,4 +935,178 @@ Response:
    }
 }
 ```
+
+
+
+
+## Create Market (MarketCreation)
+Creates a market.  For Create Requests all fields that have default values MUST be omitted. So putting "Period":0 for example will be rejected by any Node.
+Request:
+```jsonc
+{
+  "Type": "MarketCreation",
+  "Nonce": 3,
+  "SignatureUser": "FOOuU5oibmQatnBx4VrxMvwA6...P8bqm7J+38gz+xP945a4Cg==",
+  "Data": {
+    "ID": "2646b51a-bd6b-498d-b246-ae80ecbc3f3c",
+    "Market": {
+      "ID": "d81e889f-7b98-4229-941c-ffefac4ed7c3",
+      "MainNodeID": 1,
+      "Comp": "Testcompetition",
+      "CreationDate": "2022-07-19T11:05:17.5852297Z",
+      "Descr": "TestDescript",
+      "Title": "TestMarket",
+      "Cat": 12,
+      "ClosD": "2022-08-15T00:00:00",
+      "SettlD": "2022-08-16T00:00:00",
+      "Ru": [
+        {
+          "Name": "ru1",
+          "mCT": 6000
+        },
+        {
+          "Name": "ru2",
+          "mCT": 6000
+        }
+      ],
+      "Period": 1,
+      "Creator": 1,
+      "Settler": { "1": true },
+      "ComRecip": { "1": 0.5 },
+      "SetFin": 24
+    },
+    "UserID": 1,
+    "NodeID": 1,
+    "CreatedByUser": "2022-07-19T11:05:17.5852297Z"
+  }
+}
+```
+
+Response:
+```jsonc
+  {
+    "State": "Success",
+    "Type": "MarketCreation",
+    "Nonce": 3,
+    "Data": {
+      "Market": {
+        "ID": "d81e889f-7b98-4229-941c-ffefac4ed7c3",
+        "MainNodeID": 1,
+        "Comp": "Testcompetition",
+        "CreationDate": "2022-07-19T11:05:17.5852297Z",
+        "Descr": "TestDescript",
+        "Title": "TestMarket",
+        "Cat": 12,
+        "ClosD": "2022-08-15T00:00:00",
+        "SettlD": "2022-08-16T00:00:00",
+        "Ru": [
+          {
+            "Name": "ru1",
+            "mCT": 6000
+          },
+          {
+            "Name": "ru2",
+            "mCT": 6000
+          }
+        ],
+        "Period": 1,
+        "Creator": 1,
+        "Settler": { "1": true },
+        "ComRecip": { "1": 0.5 },
+        "SetFin": 24
+      },
+      "UserID": 1,
+      "NodeID": 1,
+      "CreatedByUser": "2022-07-19T11:05:17.5852297Z"
+    }
+  }
+```
+
+## Change Market Closing Time (ChangeMarketTimes)
+Changes Closing and Settlement Date for any market that was created by the same user. For Create Requests all fields that have default values MUST be omitted. So putting "Period":0 for example will be rejected by any Node.
+Request:
+```jsonc
+{
+  "Type": "ChangeMarketTimes",
+  "Nonce": 63804569790630801,
+  "SignatureUser": "FOOuU5oibmQatnBx4VrxMvwA6...P8bqm7J+38gz+xP945a4Cg==",
+  "Data": {
+    "ID": "2646b51a-bd6b-498d-b246-ae80ecbc3f3c",
+    "ClosD":"2022-11-20T19:50:00Z",
+    "SetlD":"2022-11-20T21:50:00Z",
+    "UserID": 1,
+    "NodeID": 1,
+    "CreatedByUser": "2022-07-19T11:05:17.5852297Z"
+  }
+}
+```
+
+Response:
+```jsonc
+  {
+    "State": "Success",
+    "Type": "ChangeMarketTimes",
+    "Nonce": 63804569790630801,
+    "Data": ""
+  }
+```
+
+Error Response:
+```jsonc
+  {
+    "State": "Error",
+    "Type": "ChangeMarketTimes",
+    "Nonce": 63804569790630801,
+    "Data": "Market already settled."
+  }
+```
+
+## Transfer / Burn Funds including Withdrawals via Cross Chain Bridges (Transfer)
+Allows you to transfer funds to a different user account  or to burn the funds to withdraw them via a cross chain bridge.
+Funds that are burned, can be retrieved via Smart Chain Bridges on other Chains.  For burning transaction the "Descr"  field needs to contain the ETH withdrawal address. Adding additional information in the "Descr" field or putting an wrong address there might result in your funds being permanently lost.  
+Request:
+```jsonc
+{
+  "Type": "Transfer",
+  "Nonce": 63804569790630801,
+  "SignatureUser": "FOOuU5oibmQatnBx4VrxMvwA6...P8bqm7J+38gz+xP945a4Cg==",
+  "Data": {
+    "ID": "2646b51a-bd6b-498d-b246-ae80ecbc3f3c",
+    "Cur": 0,   //Currency ID, default is 0 (mBTC)
+    "FromU": 43,   // Sender's User ID
+    "ToU": 5,   // Receiver's User ID
+    "Descr": "0x63c3223207A1400868b05e756c26E77284B9ebC1",   // Reference. Needs to match the withdrawal address to be used in the smart contract exactly for burning transactions.
+    "TrType": 10,   // TransferTypes are:  P2P,            FeePaid,            FeeReceived,            FeeReversed,            Settlement,         
+    		// SettlementReversed,    Exchange,            Withdrawal,            Deposit,            CurrencyIssuing,          
+		// Burn,            DirectDebit,            Penalty,         Staking
+		// In Order to burn funds, you need to pass the value 10 (Burn)
+    "Chain" : 0  //Only Applicable for Burning Transactions you may set the Chain.  0: Ethereum.
+    
+    "NodeID": 1,
+    "Amount": 10.5,  // Amount 
+    "CreatedByUser": "2022-07-19T11:05:17.5852297Z"
+  }
+}
+```
+
+Response:
+```jsonc
+  {
+    "State": "Success",
+    "Type": "Transfer",
+    "Nonce": 63804569790630801,
+    "Data": null
+  }
+```
+
+Error Response:
+```jsonc
+  {
+    "State": "Error",
+    "Type": "Transfer",
+    "Nonce": 63804569790630801,
+    "Data": "Not enough Balance"
+  }
+```
+
 
