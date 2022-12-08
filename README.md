@@ -4,8 +4,14 @@ All JSON requests can be sent (with UTF8 encoding) to any node of the network. T
 
 **`83.171.236.194:81`**
 
-It is also possible to run your own node.  New Accounts can only be created by existing accounts. Once you have an account, deposits can be made by passing your UserId to the Deposit function of the Ethereum Smart Contract.  Having an Invite-only-platform shall maintain a high quality user base and keep bad actors out.  Upon majority vote of all staking nodes in the network, bad actors and all their referrals can be banned. Referrers of these bad actors may also be banned. Thus it is recommended to only invite new people you know and trust.
+It is also possible to run your own node. Installation instructions are to be announced. For early access, please contact the developers.
 
+## Getting Access
+
+The developers of the protocol are aware that having an completely decentralized platform for any kind of market open for everyone without entry restrictions may lead to severe negative external effects. Thus the Platform is Invite-Only. Having an Invite-Only-Platform shall maintain a high quality user base and keep out bad actors.  
+New accounts can only be created by existing accounts. Once you have an account, deposits can be made by passing your UserId to the deposit function of the Ethereum Smart Contract.  
+
+If bad actors enter the platform anyway, a majority vote of all staking nodes in the network can ban certain accounts and all their referrals. Referrers of bad actors may also be banned. Thus it is recommended to only invite new people you know and trust.
 
 
 ## Index
