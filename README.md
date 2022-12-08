@@ -1076,10 +1076,10 @@ Request:
   "Data": {
     "ID": "2646b51a-bd6b-498d-b246-ae80ecbc3f3c",
     "Cur": 0,   //Currency ID, default is 0 (mBTC)
-    "FromU": 43,   // Sender's User ID
-    "ToU": 5,   // Receiver's User ID
-    "Descr": "0x63c3223207A1400868b05e756c26E77284B9ebC1",   // Reference. Needs to match the withdrawal address to be used in the smart contract exactly for burning transactions.
-    "TrType": 10,   // TransferTypes are:  P2P,            FeePaid,            FeeReceived,            FeeReversed,            Settlement,         
+    "From": 43,   // Sender's User ID
+    "To": 5,   // Receiver's User ID
+    "Reference": "0x63c3223207A1400868b05e756c26E77284B9ebC1",   // Reference. Needs to match the withdrawal address to be used in the smart contract exactly for burning transactions.
+    "TType": 10,   // TransferTypes are:  P2P,            FeePaid,            FeeReceived,            FeeReversed,            Settlement,         
     		// SettlementReversed,    Exchange,            Withdrawal,            Deposit,            CurrencyIssuing,          
 		// Burn,            DirectDebit,            Penalty,         Staking
 		// In Order to burn funds, you need to pass the value 10 (Burn)
