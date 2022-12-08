@@ -27,8 +27,8 @@ It is also possible to run your own node.
 - [Create Market (MarketCreation)](#create-market-marketcreation)
 - [Change Closing Time (ChangeMarketTimes)](#change-Market-closing-time-changemarkettimes)
 - [Change/Create an Order (OrderAlteration)](#changecreate-an-order-orderalteration)
-- [Transfer/Burn/Withdraw (Transfer)](#transfer)
-
+- [Transfer/Burn/Withdraw (Transfer)](#transfer-burn-withdraw-funds-transfer)  
+- 
 ## Server Heartbeat (ReturnHeartbeat)
 Returns the current server time in ticks. First directly after connecting then with an interval of one minute. The server time is returned as the "Nonce" value.
 Response:
@@ -818,68 +818,6 @@ Response (Error):
 }
 ```
 
-## Change/Create an Order (OrderAlteration)
-Used to create or change an order.
-For Create Requests all fields that have default values MUST be omitted. Putting "State":0 for example will be rejected by any Node. 
-
-Request:
-```jsonc
-{
-  "Type": "OrderAlteration",
-  "Nonce": 4,
-  "SignatureUser": "rvPmrUb/Sx/HpuQlKAvBD...LWFpOIsyah5XQL6APZW06mBE8CA==",
-  "Data": {
-    "UserOrder": {
-      "MarketID": "d81e889f-7b98-4229-941c-ffefac4ed7c3",
-      "OrderID": "c0c025a2-dc39-4c5a-afaf-40c975ac014e"
-    },
-    "UnmatchedOrder": {
-      "Price": 1.5,
-      "RemAmount": 3.0,
-      "Amount": 3.0,
-    //  "State":0,
-      "Side":1,
-      "ID": "c0c025a2-dc39-4c5a-afaf-40c975ac014e",
-      "makerCT": 6000,
-      "UserID": 1
-    },
-    "UserID": 1,
-    "NodeID": 1,
-    "CreatedByUser": "2022-07-19T11:08:48.9997487Z",
-    // "LayAsL":false,    //Set this to true if you place a lay order on a binary market and you like to have the Amount as Liability of the Order.
-   // "Local":false,    //indicates whether the order shall be shared with all other nodes.   Local = true will require a lower Miner Fee
-       		 	     		// By default all markets are shared accross all nodes
-        
-  }
-}
-```
-
-Response:
-```jsonc
-{
-    "State": "Success",
-    "Type": "OrderAlteration",
-    "Nonce": 4,
-    "Data": {
-      "UserOrder": {
-        "MarketID": "d81e889f-7b98-4229-941c-ffefac4ed7c3",
-        "OrderID": "c0c025a2-dc39-4c5a-afaf-40c975ac014e"
-      },
-      "UnmatchedOrder": {
-        "Price": 1.5,
-        "RemAmount": 3.0,
-        "Amount": 3.0,
-        "ID": "c0c025a2-dc39-4c5a-afaf-40c975ac014e",
-        "makerCT": 6000,
-        "UserID": 1
-      },
-      "UserID": 1,
-      "NodeID": 1,
-      "CreatedByUser": "2022-07-19T11:08:48.9997487Z"
-    }
-  }
-  
-```
 
 ## Signing (Example)
 
@@ -1022,6 +960,70 @@ Response:
   }
 ```
 
+
+## Change/Create an Order (OrderAlteration)
+Used to create or change an order.
+For Create Requests all fields that have default values MUST be omitted. Putting "State":0 for example will be rejected by any Node. 
+
+Request:
+```jsonc
+{
+  "Type": "OrderAlteration",
+  "Nonce": 4,
+  "SignatureUser": "rvPmrUb/Sx/HpuQlKAvBD...LWFpOIsyah5XQL6APZW06mBE8CA==",
+  "Data": {
+    "UserOrder": {
+      "MarketID": "d81e889f-7b98-4229-941c-ffefac4ed7c3",
+      "OrderID": "c0c025a2-dc39-4c5a-afaf-40c975ac014e"
+    },
+    "UnmatchedOrder": {
+      "Price": 1.5,
+      "RemAmount": 3.0,
+      "Amount": 3.0,
+    //  "State":0,
+      "Side":1,
+      "ID": "c0c025a2-dc39-4c5a-afaf-40c975ac014e",
+      "makerCT": 6000,
+      "UserID": 1
+    },
+    "UserID": 1,
+    "NodeID": 1,
+    "CreatedByUser": "2022-07-19T11:08:48.9997487Z",
+    // "LayAsL":false,    //Set this to true if you place a lay order on a binary market and you like to have the Amount as Liability of the Order.
+   // "Local":false,    //indicates whether the order shall be shared with all other nodes.   Local = true will require a lower Miner Fee
+       		 	     		// By default all markets are shared accross all nodes
+        
+  }
+}
+```
+
+Response:
+```jsonc
+{
+    "State": "Success",
+    "Type": "OrderAlteration",
+    "Nonce": 4,
+    "Data": {
+      "UserOrder": {
+        "MarketID": "d81e889f-7b98-4229-941c-ffefac4ed7c3",
+        "OrderID": "c0c025a2-dc39-4c5a-afaf-40c975ac014e"
+      },
+      "UnmatchedOrder": {
+        "Price": 1.5,
+        "RemAmount": 3.0,
+        "Amount": 3.0,
+        "ID": "c0c025a2-dc39-4c5a-afaf-40c975ac014e",
+        "makerCT": 6000,
+        "UserID": 1
+      },
+      "UserID": 1,
+      "NodeID": 1,
+      "CreatedByUser": "2022-07-19T11:08:48.9997487Z"
+    }
+  }
+  
+```
+
 ## Change Market Closing Time (ChangeMarketTimes)
 Changes Closing and Settlement Date for any market that was created by the same user. For Create Requests all fields that have default values MUST be omitted. So putting "Period":0 for example will be rejected by any Node.
 Request:
@@ -1061,9 +1063,9 @@ Error Response:
   }
 ```
 
-## Transfer / Burn Funds including Withdrawals via Cross Chain Bridges (Transfer)
+## Transfer / Burn Withdraw Funds (Transfer)
 Allows you to transfer funds to a different user account  or to burn the funds to withdraw them via a cross chain bridge.
-Funds that are burned, can be retrieved via Smart Chain Bridges on other Chains.  For burning transaction the "Descr"  field needs to contain the ETH withdrawal address. Adding additional information in the "Descr" field or putting an wrong address there might result in your funds being permanently lost.  
+Funds that are burned, can be retrieved via Smart Chain Bridges on other Chains.  For burning transaction the "Descr"  field needs to contain the withdrawal address. Adding additional information in the "Descr" field or putting an wrong address there might result in your funds being permanently lost.  
 Request:
 ```jsonc
 {
