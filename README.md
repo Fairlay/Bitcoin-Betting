@@ -21,13 +21,16 @@ If bad actors enter the platform anyway, a majority vote of all staking nodes in
 - [Get Competitions (SubscribeCompetitions)](#get-competitions-subscribecompetitions)
 - [Get Markets and Orderbooks (SubscribeMarketsByFilter)](#get-markets-and-orderbooks-subscribemarketsbyfilter)
 - [Get Market by ID (GetMarketByID)](#get-market-by-id-getmarketbyid)
+- 
 ---
 - [Get Next Available User ID (GetFreeUserID)](#get-next-available-user-id-getfreeuserid)
 - [Get User ID from Public Key (GetUserIDFromPubKey)](#get-user-id-from-public-key-getuseridfrompubkey)
 - [Get User Balances (SubscribeBalance)](#get-user-balances-subscribebalance)
+- 
 ---
 - [Get Unmatched Orders (SubscribeUOrders)](#get-unmatched-orders-subscribeuorders)
 - [Get Matched Orders (SubscribeMatches)](#get-matched-orders-subscribematches)
+- 
 ---
 - [Signing](#signing-example)
 - [Create an account (AccountCreation)](#create-an-account-accountcreation)
@@ -35,7 +38,8 @@ If bad actors enter the platform anyway, a majority vote of all staking nodes in
 - [Change Closing Time (ChangeMarketTimes)](#change-Market-closing-time-changemarkettimes)
 - [Change/Create an Order (OrderAlteration)](#changecreate-an-order-orderalteration)
 - [Transfer/Burn/Withdraw (Transfer)](#transfer-burn-withdraw-funds-transfer)  
-- 
+- [Issue Currency/ Deposit (IssueCurrency)](#deposit-issue-currency)  
+
 ## Server Heartbeat (ReturnHeartbeat)
 Returns the current server time in ticks. First directly after connecting then with an interval of one minute. The server time is returned as the "Nonce" value.
 Response:
@@ -828,24 +832,23 @@ Response (Error):
 
 ## Signing (Example)
 
-In order to provide a valid signature, sort the Data Object alphabetically and sign it with Ed25519 (or ECDSA if your Account is flagged as "isETH") to provide it as "SignatureUser" inside the Storage Unit you send to the Node.  For signing, all fields that have default values MUST be omitted.   The creation date of the Data object provided as CreatedByUser  may not deviate more than 15 seconds from the Node time or the request might get rejected.
+In order to provide a valid signature, sort the Data Object alphabetically and sign it with Ed25519 (or ECDSA if your Account is flagged as "isETH") to provide it as "SignatureUser" inside the Storage Unit you send to the Node.  For signing, all fields that have default values MUST be omitted - they are only shown for completeness in all request samples below.   The creation date of the Data object provided as CreatedByUser  may not deviate more than 15 seconds from the Node time or the request might get rejected.
 
 
 For example, sign the following Data object of a ChangeMarketTimes Request:  
 
 {"ClosD":"2022-11-20T19:50:00Z","CreatedByUser":"2022-11-20T19:35:45.4294401Z","Mid":"c91d1993-7115-49f1-b3cd-ab9dc88821a2","NodeID":1,"SetlD":"2022-11-20T21:50:00Z","UserID":2}
 
-send the following Request to the Node:
+send the following Request to the Node with ID 1:
 
 {"Type":"ChangeMarketTimes","Nonce":63804569790630801,"SignatureUser":"/khiPwpPNk8gFSyrp81t1ZcbUNmF8w233bQCvhz4U5PzCcALbPiipsvWqR+AQ+cJJVHtk0RMtihpM3DHdMxSBg==","Data":{"Mid":"c91d1993-7115-49f1-b3cd-ab9dc88821a2","ClosD":"2022-11-20T19:50:00Z",
 "SetlD":"2022-11-20T21:50:00Z","UserID":2,"NodeID":1,"CreatedByUser":"2022-11-20T19:35:45.4294401Z"}}
 
 
 
-
 ## Create an account (AccountCreation)
-Creating  an account is only possible through an existing account as a transaction fee is involved for creating it. The Nodes accept both ED25519 and ECDSA signatures. If you like to have an account that signs requests via ECDSA, set IsETH to true on account creation.
-For Create Requests all fields that have default values MUST be omitted. 
+Creating  an account is only possible through an existing account as a transaction fee is involved for creating it.  The Nodes accept both ED25519 and ECDSA signatures. If you like to have an account that signs requests via ECDSA, set IsETH to true on account creation.
+For Create Requests all fields that have default values MUST be omitted.  Also read the Get Access  section.
 
 Request:
 ```jsonc
@@ -969,7 +972,7 @@ Response:
 
 
 ## Change/Create an Order (OrderAlteration)
-Used to create or change an order.
+Used to create or change or cancel an order.
 For Create Requests all fields that have default values MUST be omitted. Putting "State":0 for example will be rejected by any Node. 
 
 Request:
@@ -1089,7 +1092,7 @@ Request:
     		// SettlementReversed,    Exchange,            Withdrawal,            Deposit,            CurrencyIssuing,          
 		// Burn,            DirectDebit,            Penalty,         Staking
 		// In Order to burn funds, you need to pass the value 10 (Burn)
-    "Chain" : 0  //Only Applicable for Burning Transactions you may set the Chain.  0: Ethereum.
+  //  "Chain" : 0  //Only Applicable for Burning Transactions you may set the Chain.  0: Ethereum.
     
     "NodeID": 1,
     "Amount": 10.5,  // Amount 
@@ -1119,3 +1122,67 @@ Error Response:
 ```
 
 
+## Deposit  (IssueCurrency) 
+Allows you to issue your own Currency. 
+
+If Maintainer is set to 0 (default), the currency is self maintained and currency can be issued via  CrossChainPayments only.  CrossChainPayments must be enabled if no Maintainer is set.
+
+If DisallowIssuingByMaintainer is set to True, the maintainer may only issue the Currency on Creation, and may not change the total amount later on. 
+
+Creating a self-maintained Currency:
+
+Request:
+```jsonc
+{
+  "Type": "CurrencyIssuance",
+  "Nonce": 63804569790630801,
+  "SignatureUser": "FOOuU5oibmQatnBx4VrxMvwA6...P8bqm7J+38gz+xP945a4Cg==",
+  "Data": {
+    "Currency": {"ID":101, "Name": "MilliWrappedBitcoin", "Symbol" : "mWBTC", "ColdWalletAddress": "some SmartContractAddress",
+    // "TotalBalance":"0",
+    // "Maintainer":0,
+     "CrossChainPayments":true,
+     "DisallowIssuingByMaintainer":true
+     },
+    "NodeID": 1,
+    "UserID":1
+  }
+}
+```
+
+Each time after a Deposit to the Smart Contract, the deposited amount must be credited via the following request:
+
+```jsonc
+{
+  "Type": "CurrencyIssuance",
+  "Nonce": 63804569790630801,
+  "SignatureUser": "FOOuU5oibmQatnBx4VrxMvwA6...P8bqm7J+38gz+xP945a4Cg==",
+  "Data": {
+    "Deposit": {"TXID":"0x920960a4812bf2ad8395a4a451b232daea3805b427b94e20b4bc1f1e1ac0f480","UserID":4,"Amount":15},
+    "Currency": {"ID":101},
+    "NodeID": 1,
+    "UserID":1
+  }
+}
+```
+
+
+Response:
+```jsonc
+  {
+    "State": "Success",
+    "Type": "CurrencyIssuance",
+    "Nonce": 63804569790630801,
+    "Data": null
+  }
+```
+
+Error Response:
+```jsonc
+  {
+    "State": "Error",
+    "Type": "CurrencyIssuance",
+    "Nonce": 63804569790630801,
+    "Data": "Not enough Balance"
+  }
+```
