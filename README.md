@@ -37,8 +37,8 @@ If bad actors enter the platform anyway, a majority vote of all staking nodes in
 - [Create Market (MarketCreation)](#create-market-marketcreation)
 - [Change Closing Time (ChangeMarketTimes)](#change-Market-closing-time-changemarkettimes)
 - [Change/Create an Order (OrderAlteration)](#changecreate-an-order-orderalteration)
-- [Send / Burn / Withdraw Funds (Transfer)](#send-burn-withdraw-funds-transfer)  
-- [Issue Currency/ Deposit (IssueCurrency)](#deposit-issue-currency)  
+- [Send / Burn / Withdraw Funds (Transfer)](#send--burn--withdraw-funds-transfer)  
+- [Issue Currency/ Deposit (IssueCurrency)](#deposit--issue-currency)  
 
 ## Server Heartbeat (ReturnHeartbeat)
 Returns the current server time in ticks. First directly after connecting then with an interval of one minute. The server time is returned as the "Nonce" value.
@@ -969,7 +969,44 @@ Response:
     }
   }
 ```
+## Change Market Closing Time (ChangeMarketTimes)
+Changes Closing and Settlement Date for any market that was created by the same user. For Create Requests all fields that have default values MUST be omitted. So putting "Period":0 for example will be rejected by any Node.
+Request:
+```jsonc
+{
+  "Type": "ChangeMarketTimes",
+  "Nonce": 63804569790630801,
+  "SignatureUser": "FOOuU5oibmQatnBx4VrxMvwA6...P8bqm7J+38gz+xP945a4Cg==",
+  "Data": {
+    "ID": "2646b51a-bd6b-498d-b246-ae80ecbc3f3c",
+    "ClosD":"2022-11-20T19:50:00Z",
+    "SetlD":"2022-11-20T21:50:00Z",
+    "UserID": 1,
+    "NodeID": 1,
+    "CreatedByUser": "2022-07-19T11:05:17.5852297Z"
+  }
+}
+```
 
+Response:
+```jsonc
+  {
+    "State": "Success",
+    "Type": "ChangeMarketTimes",
+    "Nonce": 63804569790630801,
+    "Data": ""
+  }
+```
+
+Error Response:
+```jsonc
+  {
+    "State": "Error",
+    "Type": "ChangeMarketTimes",
+    "Nonce": 63804569790630801,
+    "Data": "Market already settled."
+  }
+```
 
 ## Change/Create an Order (OrderAlteration)
 Used to create or change or cancel an order.
@@ -1034,45 +1071,8 @@ Response:
   
 ```(#changecreate-an-order-orderalteration)
 
-## Change Market Closing Time (ChangeMarketTimes)
-Changes Closing and Settlement Date for any market that was created by the same user. For Create Requests all fields that have default values MUST be omitted. So putting "Period":0 for example will be rejected by any Node.
-Request:
-```jsonc
-{
-  "Type": "ChangeMarketTimes",
-  "Nonce": 63804569790630801,
-  "SignatureUser": "FOOuU5oibmQatnBx4VrxMvwA6...P8bqm7J+38gz+xP945a4Cg==",
-  "Data": {
-    "ID": "2646b51a-bd6b-498d-b246-ae80ecbc3f3c",
-    "ClosD":"2022-11-20T19:50:00Z",
-    "SetlD":"2022-11-20T21:50:00Z",
-    "UserID": 1,
-    "NodeID": 1,
-    "CreatedByUser": "2022-07-19T11:05:17.5852297Z"
-  }
-}
-```
 
-Response:
-```jsonc
-  {
-    "State": "Success",
-    "Type": "ChangeMarketTimes",
-    "Nonce": 63804569790630801,
-    "Data": ""
-  }
-```
-
-Error Response:
-```jsonc
-  {
-    "State": "Error",
-    "Type": "ChangeMarketTimes",
-    "Nonce": 63804569790630801,
-    "Data": "Market already settled."
-  }
-```
-## Send / Burn / Withdraw Funds (Transfer)
+## Send/Burn/Withdraw Funds (Transfer)
 Allows you to transfer funds to a different user account  or to burn the funds to withdraw them via a cross chain bridge.
 Funds that are burned, can be retrieved via Smart Chain Bridges on other Chains.  For burning transaction the "Descr"  field needs to contain the withdrawal address. Adding additional information in the "Descr" field or putting an wrong address there might result in your funds being permanently lost.  
 Request:
