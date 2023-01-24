@@ -38,7 +38,7 @@ If bad actors enter the platform anyway, a majority vote of all staking nodes in
 - [Change Closing Time (ChangeMarketTimes)](#change-Market-closing-time-changemarkettimes)
 - [Change/Create an Order (OrderAlteration)](#changecreate-an-order-orderalteration)
 - [Send / Burn / Withdraw Funds (Transfer)](#send--burn--withdraw-funds-transfer)  
-- [Issue Currency/ Deposit (IssueCurrency)](#deposit--currencyIssuance)  
+- [Issue Currency/ Deposit (CurrencyIssuance)](#deposit--currencyIssuance)  
 
 ## Server Heartbeat (ReturnHeartbeat)
 Returns the current server time in ticks. First directly after connecting then with an interval of one minute. The server time is returned as the "Nonce" value.
