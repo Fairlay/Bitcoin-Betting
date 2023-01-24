@@ -37,7 +37,7 @@ If bad actors enter the platform anyway, a majority vote of all staking nodes in
 - [Create Market (MarketCreation)](#create-market-marketcreation)
 - [Change Closing Time (ChangeMarketTimes)](#change-Market-closing-time-changemarkettimes)
 - [Change/Create an Order (OrderAlteration)](#changecreate-an-order-orderalteration)
-- [Send / Burn / Withdraw Funds (Transfer)](#send--burn--withdraw-funds-transfer)  
+- [Send / Burn / Withdraw Funds (Transfer)](#sendburnwithdraw-funds-transfer)  
 - [Issue Currency/ Deposit (CurrencyIssuance)](#deposit--currencyIssuance)  
 
 ## Server Heartbeat (ReturnHeartbeat)
