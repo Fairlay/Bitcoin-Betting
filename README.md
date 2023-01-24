@@ -21,23 +21,23 @@ If bad actors enter the platform anyway, a majority vote of all staking nodes in
 - [Get Competitions (SubscribeCompetitions)](#get-competitions-subscribecompetitions)
 - [Get Markets and Orderbooks (SubscribeMarketsByFilter)](#get-markets-and-orderbooks-subscribemarketsbyfilter)
 - [Get Market by ID (GetMarketByID)](#get-market-by-id-getmarketbyid)
-- 
+
 ---
 - [Get Next Available User ID (GetFreeUserID)](#get-next-available-user-id-getfreeuserid)
 - [Get User ID from Public Key (GetUserIDFromPubKey)](#get-user-id-from-public-key-getuseridfrompubkey)
 - [Get User Balances (SubscribeBalance)](#get-user-balances-subscribebalance)
-- 
+
 ---
 - [Get Unmatched Orders (SubscribeUOrders)](#get-unmatched-orders-subscribeuorders)
 - [Get Matched Orders (SubscribeMatches)](#get-matched-orders-subscribematches)
-- 
+
 ---
 - [Signing](#signing-example)
 - [Create an account (AccountCreation)](#create-an-account-accountcreation)
 - [Create Market (MarketCreation)](#create-market-marketcreation)
 - [Change Closing Time (ChangeMarketTimes)](#change-Market-closing-time-changemarkettimes)
 - [Change/Create an Order (OrderAlteration)](#changecreate-an-order-orderalteration)
-- [Transfer/Burn/Withdraw (Transfer)](#transfer-burn-withdraw-funds-transfer)  
+- [Send / Burn / Withdraw Funds (Transfer)](#send-burn-withdraw-funds-transfer)  
 - [Issue Currency/ Deposit (IssueCurrency)](#deposit-issue-currency)  
 
 ## Server Heartbeat (ReturnHeartbeat)
@@ -1032,7 +1032,7 @@ Response:
     }
   }
   
-```
+```(#changecreate-an-order-orderalteration)
 
 ## Change Market Closing Time (ChangeMarketTimes)
 Changes Closing and Settlement Date for any market that was created by the same user. For Create Requests all fields that have default values MUST be omitted. So putting "Period":0 for example will be rejected by any Node.
@@ -1072,8 +1072,7 @@ Error Response:
     "Data": "Market already settled."
   }
 ```
-
-## Transfer / Burn Withdraw Funds (Transfer)
+## Send / Burn / Withdraw Funds (Transfer)
 Allows you to transfer funds to a different user account  or to burn the funds to withdraw them via a cross chain bridge.
 Funds that are burned, can be retrieved via Smart Chain Bridges on other Chains.  For burning transaction the "Descr"  field needs to contain the withdrawal address. Adding additional information in the "Descr" field or putting an wrong address there might result in your funds being permanently lost.  
 Request:
@@ -1122,7 +1121,7 @@ Error Response:
 ```
 
 
-## Deposit  (IssueCurrency) 
+## Deposit  (Issue Currency) 
 Allows you to issue your own Currency. 
 
 If Maintainer is set to 0 (default), the currency is self maintained and currency can be issued via  CrossChainPayments only.  CrossChainPayments must be enabled if no Maintainer is set.
