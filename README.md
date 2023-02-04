@@ -1083,7 +1083,7 @@ Request:
   "SignatureUser": "FOOuU5oibmQatnBx4VrxMvwA6...P8bqm7J+38gz+xP945a4Cg==",
   "Data": {
     "ID": "2646b51a-bd6b-498d-b246-ae80ecbc3f3c",
-    "Cur": 0,   //Currency ID, default is 0 (mBTC)
+   // "Cur": 0,   //Currency ID, default is 0 (mBTC)
     "From": 43,   // Sender's User ID
     "To": 5,   // Receiver's User ID
     "Reference": "0x63c3223207A1400868b05e756c26E77284B9ebC1",   // Reference. Needs to match the withdrawal address to be used in the smart contract exactly for burning transactions.
@@ -1091,7 +1091,7 @@ Request:
     		// SettlementReversed,    Exchange,            Withdrawal,            Deposit,            CurrencyIssuing,          
 		// Burn,            DirectDebit,            Penalty,         Staking
 		// In Order to burn funds, you need to pass the value 10 (Burn)
-  //  "Chain" : 0  //Only Applicable for Burning Transactions you may set the Chain.  0: Ethereum.
+  //  "Chain" : 0  // Only Applicable for Burning Transactions to set the chain the funds are released. Default 0 Ethereum. 
     
     "NodeID": 1,
     "Amount": 10.5,  // Amount 
