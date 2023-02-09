@@ -1024,13 +1024,16 @@ Request:
       "OrderID": "c0c025a2-dc39-4c5a-afaf-40c975ac014e"
     },
     "UnmatchedOrder": {
+      "Amount": 3.0,
+      "ID": "c0c025a2-dc39-4c5a-afaf-40c975ac014e",
+      "makerCT": 6000,
+      //"Note": null,  // can be any string
       "Price": 1.5,
       "RemAmount": 3.0,
-      "Amount": 3.0,
     //  "State":0,
       "Side":1,
-      "ID": "c0c025a2-dc39-4c5a-afaf-40c975ac014e",
-      "makerCT": 6000
+    //  "Type":0,  // 0   Default,     1      PostOnly,     2       KillOrFill,   3         Same
+      "UserID": 1,
     },
     "UserID": 1,
     "NodeID": 1,
