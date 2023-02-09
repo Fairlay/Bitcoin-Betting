@@ -1030,8 +1030,7 @@ Request:
     //  "State":0,
       "Side":1,
       "ID": "c0c025a2-dc39-4c5a-afaf-40c975ac014e",
-      "makerCT": 6000,
-      "UserID": 1
+      "makerCT": 6000
     },
     "UserID": 1,
     "NodeID": 1,
