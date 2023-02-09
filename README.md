@@ -1031,9 +1031,9 @@ Request:
       "Price": 1.5,
       "RemAmount": 3.0,
     //  "State":0,
-      "Side":1,
+      "Side":1
     //  "Type":0,  // 0   Default,     1      PostOnly,     2       KillOrFill,   3         Same
-      "UserID": 1,
+    //  "UserID": 1  Not required to post 
     },
     "UserID": 1,
     "NodeID": 1,
