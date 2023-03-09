@@ -17,6 +17,7 @@ If bad actors enter the platform anyway, a majority vote of all staking nodes in
 ## Index
 - [Server Time (ReturnHeartbeat)](#server-heartbeat-ReturnHeartbeat)
 ---
+- [Get Currencies](#get-currencies)
 - [Get Categories (SubscribeSports)](#get-categories-subscribesports)
 - [Get Competitions (SubscribeCompetitions)](#get-competitions-subscribecompetitions)
 - [Get Markets and Orderbooks (SubscribeMarketsByFilter)](#get-markets-and-orderbooks-subscribemarketsbyfilter)
@@ -52,7 +53,59 @@ Response:
 }
 ````
 
-## Get Categories (SubscribeSports)
+## Get Currencies (SubscribeSports)
+Returns all active categories (have active/inplay markets).
+
+Request:
+```jsonc
+{
+    "Type": "GetCurrencies",
+
+    "RequestTime": "2022-04-22T09:20:14.3856547Z",
+    // Should be close to server's time
+
+    "UserID": -1,
+    // This will be a "short" integer ID (1k to 1m)
+    // No user identity necessary
+
+    "NodeID": 1
+    // This will be the same as the User ID who is running the node
+}
+```
+
+Response:
+```jsonc
+{
+    "State": "Success",
+
+    "Type": "GetCurrencies",
+
+    "Data": [
+        [
+            "ID" : 1,
+            "Name" : "Bitcoin",
+            "ColdWalletAddress" : "",
+            "TotalBalance" : 100,
+            "Maintainer" : 1,
+            "CrossChainPayments" : "true",
+            "DisallowIssuingByMaintainer" : "true",
+	    
+        ],
+        [
+           
+            "ID" : 2,
+            "Name" : "Ether",
+            "ColdWalletAddress" : "",
+            "TotalBalance" : 1,
+            "Maintainer" : 1,
+            "CrossChainPayments" : "true",
+            "DisallowIssuingByMaintainer" : "true",
+        ]
+    ]
+    
+}
+````
+## Get Categories
 Returns all active categories (have active/inplay markets).
 
 Request:
@@ -79,6 +132,8 @@ Response:
 
     "Type": "SubscribeSports",
 
+    
+    
     "Data": [
         [
             "13",
@@ -98,9 +153,9 @@ Response:
         ]
     ]
     // Array of [ID, slug, name]
+
 }
 ````
-
 ## Get Competitions (SubscribeCompetitions)
 Returns all active competitions for all categories (have active/inplay markets).
 
