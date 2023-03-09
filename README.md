@@ -18,7 +18,7 @@ If bad actors enter the platform anyway, a majority vote of all staking nodes in
 - [Server Time (ReturnHeartbeat)](#server-heartbeat-ReturnHeartbeat)
 ---
 - [Get Currencies](#get-currencies)
-- [Get Categories (SubscribeSports)](#get-categories-subscribesports)
+- [Get Categories](#get-categories)
 - [Get Competitions (SubscribeCompetitions)](#get-competitions-subscribecompetitions)
 - [Get Markets and Orderbooks (SubscribeMarketsByFilter)](#get-markets-and-orderbooks-subscribemarketsbyfilter)
 - [Get Market by ID (GetMarketByID)](#get-market-by-id-getmarketbyid)
@@ -53,7 +53,7 @@ Response:
 }
 ````
 
-## Get Currencies (SubscribeSports)
+## Get Currencies
 Returns all active categories (have active/inplay markets).
 
 Request:
