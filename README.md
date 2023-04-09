@@ -1,3 +1,4 @@
+
 # Websocket API documentation
 
 All JSON requests can be sent (with UTF8 encoding) to any node of the network. The following public node are available  
@@ -227,6 +228,7 @@ Request:
         "MarketFilter": {
 
             "OnlyActive": true,
+            "Status": 1,     //get all regular markets   0  All, 1 Active, 2 Live / In-play
 
             "PageSize": 100
             // Number of markets per page (websocket message)
@@ -1176,8 +1178,57 @@ Error Response:
     "Data": "Not enough Balance"
   }
 ```
+## GetBurnValidations 
+Allows you to transfer funds to a different user account  or to burn the funds to withdraw them via a cross chain bridge.
+Funds that are burned, can be retrieved via Smart Chain Bridges on other Chains.  For burning transaction the "Descr"  field needs to contain the withdrawal address. Adding additional information in the "Descr" field or putting an wrong address there might result in your funds being permanently lost.  
+Request:
+```jsonc
+{
+  "Type": "GetBurnValidations",
+  "Nonce": 63804569790630801,
+  "SignatureUser": "FOOuU5oibmQatnBx4VrxMvwA6...P8bqm7J+38gz+xP945a4Cg==",
+  "Data": {
 
+    "NodeID": 1,
+    "UserID": 13,
+    "CreatedByUser": "2022-07-19T11:05:17.5852297Z"
+  }
+}
+```
 
+Response:
+```jsonc
+  {
+    "State": "Success",
+    "Type": "GetBurnValidations",
+    "Nonce": 63804569790630801,
+   {
+      "BurnValidations": [
+      {
+        "TXID": "0x123456789",
+        "Cur": 1,
+        "Amount": 1,
+        "Nonce": 12345678,
+        "Address": "0x12345",
+        "SignatureValidator": "0x1234567",
+        "CreationTime": "2022-11-19T11:08:48.9997487Z"
+      }],     
+      "UserID": 13,
+      "NodeID": 1,
+      "CreatedByUser": "2022-11-19T11:08:48.9997487Z"
+    }
+  }
+```
+
+Error Response:
+```jsonc
+  {
+    "State": "Error",
+    "Type": "GetBurnValidations",
+    "Nonce": 63804569790630801,
+    "Data": "Invalid User"
+  }
+```
 ## Deposit  (CurrencyIssuance) 
 Allows you to issue your own Currency. 
 
