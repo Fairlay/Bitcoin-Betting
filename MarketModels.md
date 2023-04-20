@@ -1,5 +1,5 @@
  
- '''
+```
  public enum SettleTypes
         {
             BINARY,
@@ -80,4 +80,4 @@
             FINALIZED,
             CANCELLED
         }
-'''
+```
