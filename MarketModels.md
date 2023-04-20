@@ -1,4 +1,6 @@
-  public enum SettleTypes
+ 
+ '''
+ public enum SettleTypes
         {
             BINARY,
             CFD,
@@ -78,3 +80,4 @@
             FINALIZED,
             CANCELLED
         }
+'''
