@@ -239,6 +239,7 @@ Request:
         //HashSet<string> GeneralAND;
         //HashSet<string> GeneralNOT;
         //HashSet<string> GeneralOR;
+	// Market.StatusTypes? Status;
 
        // HashSet<string> RunnerAND;
        // HashSet<string> TitleAND;
