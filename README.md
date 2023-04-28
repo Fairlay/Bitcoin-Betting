@@ -1078,8 +1078,7 @@ Request:
   "SignatureUser": "rvPmrUb/Sx/HpuQlKAvBD...LWFpOIsyah5XQL6APZW06mBE8CA==",
   "Data": {
     "UserOrder": {
-      "MarketID": "d81e889f-7b98-4229-941c-ffefac4ed7c3",
-      "OrderID": "c0c025a2-dc39-4c5a-afaf-40c975ac014e"
+      "MarketID": "d81e889f-7b98-4229-941c-ffefac4ed7c3"
     },
     "UnmatchedOrder": {
       "Amount": 3.0,
@@ -1090,9 +1089,8 @@ Request:
       "RemAmount": 3.0,
     //  "State":0,
       "Side":1
-    //  "Type":0,  // 0   Default,     1      PostOnly,     2       KillOrFill,   3         Same
-    //  "UserID": 1  Not required to post 
-    },
+      "Type":2,  // 0   Default,     1      PostOnly,     2       KillOrFill,   3         Same
+     },
     "UserID": 1,
     "NodeID": 1,
     "CreatedByUser": "2022-07-19T11:08:48.9997487Z",
@@ -1113,7 +1111,8 @@ Response:
     "Data": {
       "UserOrder": {
         "MarketID": "d81e889f-7b98-4229-941c-ffefac4ed7c3",
-        "OrderID": "c0c025a2-dc39-4c5a-afaf-40c975ac014e"
+        "OrderID": "c0c025a2-dc39-4c5a-afaf-40c975ac014e",
+	"Side":1
       },
       "UnmatchedOrder": {
         "Price": 1.5,
@@ -1121,6 +1120,7 @@ Response:
         "Amount": 3.0,
         "ID": "c0c025a2-dc39-4c5a-afaf-40c975ac014e",
         "makerCT": 6000,
+	"Side":1,
         "UserID": 1
       },
       "UserID": 1,
