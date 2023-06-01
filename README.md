@@ -1,23 +1,63 @@
 
 # Websocket API documentation
 
-All JSON requests can be sent (with UTF8 encoding) to any node of the network. The following public node are available  
-
-**`83.171.236.194:81`**
-
-It is also possible to run your own node. Installation instructions are to be announced. For early access, please contact the developers.
-
 ## Getting Access
-
 The developers of the protocol are aware that having an completely decentralized platform for any kind of market open for everyone without entry restrictions may lead to severe negative external effects. Thus the Platform is Invite-Only. Having an Invite-Only-Platform shall maintain a high quality user base and keep out bad actors.  
+
 New accounts can only be created by existing accounts. Once you have an account, deposits can be made by passing your UserId to the deposit function of the Ethereum Smart Contract.  
 
 If bad actors enter the platform anyway, a majority vote of all staking nodes in the network can ban certain accounts and all their referrals. Referrers of bad actors may also be banned. Thus it is recommended to only invite new people you know and trust.
 
+## How to connect
+You need to connect to a node using the Websocket protocol. We'll list below a few public servers, but it is also possible to run your own node in the future. Installation instructions are to be announced. For early access, please contact the developers.
+
+Please take note that all JSON messages/requests must be sent with UTF8 encoding.
+
+Public node addresses:
+```
+83.171.236.194:81
+85.206.161.63:81
+```
+
+## How to sign messages
+Requests that change state requires a signature. In order to provide a valid signature, sort the `Data` object alphabetically and sign it with Ed25519 (or ECDSA if your account is flagged as "isETH") to provide it as `SignatureUser` property inside the storage unit you send to the Node.
+
+For signing, all fields that have default values MUST be omitted - they are only shown for completeness in all request samples below. The creation date of the Data object provided as `CreatedByUser` may not deviate more than 15 seconds from the Node time or the request might get rejected.
+
+<!-- TODO: add link -->
+For example, consider signing the following `Data` object of a `ChangeMarketTimes` request:  
+```json
+{
+  "ClosD":"2022-11-20T19:50:00Z",
+  "CreatedByUser":"2022-11-20T19:35:45.4294401Z",
+  "Mid":"c91d1993-7115-49f1-b3cd-ab9dc88821a2",
+  "NodeID":1,
+  "SetlD":"2022-11-20T21:50:00Z",
+  "UserID":2
+}
+```
+
+Your final message/request to be sent to the Node with `ID = 1`:
+
+```json
+{
+  "Type":"ChangeMarketTimes",
+  "Nonce":63804569790630801,
+  "SignatureUser":"/khiPwpPNk8gFSyrp81t1ZcbUNmF8w233bQCvhz4U5PzCcALbPiipsvWqR+AQ+cJJVHtk0RMtihpM3DHdMxSBg==",
+  "Data": {
+    "ClosD":"2022-11-20T19:50:00Z",
+    "CreatedByUser":"2022-11-20T19:35:45.4294401Z",
+    "Mid":"c91d1993-7115-49f1-b3cd-ab9dc88821a2",
+    "NodeID":1,
+    "SetlD":"2022-11-20T21:50:00Z",
+    "UserID":2
+  }
+}
+```
+
 
 ## Index
 - [Server Time (ReturnHeartbeat)](#server-heartbeat-ReturnHeartbeat)
----
 - [Get Currencies](#get-currencies)
 - [Get Categories](#get-categories)
 - [Get Competitions (SubscribeCompetitions)](#get-competitions-subscribecompetitions)
@@ -34,7 +74,6 @@ If bad actors enter the platform anyway, a majority vote of all staking nodes in
 - [Get Matched Orders (SubscribeMatches)](#get-matched-orders-subscribematches)
 
 ---
-- [Signing](#signing-example)
 - [Create an account (AccountCreation)](#create-an-account-accountcreation)
 - [Create Market (MarketCreation)](#create-market-marketcreation)
 - [Change Closing Time (ChangeMarketTimes)](#change-Market-closing-time-changemarkettimes)
@@ -886,21 +925,6 @@ Response (Error):
     "Error": "User does not exist"
 }
 ```
-
-
-## Signing (Example)
-
-In order to provide a valid signature, sort the Data Object alphabetically and sign it with Ed25519 (or ECDSA if your Account is flagged as "isETH") to provide it as "SignatureUser" inside the Storage Unit you send to the Node.  For signing, all fields that have default values MUST be omitted - they are only shown for completeness in all request samples below.   The creation date of the Data object provided as CreatedByUser  may not deviate more than 15 seconds from the Node time or the request might get rejected.
-
-
-For example, sign the following Data object of a ChangeMarketTimes Request:  
-
-{"ClosD":"2022-11-20T19:50:00Z","CreatedByUser":"2022-11-20T19:35:45.4294401Z","Mid":"c91d1993-7115-49f1-b3cd-ab9dc88821a2","NodeID":1,"SetlD":"2022-11-20T21:50:00Z","UserID":2}
-
-send the following Request to the Node with ID 1:
-
-{"Type":"ChangeMarketTimes","Nonce":63804569790630801,"SignatureUser":"/khiPwpPNk8gFSyrp81t1ZcbUNmF8w233bQCvhz4U5PzCcALbPiipsvWqR+AQ+cJJVHtk0RMtihpM3DHdMxSBg==","Data":{"Mid":"c91d1993-7115-49f1-b3cd-ab9dc88821a2","ClosD":"2022-11-20T19:50:00Z",
-"SetlD":"2022-11-20T21:50:00Z","UserID":2,"NodeID":1,"CreatedByUser":"2022-11-20T19:35:45.4294401Z"}}
 
 
 
