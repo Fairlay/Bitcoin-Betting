@@ -81,17 +81,34 @@ Get the next available user ID
 - [`GetUserIDFromPubKey`](#GetUserIDFromPubKey)  
 Get user ID given a public key
 
+- [`AccountCreation`](#AccountCreation)
+
 - [`SubscribeBalance`](#SubscribeBalance)  
 Get (and subscribe to) user balance given a user ID
 
-- [Get Unmatched Orders (SubscribeUOrders)](#get-unmatched-orders-subscribeuorders)
-- [Get Matched Orders (SubscribeMatches)](#get-matched-orders-subscribematches)
-- [Create an account (AccountCreation)](#create-an-account-accountcreation)
-- [Create Market (MarketCreation)](#create-market-marketcreation)
-- [Change Closing Time (ChangeMarketTimes)](#change-Market-closing-time-changemarkettimes)
-- [Change/Create an Order (OrderAlteration)](#changecreate-an-order-orderalteration)
-- [Send / Burn / Withdraw Funds (Transfer)](#sendburnwithdraw-funds-transfer)  
-- [Issue Currency/ Deposit (CurrencyIssuance)](#deposit--currencyIssuance)  
+- [`SubscribeUOrders`](#SubscribeUOrders)  
+Get (and subscribe to) unmatched orders
+
+- [`SubscribeMatches`](#SubscribeMatches)  
+Get (and subscribe to) matched orders
+
+- [`OrderAlteration`](#OrderAlteration)  
+Create, change or cancel an order created by the user
+
+- [MarketCreation](#MarketCreation)  
+Create a new market
+
+- [`ChangeMarketTimes`](#ChangeMarketTimes)  
+Change close and/or settle for a market created by the user
+
+- [`CurrencyIssuance`](#CurrencyIssuance)  
+Issue your own currency or credit your deposits
+
+- [`GetBurnValidations`](#GetBurnValidations)  
+Get a list of all burned transactions
+
+- [`Transfer`](#Transfer)  
+Withdraw your funds by sending or burning
 
 ## `ReturnHeartbeat`
 Once connected to a node, you'll start receiving `ReturnHeartbeat` with the current server time in ticks every minute. The server time is returned as the `Nonce` value.
@@ -485,6 +502,45 @@ Returns an integer if an account with the public key is found.
 }
 ```
 
+
+## `AccountCreation`
+Creating  an account is only possible through an existing account as a transaction fee is involved for creating it.  The Nodes accept both ED25519 and ECDSA signatures. If you like to have an account that signs requests via ECDSA, set IsETH to true on account creation.
+For Create Requests all fields that have default values MUST be omitted.  Also read the Get Access  section.
+
+Request:
+```jsonc
+{
+  "Type": "AccountCreation",
+  "Nonce": 1,
+  "SignatureUser": "1HXMLy1s4zWDnu...SEFER+R2Mc/KMIfhY+OvDe8Nfuw34rECA==",
+  "Data": {
+    "NewAccountID": 2,
+    "PubKey": "3mVC3iAAQA...to2dk00ekGqojg==",
+    "IsETH":false,
+    "UserID": 1,
+    "NodeID": 1,
+    "CreatedByUser": "2022-07-19T11:01:25.8980825Z"
+  }
+}
+```
+
+Response:
+```jsonc
+{
+   "State": "Success",
+   "Type": "AccountCreation",
+   "Nonce": 1,
+   "Data": {
+     "NewAccountID": 2,
+     "PubKey": "3mVC3iAAQAA8SYKHTVi1MMIf7L+EIJL5jIOov5oNto2dk00ekGqojg==",
+     "IsETH":false,
+     "UserID": 1,
+     "NodeID": 1,
+     "CreatedByUser": "2022-07-19T11:01:25.8980825Z"
+   }
+}
+```
+
 ## `SubscribeBalance`
 Returns user balance and subscribes to future balance changes given a user ID. This does not require authentication.
 ```jsonc
@@ -524,11 +580,10 @@ Returns user balance and subscribes to future balance changes given a user ID. T
 }
 ```
 
-## Get Unmatched Orders (SubscribeUOrders)
-Returns unmatched orders. This does not require autentication.
-
-Request:
+## `SubscribeUOrders`
+Get unmatched orders and subscribes to future changes. This does not require autentication.
 ```jsonc
+// Request:
 {
   "Type": "SubscribeUOrders",
   "Nonce": 6,
@@ -545,121 +600,112 @@ Request:
 	    "Default",
 	    "Same"
     ]
-    // Possible Types:
-    // Default, PostOnly, KillOrFill, Same
   }
 }
 ```
-
-
-Response:
 ```jsonc
+// Response:
 {
-  {
-    "State": "Success",
-    "Type": "SubscribeUOrders",
-    "Nonce": 6,
-    "Count": 1,
-    "Data": [
-      {
-        "UserOrder": {
-          "HiddenLUChange": 637931524616597824,
-          "MarketID": "d81e889f-7b98-4229-941c-ffefac4ed7c3",
-          "OrderID": "ce8bdedc-b345-44f3-b54e-11ea3f44975f",
-	  "Side":0,
-	  "RunnerID":0,
-	  "Note":null,
-	  "Insurance":false,
-        },
-        "UnmatchedOrder": {
-          "SUID": "370567508BA10F0E42BD414AC93AC56A36C8702B7F94F32762E22970FCAE32DC",
-          "Price": 1.7,
-          "RemAmount": 2.0,
-          "State": 2,   
-          "Amount": 2.0,
-          "ID": "ce8bdedc-b345-44f3-b54e-11ea3f44975f",
-          "makerCT": 6000,
-          "UserID": 1,
-	  "Type" :1,
-	  "Side":1,
-	  "Note":"",
-	  "CancelAt": "2022-07-11T16:07:41.8473882Z",
-	  
-        }
+  "State": "Success",
+  "Type": "SubscribeUOrders",
+  "Nonce": 6,
+  "Count": 1,
+  "Data": [
+    {
+      "UserOrder": {
+        "HiddenLUChange": 637931524616597824,
+        "MarketID": "d81e889f-7b98-4229-941c-ffefac4ed7c3",
+        "OrderID": "ce8bdedc-b345-44f3-b54e-11ea3f44975f",
+        "Side":0,
+        "RunnerID":0,
+        "Note":null,
+        "Insurance":false,
       },
-      {
-        "UserOrder": {
-          "HiddenLUChange": 637931524616708953,
-          "Side": 1,
-          "MarketID": "d81e889f-7b98-4229-941c-ffefac4ed7c3",
-          "OrderID": "b26a4789-81d0-4a5d-842b-392aac17c4d2"
-        },
-        "UnmatchedOrder": {
-          "SUID": "1CFCC078DF55E3901DB706ED6BEB0A6781DC273D35EA1C7BECBDA9B9CF2A8AED",
-          "Price": 2.5,
-          "RemAmount": 3.0,
-          "Side": 1,
-          "Amount": 3.0,
-          "ID": "b26a4789-81d0-4a5d-842b-392aac17c4d2",
-          "makerCT": 6000,
-          "UserID": 1
-        }
-      },
-      {
-        "UserOrder": {
-          "HiddenLUChange": 637931524616219927,
-          "MarketID": "d81e889f-7b98-4229-941c-ffefac4ed7c3",
-          "OrderID": "c0c025a2-dc39-4c5a-afaf-40c975ac014e"
-        },
-        "UnmatchedOrder": {
-          "SUID": "4A4BC5B7477D1953B92D081D773CD6630846E78910EAE2DBE2B3F47835849B64",
-          "Price": 1.5,
-          "RemAmount": 3.0,
-          "Amount": 3.0,
-          "State": 0,
-          "ID": "c0c025a2-dc39-4c5a-afaf-40c975ac014e",
-          "makerCT": 6000,
-          "UserID": 1
-        }
-      },
-      {
-        "UserOrder": {
-          "HiddenLUChange": 637931524616651548,
-          "Side": 1,
-          "MarketID": "d81e889f-7b98-4229-941c-ffefac4ed7c3",
-          "OrderID": "dfd965a8-554e-495f-9c96-fb9612e90d22"
-        },
-        "UnmatchedOrder": {
-          "SUID": "201540BE64FCE9D131AC3D5D123E9C47285DEFAB0192B7ACC9F583354EBDD759",
-          "Price": 2.3,
-          "RemAmount": 2.0,
-          "Side": 1,
-          "Amount": 2.0,
-          "State": 1,
-          "ID": "dfd965a8-554e-495f-9c96-fb9612e90d22",
-          "makerCT": 6000,
-          "UserID": 1
-        }
+      "UnmatchedOrder": {
+        "SUID": "370567508BA10F0E42BD414AC93AC56A36C8702B7F94F32762E22970FCAE32DC",
+        "Price": 1.7,
+        "RemAmount": 2.0,
+        "State": 2,   
+        "Amount": 2.0,
+        "ID": "ce8bdedc-b345-44f3-b54e-11ea3f44975f",
+        "makerCT": 6000,
+        "UserID": 1,
+        "Type" :1,
+        "Side":1,
+        "Note":"",
+        "CancelAt": "2022-07-11T16:07:41.8473882Z",
       }
-    ]
-  }
+    },    
+    {
+      "UserOrder": {
+        "HiddenLUChange": 637931524616708953,
+        "Side": 1,
+        "MarketID": "d81e889f-7b98-4229-941c-ffefac4ed7c3",
+        "OrderID": "b26a4789-81d0-4a5d-842b-392aac17c4d2"
+      },
+      "UnmatchedOrder": {
+        "SUID": "1CFCC078DF55E3901DB706ED6BEB0A6781DC273D35EA1C7BECBDA9B9CF2A8AED",
+        "Price": 2.5,
+        "RemAmount": 3.0,
+        "Side": 1,
+        "Amount": 3.0,
+        "ID": "b26a4789-81d0-4a5d-842b-392aac17c4d2",
+        "makerCT": 6000,
+        "UserID": 1
+      }
+    },
+    {
+      "UserOrder": {
+        "HiddenLUChange": 637931524616219927,
+        "MarketID": "d81e889f-7b98-4229-941c-ffefac4ed7c3",
+        "OrderID": "c0c025a2-dc39-4c5a-afaf-40c975ac014e"
+      },
+      "UnmatchedOrder": {
+        "SUID": "4A4BC5B7477D1953B92D081D773CD6630846E78910EAE2DBE2B3F47835849B64",
+        "Price": 1.5,
+        "RemAmount": 3.0,
+        "Amount": 3.0,
+        "State": 0,
+        "ID": "c0c025a2-dc39-4c5a-afaf-40c975ac014e",
+        "makerCT": 6000,
+        "UserID": 1
+      }
+    },
+    {
+      "UserOrder": {
+        "HiddenLUChange": 637931524616651548,
+        "Side": 1,
+        "MarketID": "d81e889f-7b98-4229-941c-ffefac4ed7c3",
+        "OrderID": "dfd965a8-554e-495f-9c96-fb9612e90d22"
+      },
+      "UnmatchedOrder": {
+        "SUID": "201540BE64FCE9D131AC3D5D123E9C47285DEFAB0192B7ACC9F583354EBDD759",
+        "Price": 2.3,
+        "RemAmount": 2.0,
+        "Side": 1,
+        "Amount": 2.0,
+        "State": 1,
+        "ID": "dfd965a8-554e-495f-9c96-fb9612e90d22",
+        "makerCT": 6000,
+        "UserID": 1
+      }
+    }
+  ]
 }
 ```
-
-Response (Error):
 ```jsonc
+// Response (error):
 {
-    "State": "Error",
-    "Type": "SubscribeUOrders",
-    "Error": "User does not exist"
+  "State": "Error",
+  "Type": "SubscribeUOrders",
+  "Error": "User does not exist"
 }
 ```
 
-## Get Matched Orders (SubscribeMatches)
-Returns all matched user orders. This does not require autentication.
-
-Request:
+## `SubscribeMatches`
+Returns all matched user orders and subscribes to future changes. This does not require autentication.
 ```jsonc
+// Request:
 {
   "Type": "SubscribeMatches",
   "Nonce": 5,
@@ -675,9 +721,8 @@ Request:
   }
 }
 ```
-
-Response:
 ```jsonc
+// Response:
 {
   "State": "Success",
   "Type": "SubscribeMatches",
@@ -689,86 +734,94 @@ Response:
         "MarketID": "d81e889f-7b98-4229-941c-ffefac4ed7c3",
         "OrderID": "aeda7c0a-5dbb-48f2-8ffa-f768b706c51b",
         "Note": ";2",
-	  "Side":0,
-	  "RunnerID":0,
-	  "Note":null,
-	  "Insurance":false,
+        "Side":0,
+        "RunnerID":0,
+        "Note":null,
+        "Insurance":false,
       },
       "MatchedOrder": {
         "ID": "aeda7c0a-5dbb-48f2-8ffa-f768b706c51b",
         "State": 1,
-        // State (MATCHEDORDER):  DEFAULT,            MATCHED,            RUNNERWON,            RUNNERHALFWON,            RUNNERLOST,       
-        //    RUNNERHALFLOST,            MAKERVOIDED,            VOIDED,            PENDING,            DECIMALRESULT,      
-        //    DECIMALRESULTTOBASE,            SETTLED
         "CreationDate": "2022-07-11T16:07:41.8473882Z",
         "Price": 1.9,
         "Amount": 1.0,
-	"DecResult":0,  // used for markets with continuous settlement 
-	"R":0,   //  Used for Flags
-	"Red":0,  //Reduction. Used in special circumstances when the matched Price has to be reduced on settlement. (Used in Horse racing markets or with multibets)
-	"MakerCancelTime":0,  // time in milliseconds the maker of the bet is allowed to change the status of the bet from PENDING to MAKERVOIDED. Only used by 					//professional Market Makers.
+        "DecResult":0,
+        "R":0,
+        "Red":0,
+        "MakerCancelTime":0,
       }
     }
   ]
 }
 ```
-
-Response (Error):
 ```jsonc
+// Response (error):
 {
-    "State": "Error",
-    "Type": "SubscribeMatches",
-    "Error": "User does not exist"
+  "State": "Error",
+  "Type": "SubscribeMatches",
+  "Error": "User does not exist"
 }
 ```
 
-
-
-## Create an account (AccountCreation)
-Creating  an account is only possible through an existing account as a transaction fee is involved for creating it.  The Nodes accept both ED25519 and ECDSA signatures. If you like to have an account that signs requests via ECDSA, set IsETH to true on account creation.
-For Create Requests all fields that have default values MUST be omitted.  Also read the Get Access  section.
-
-Request:
+## `OrderAlteration`
+Use to create, change or cancel an order created by the same user. Take note that all fields that have default values MUST be omitted. So putting `"Side":0` for example will be rejected by any node.
 ```jsonc
+// Request:
 {
-  "Type": "AccountCreation",
-  "Nonce": 1,
-  "SignatureUser": "1HXMLy1s4zWDnu...SEFER+R2Mc/KMIfhY+OvDe8Nfuw34rECA==",
+  "Type": "OrderAlteration",
+  "Nonce": 4,
+  "SignatureUser": "rvPmrUb/Sx/HpuQlKAvBD...LWFpOIsyah5XQL6APZW06mBE8CA==",
   "Data": {
-    "NewAccountID": 2,
-    "PubKey": "3mVC3iAAQA...to2dk00ekGqojg==",
-    "IsETH":false,
+    "UserOrder": {
+      "MarketID": "d81e889f-7b98-4229-941c-ffefac4ed7c3"
+    },
+    "UnmatchedOrder": {
+      "Amount": 3.0,
+      "ID": "c0c025a2-dc39-4c5a-afaf-40c975ac014e",
+      "makerCT": 6000,
+      "Price": 1.5,
+      "RemAmount": 3.0,
+      "Side":1,
+      "Type":2,
+     },
     "UserID": 1,
     "NodeID": 1,
-    "CreatedByUser": "2022-07-19T11:01:25.8980825Z"
+    "CreatedByUser": "2022-07-19T11:08:48.9997487Z",
+  }
+}
+```
+```jsonc
+// Response:
+{
+  "State": "Success",
+  "Type": "OrderAlteration",
+  "Nonce": 4,
+  "Data": {
+    "UserOrder": {
+      "MarketID": "d81e889f-7b98-4229-941c-ffefac4ed7c3",
+      "OrderID": "c0c025a2-dc39-4c5a-afaf-40c975ac014e",
+      "Side":1
+    },
+    "UnmatchedOrder": {
+      "Price": 1.5,
+      "RemAmount": 3.0,
+      "Amount": 3.0,
+      "ID": "c0c025a2-dc39-4c5a-afaf-40c975ac014e",
+      "makerCT": 6000,
+      "Side":1,
+      "UserID": 1
+    },
+    "UserID": 1,
+    "NodeID": 1,
+    "CreatedByUser": "2022-07-19T11:08:48.9997487Z"
   }
 }
 ```
 
-Response:
+## `MarketCreation`
+Creates a new market. Take note that all fields that have default values MUST be omitted. So putting `"Period":0` for example will be rejected by any node.
 ```jsonc
-{
-   "State": "Success",
-   "Type": "AccountCreation",
-   "Nonce": 1,
-   "Data": {
-     "NewAccountID": 2,
-     "PubKey": "3mVC3iAAQAA8SYKHTVi1MMIf7L+EIJL5jIOov5oNto2dk00ekGqojg==",
-     "IsETH":false,
-     "UserID": 1,
-     "NodeID": 1,
-     "CreatedByUser": "2022-07-19T11:01:25.8980825Z"
-   }
-}
-```
-
-
-
-
-## Create Market (MarketCreation)
-Creates a market.  For Create Requests all fields that have default values MUST be omitted. So putting "Period":0 for example will be rejected by any Node.
-Request:
-```jsonc
+// Request:
 {
   "Type": "MarketCreation",
   "Nonce": 3,
@@ -807,9 +860,8 @@ Request:
   }
 }
 ```
-
-Response:
 ```jsonc
+// Response:
   {
     "State": "Success",
     "Type": "MarketCreation",
@@ -847,10 +899,11 @@ Response:
     }
   }
 ```
-## Change Market Closing Time (ChangeMarketTimes)
-Changes Closing and Settlement Date for any market that was created by the same user. For Create Requests all fields that have default values MUST be omitted. So putting "Period":0 for example will be rejected by any Node.
-Request:
+
+## `ChangeMarketTimes`
+Changes closing and settlement dates for any market that was created by the same user. Take note that all fields that have default values MUST be omitted. So putting `"Period":0` for example will be rejected by any node.
 ```jsonc
+// Request:
 {
   "Type": "ChangeMarketTimes",
   "Nonce": 63804569790630801,
@@ -865,222 +918,51 @@ Request:
   }
 }
 ```
-
-Response:
 ```jsonc
-  {
-    "State": "Success",
-    "Type": "ChangeMarketTimes",
-    "Nonce": 63804569790630801,
-    "Data": ""
-  }
-```
-
-Error Response:
-```jsonc
-  {
-    "State": "Error",
-    "Type": "ChangeMarketTimes",
-    "Nonce": 63804569790630801,
-    "Data": "Market already settled."
-  }
-```
-
-## Change/Create an Order (OrderAlteration)
-Used to create or change or cancel an order.
-For Create Requests all fields that have default values MUST be omitted. Putting "State":0 for example will be rejected by any Node. 
-
-Request:
-```jsonc
+// Response:
 {
-  "Type": "OrderAlteration",
-  "Nonce": 4,
-  "SignatureUser": "rvPmrUb/Sx/HpuQlKAvBD...LWFpOIsyah5XQL6APZW06mBE8CA==",
-  "Data": {
-    "UserOrder": {
-      "MarketID": "d81e889f-7b98-4229-941c-ffefac4ed7c3"
-    },
-    "UnmatchedOrder": {
-      "Amount": 3.0,
-      "ID": "c0c025a2-dc39-4c5a-afaf-40c975ac014e",
-      "makerCT": 6000,
-      //"Note": null,  // can be any string
-      "Price": 1.5,
-      "RemAmount": 3.0,
-    //  "State":0,
-      "Side":1
-      "Type":2,  // 0   Default,     1      PostOnly,     2       KillOrFill,   3         Same
-     },
-    "UserID": 1,
-    "NodeID": 1,
-    "CreatedByUser": "2022-07-19T11:08:48.9997487Z",
-    // "LayAsL":false,    //Set this to true if you place a lay order on a binary market and you like to have the Amount as Liability of the Order.
-   // "Local":false,    //indicates whether the order shall be shared with all other nodes.   Local = true will require a lower Miner Fee
-       		 	     		// By default all markets are shared accross all nodes
-        
-  }
-}
-```
-
-Response:
-```jsonc
-{
-    "State": "Success",
-    "Type": "OrderAlteration",
-    "Nonce": 4,
-    "Data": {
-      "UserOrder": {
-        "MarketID": "d81e889f-7b98-4229-941c-ffefac4ed7c3",
-        "OrderID": "c0c025a2-dc39-4c5a-afaf-40c975ac014e",
-	"Side":1
-      },
-      "UnmatchedOrder": {
-        "Price": 1.5,
-        "RemAmount": 3.0,
-        "Amount": 3.0,
-        "ID": "c0c025a2-dc39-4c5a-afaf-40c975ac014e",
-        "makerCT": 6000,
-	"Side":1,
-        "UserID": 1
-      },
-      "UserID": 1,
-      "NodeID": 1,
-      "CreatedByUser": "2022-07-19T11:08:48.9997487Z"
-    }
-  }
-  
-```
-
-
-## Send/Burn/Withdraw Funds (Transfer)
-Allows you to transfer funds to a different user account  or to burn the funds to withdraw them via a cross chain bridge.
-Funds that are burned, can be retrieved via Smart Chain Bridges on other Chains.  For burning transaction the "Descr"  field needs to contain the withdrawal address. Adding additional information in the "Descr" field or putting an wrong address there might result in your funds being permanently lost.  
-Request:
-```jsonc
-{
-  "Type": "Transfer",
+  "State": "Success",
+  "Type": "ChangeMarketTimes",
   "Nonce": 63804569790630801,
-  "SignatureUser": "FOOuU5oibmQatnBx4VrxMvwA6...P8bqm7J+38gz+xP945a4Cg==",
-  "Data": {
-    "ID": "2646b51a-bd6b-498d-b246-ae80ecbc3f3c",
-   // "Cur": 0,   //Currency ID, default is 0 (mBTC)
-    "From": 43,   // Sender's User ID
-    "To": 5,   // Receiver's User ID
-    "Reference": "0x63c3223207A1400868b05e756c26E77284B9ebC1",   // Reference. Needs to match the withdrawal address to be used in the smart contract exactly for burning transactions.
-    "TType": 10,   // TransferTypes are:  P2P,            FeePaid,            FeeReceived,            FeeReversed,            Settlement,         
-    		// SettlementReversed,    Exchange,            Withdrawal,            Deposit,            CurrencyIssuing,          
-		// Burn,            DirectDebit,            Penalty,         Staking
-		// In Order to burn funds, you need to pass the value 10 (Burn)
-  //  "Chain" : 0  // Only Applicable for Burning Transactions to set the chain the funds are released. Default 0 Ethereum. 
-    
-    "NodeID": 1,
-    "Amount": 10.5,  // Amount 
-    "CreatedByUser": "2022-07-19T11:05:17.5852297Z"
-  }
+  "Data": ""
 }
 ```
-
-Response:
 ```jsonc
-  {
-    "State": "Success",
-    "Type": "Transfer",
-    "Nonce": 63804569790630801,
-    "Data": null
-  }
-```
-
-Error Response:
-```jsonc
-  {
-    "State": "Error",
-    "Type": "Transfer",
-    "Nonce": 63804569790630801,
-    "Data": "Not enough Balance"
-  }
-```
-## GetBurnValidations 
-Allows you to transfer funds to a different user account  or to burn the funds to withdraw them via a cross chain bridge.
-Funds that are burned, can be retrieved via Smart Chain Bridges on other Chains.  For burning transaction the "Descr"  field needs to contain the withdrawal address. Adding additional information in the "Descr" field or putting an wrong address there might result in your funds being permanently lost.  
-Request:
-```jsonc
+// Response (error):
 {
-  "Type": "GetBurnValidations",
+  "State": "Error",
+  "Type": "ChangeMarketTimes",
   "Nonce": 63804569790630801,
-  "SignatureUser": "FOOuU5oibmQatnBx4VrxMvwA6...P8bqm7J+38gz+xP945a4Cg==",
-  "Data": {
-
-    "NodeID": 1,
-    "UserID": 13,
-    "CreatedByUser": "2022-07-19T11:05:17.5852297Z"
-  }
+  "Data": "Market already settled."
 }
 ```
 
-Response:
+## `CurrencyIssuance` 
+Allows you to issue your own currency. If Maintainer is set to `0` (default), the currency is self maintained and currency can be issued via  `CrossChainPayments` only. `CrossChainPayments` must be enabled if no Maintainer is set. If `DisallowIssuingByMaintainer` is set to `true`, the maintainer may only issue the Currency on creation, and may not change the total amount later on. 
 ```jsonc
-  {
-    "State": "Success",
-    "Type": "GetBurnValidations",
-    "Nonce": 63804569790630801,
-   {
-      "BurnValidations": [
-      {
-        "TXID": "0x123456789",
-        "Cur": 1,
-        "Amount": 1,
-        "Nonce": 12345678,
-        "Address": "0x12345",
-        "SignatureValidator": "0x1234567",
-        "CreationTime": "2022-11-19T11:08:48.9997487Z"
-      }],     
-      "UserID": 13,
-      "NodeID": 1,
-      "CreatedByUser": "2022-11-19T11:08:48.9997487Z"
-    }
-  }
-```
-
-Error Response:
-```jsonc
-  {
-    "State": "Error",
-    "Type": "GetBurnValidations",
-    "Nonce": 63804569790630801,
-    "Data": "Invalid User"
-  }
-```
-## Deposit  (CurrencyIssuance) 
-Allows you to issue your own Currency. 
-
-If Maintainer is set to 0 (default), the currency is self maintained and currency can be issued via  CrossChainPayments only.  CrossChainPayments must be enabled if no Maintainer is set.
-
-If DisallowIssuingByMaintainer is set to True, the maintainer may only issue the Currency on Creation, and may not change the total amount later on. 
-
-Creating a self-maintained Currency:
-
-Request:
-```jsonc
+// Creating a self-maintained Currency
+// Request:
 {
   "Type": "CurrencyIssuance",
   "Nonce": 63804569790630801,
   "SignatureUser": "FOOuU5oibmQatnBx4VrxMvwA6...P8bqm7J+38gz+xP945a4Cg==",
   "Data": {
-    "Currency": {"ID":101, "Name": "MilliWrappedBitcoin", "Symbol" : "mWBTC", "ColdWalletAddress": "some SmartContractAddress",
-    // "TotalBalance":"0",
-    // "Maintainer":0,
-     "CrossChainPayments":true,
-     "DisallowIssuingByMaintainer":true
+    "Currency": {
+      "ID":101,
+      "Name": "MilliWrappedBitcoin",
+      "Symbol" : "mWBTC",
+      "ColdWalletAddress": "some SmartContractAddress",
+      "CrossChainPayments":true,
+      "DisallowIssuingByMaintainer":true
      },
     "NodeID": 1,
     "UserID":1
   }
 }
 ```
-
-Each time after a Deposit to the Smart Contract, the deposited amount must be credited via the following request:
-
 ```jsonc
+// Deposit: after a smart contratct deposit, the amount must be credited via the following:
+// Request:
 {
   "Type": "CurrencyIssuance",
   "Nonce": 63804569790630801,
@@ -1093,24 +975,109 @@ Each time after a Deposit to the Smart Contract, the deposited amount must be cr
   }
 }
 ```
-
-
-Response:
 ```jsonc
-  {
-    "State": "Success",
-    "Type": "CurrencyIssuance",
-    "Nonce": 63804569790630801,
-    "Data": null
-  }
+// Response:
+{
+  "State": "Success",
+  "Type": "CurrencyIssuance",
+  "Nonce": 63804569790630801,
+  "Data": null
+}
+```
+```jsonc
+// Response (error):
+{
+  "State": "Error",
+  "Type": "CurrencyIssuance",
+  "Nonce": 63804569790630801,
+  "Data": "Not enough Balance"
+}
 ```
 
-Error Response:
+## `GetBurnValidations`
+Get a list of all burned transactions.
 ```jsonc
-  {
-    "State": "Error",
-    "Type": "CurrencyIssuance",
-    "Nonce": 63804569790630801,
-    "Data": "Not enough Balance"
+// Request:
+{
+  "Type": "GetBurnValidations",
+  "Nonce": 63804569790630801,
+  "SignatureUser": "FOOuU5oibmQatnBx4VrxMvwA6...P8bqm7J+38gz+xP945a4Cg==",
+  "Data": {
+    "NodeID": 1,
+    "UserID": 13,
+    "CreatedByUser": "2022-07-19T11:05:17.5852297Z"
   }
+}
+```
+```jsonc
+// Response:
+{
+  "State": "Success",
+  "Type": "GetBurnValidations",
+  "Nonce": 63804569790630801,
+  {
+    "BurnValidations": [{
+      "TXID": "0x123456789",
+      "Cur": 1,
+      "Amount": 1,
+      "Nonce": 12345678,
+      "Address": "0x12345",
+      "SignatureValidator": "0x1234567",
+      "CreationTime": "2022-11-19T11:08:48.9997487Z"
+    }],     
+    "UserID": 13,
+    "NodeID": 1,
+    "CreatedByUser": "2022-11-19T11:08:48.9997487Z"
+  }
+}
+```
+```jsonc
+// Response (error):
+{
+  "State": "Error",
+  "Type": "GetBurnValidations",
+  "Nonce": 63804569790630801,
+  "Data": "Invalid User"
+}
+```
+
+
+## `Transfer`
+Allows you to transfer funds to a different user account or to burn the funds to withdraw them via a cross chain bridge.
+Funds that are burned, can be retrieved via Smart Chain Bridges on other Chains. For burning transaction the `Descr` field needs to contain the withdrawal address. Adding additional information in the `Descr` field or putting an wrong address there might result in your funds being permanently lost.
+```jsonc
+// Request:
+{
+  "Type": "Transfer",
+  "Nonce": 63804569790630801,
+  "SignatureUser": "FOOuU5oibmQatnBx4VrxMvwA6...P8bqm7J+38gz+xP945a4Cg==",
+  "Data": {
+    "ID": "2646b51a-bd6b-498d-b246-ae80ecbc3f3c",
+    "From": 43,
+    "To": 5,
+    "Reference": "0x63c3223207A1400868b05e756c26E77284B9ebC1",
+    "TType": 10,
+    "NodeID": 1,
+    "Amount": 10.5,  // Amount 
+    "CreatedByUser": "2022-07-19T11:05:17.5852297Z"
+  }
+}
+```
+```jsonc
+// Response:
+{
+  "State": "Success",
+  "Type": "Transfer",
+  "Nonce": 63804569790630801,
+  "Data": null
+}
+```
+```jsonc
+// Response (error):
+{
+  "State": "Error",
+  "Type": "Transfer",
+  "Nonce": 63804569790630801,
+  "Data": "Not enough Balance"
+}
 ```
