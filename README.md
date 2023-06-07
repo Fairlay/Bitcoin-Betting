@@ -27,7 +27,7 @@ Requests that change state requires a signature. In order to provide a valid sig
 The `RequestTime` and `CreatedByUser` property inside `Data` object **may not deviate more than 15 seconds from the node time** or the request might get rejected.
 
 For example, consider signing the following `Data` object of a `ChangeMarketTimes` request:  
-```json
+```jsonc
 {
   "ClosD":"2022-11-20T19:50:00Z",
   "CreatedByUser":"2022-11-20T19:35:45.4294401Z",
@@ -40,7 +40,7 @@ For example, consider signing the following `Data` object of a `ChangeMarketTime
 
 Your final message/request to be sent to the Node with `ID = 1`:
 
-```json
+```jsonc
 {
   "Type":"ChangeMarketTimes",
   "Nonce":63804569790630801,
@@ -64,7 +64,7 @@ You should check `State` property on every response. In case of `State == Error`
 {
   "State": "Error",
   "Type": "GetMarketByID",
-  "Error": "TODO"
+  "Error": "No market found"
 }
 ```
 
@@ -122,6 +122,8 @@ Get a list of all burned transactions
 - [`Transfer`](#Transfer)  
 Withdraw your funds by sending or burning
 
+## [Additional class documentation](interfaces.md)
+---
 ## `ReturnHeartbeat`
 Once connected to a node, you'll start receiving `ReturnHeartbeat` with the current server time in ticks every minute. The server time is returned as the `Nonce` value.
 ```jsonc
@@ -192,15 +194,19 @@ Returns all active categories (that have active/inplay markets) and subscribe to
   "Data": [
     [
         "13",
+        // ID
+
         "AMERICANFOOTBALL",
+        // Slug
+
         "AMERICAN FOOTBALL"
+        // Name
     ],
     [
         "14",
         "BASEBALL",
         "BASEBALL"
     ],
-    ...
     [
         "2",
         "TENNIS",
@@ -231,6 +237,8 @@ Returns all active competitions (that have active/inplay markets) by category an
         { "Sweden - 2nd Div. Sodra Svealand": 4 },
         { "Ireland - Premier Corners": 5 },
     },
+    // [CategoryID]: {[CompetitionName]: MarketCount} 
+
     "2": {
         { "ITF Women Ceska Lipa - QF": 3 },
     },
@@ -303,19 +311,20 @@ Returns all markets that match the filter and subscribe to future changes. There
       "2": true
     },
     "SetFin": 24,
-    "SettleProtocol":0,
-    "SettlT":0 ,
-    "Comm":0.001,
+    "SettleProtocol": 0,
+    "SettlT": 0,
+
+    "Comm": 0.001,
     "ComRecip": {
       "2": 0.5,
-      "1":0.5
+      "1": 0.5
     },
-    "MinVal":0,
-    "MaxVal":0,
-    "Cur":0,
-    "CurB":0,
-    "Flag":0,
-    "evID":12041151212,
+    "MinVal": 0,
+    "MaxVal": 0,
+    "Cur": 0,
+    "CurB": 0,
+    "Flag": 0,
+    "evID": 12041151212,
   }
 }
 ```
@@ -397,6 +406,7 @@ Returns all markets that match the filter and subscribe to future changes. There
     "RunnerID": 0,
     "Bids": [],
     "Asks": [[2.14, 240.11]]
+    // [[Price, Amount]]
   }
 }
 ```
@@ -475,8 +485,6 @@ Returns an integer with the next available user ID to be used on account creatio
 
 ## `GetUserIDFromPubKey`
 Returns an integer if an account with the public key is found.
-
-
 ```jsonc
 // Request:
 {
@@ -588,6 +596,7 @@ Get unmatched orders and subscribes to future changes. This does not require aut
 	    "Default",
 	    "Same"
     ]
+    // Types: Default, PostOnly, KillOrFill, Same
   }
 }
 ```
@@ -759,6 +768,11 @@ Use to create, change or cancel an order created by the same user. Take note tha
     "UserID": 1,
     "NodeID": 1,
     "CreatedByUser": "2022-07-19T11:08:48.9997487Z",
+    "LayAsL": false,
+    // Set this to true if you place a lay order on a binary market and you like to have the amount as liability of the order.
+
+    "Local": false,
+   // Indicates whether the order shall be shared with all other nodes. Local = true will require a lower Miner Fee. By default all markets are shared accross all nodes
   }
 }
 ```
@@ -917,6 +931,8 @@ Allows you to issue your own currency. If Maintainer is set to `0` (default), th
       "ColdWalletAddress": "some SmartContractAddress",
       "CrossChainPayments":true,
       "DisallowIssuingByMaintainer":true
+      // "TotalBalance": 0,
+      // "Maintainer": 0,
      },
     "NodeID": 1,
     "UserID":1
@@ -931,8 +947,14 @@ Allows you to issue your own currency. If Maintainer is set to `0` (default), th
   "Nonce": 63804569790630801,
   "SignatureUser": "FOOuU5oibmQatnBx4VrxMvwA6...P8bqm7J+38gz+xP945a4Cg==",
   "Data": {
-    "Deposit": {"TXID":"0x920960a4812bf2ad8395a4a451b232daea3805b427b94e20b4bc1f1e1ac0f480","UserID":4,"Amount":15},
-    "Currency": {"ID":101},
+    "Deposit": {
+      "TXID": "0x920960a4812bf2ad8395a4a451b232daea3805b427b94e20b4bc1f1e1ac0f480",
+      "UserID": 4,
+      "Amount": 15
+    },
+    "Currency": {
+      "ID": 101
+    },
     "NodeID": 1,
     "UserID":1
   }
@@ -998,12 +1020,13 @@ Funds that are burned, can be retrieved via Smart Chain Bridges on other Chains.
   "SignatureUser": "FOOuU5oibmQatnBx4VrxMvwA6...P8bqm7J+38gz+xP945a4Cg==",
   "Data": {
     "ID": "2646b51a-bd6b-498d-b246-ae80ecbc3f3c",
+    "Cur": 0,
     "From": 43,
     "To": 5,
     "Reference": "0x63c3223207A1400868b05e756c26E77284B9ebC1",
     "TType": 10,
     "NodeID": 1,
-    "Amount": 10.5,  // Amount 
+    "Amount": 10.5,
     "CreatedByUser": "2022-07-19T11:05:17.5852297Z"
   }
 }
