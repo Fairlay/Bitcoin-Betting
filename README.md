@@ -57,23 +57,35 @@ Your final message/request to be sent to the Node with `ID = 1`:
 
 
 ## Index
-- [Server Time (ReturnHeartbeat)](#server-heartbeat-ReturnHeartbeat)
-- [Get Currencies](#get-currencies)
-- [Get Categories](#get-categories)
-- [Get Competitions (SubscribeCompetitions)](#get-competitions-subscribecompetitions)
-- [Get Markets and Orderbooks (SubscribeMarketsByFilter)](#get-markets-and-orderbooks-subscribemarketsbyfilter)
-- [Get Market by ID (GetMarketByID)](#get-market-by-id-getmarketbyid)
+- [`ReturnHeartbeat`](#ReturnHeartbeat)  
+Get the time from the server in ticks
 
----
-- [Get Next Available User ID (GetFreeUserID)](#get-next-available-user-id-getfreeuserid)
-- [Get User ID from Public Key (GetUserIDFromPubKey)](#get-user-id-from-public-key-getuseridfrompubkey)
-- [Get User Balances (SubscribeBalance)](#get-user-balances-subscribebalance)
+- [`GetCurrencies`](#GetCurrencies)  
+Get available currencies
 
----
+- [`SubscribeSports`](#SubscribeSports)  
+Get (and subscribe to) available categories
+
+- [`SubscribeCompetitions`](#SubscribeCompetitions)  
+Get (and subscribe to) available competitions by category
+
+- [`SubscribeMarketsByFilter`](#SubscribeMarketsByFilter)  
+Get (and subscribe to) markets and orderbook updates given a filter
+
+- [`GetMarketByID`](#GetMarketByID)  
+Get markets given a market ID
+
+- [`GetFreeUserID`](#GetFreeUserID)  
+Get the next available user ID
+
+- [`GetUserIDFromPubKey`](#GetUserIDFromPubKey)  
+Get user ID given a public key
+
+- [`SubscribeBalance`](#SubscribeBalance)  
+Get (and subscribe to) user balance given a user ID
+
 - [Get Unmatched Orders (SubscribeUOrders)](#get-unmatched-orders-subscribeuorders)
 - [Get Matched Orders (SubscribeMatches)](#get-matched-orders-subscribematches)
-
----
 - [Create an account (AccountCreation)](#create-an-account-accountcreation)
 - [Create Market (MarketCreation)](#create-market-marketcreation)
 - [Change Closing Time (ChangeMarketTimes)](#change-Market-closing-time-changemarkettimes)
@@ -81,478 +93,291 @@ Your final message/request to be sent to the Node with `ID = 1`:
 - [Send / Burn / Withdraw Funds (Transfer)](#sendburnwithdraw-funds-transfer)  
 - [Issue Currency/ Deposit (CurrencyIssuance)](#deposit--currencyIssuance)  
 
-## Server Heartbeat (ReturnHeartbeat)
-Returns the current server time in ticks. First directly after connecting then with an interval of one minute. The server time is returned as the "Nonce" value.
-Response:
+## `ReturnHeartbeat`
+Once connected to a node, you'll start receiving `ReturnHeartbeat` with the current server time in ticks every minute. The server time is returned as the `Nonce` value.
 ```jsonc
+// Example:
 {
-    "State": "Success",
-    "Type": "ReturnHeartbeat",
-    "Nonce": "252345234523453245",
-    // Server time in ticks / 10
+  "State": "Success",
+  "Type": "ReturnHeartbeat",
+  "Nonce": "252345234523453245",
 }
 ````
 
-## Get Currencies
-Returns all active categories (have active/inplay markets).
-
-Request:
+## `GetCurrencies`
+Returns all active currencies on platform.
 ```jsonc
+// Request:
 {
-    "Type": "GetCurrencies",
-
-    "RequestTime": "2022-04-22T09:20:14.3856547Z",
-    // Should be close to server's time
-
-    "UserID": -1,
-    // This will be a "short" integer ID (1k to 1m)
-    // No user identity necessary
-
-    "NodeID": 1
-    // This will be the same as the User ID who is running the node
+  "Type": "GetCurrencies",
+  "RequestTime": "2022-04-22T09:20:14.3856547Z",
+  "UserID": -1,
+  "NodeID": 1
 }
 ```
-
-Response:
 ```jsonc
+// Response:
 {
-    "State": "Success",
-
-    "Type": "GetCurrencies",
-
-    "Data": [
-        [
-            "ID" : 1,
-            "Name" : "Bitcoin",
-            "ColdWalletAddress" : "",
-            "TotalBalance" : 100,
-            "Maintainer" : 1,
-            "CrossChainPayments" : "true",
-            "DisallowIssuingByMaintainer" : "true",
-	    
-        ],
-        [
-           
-            "ID" : 2,
-            "Name" : "Ether",
-            "ColdWalletAddress" : "",
-            "TotalBalance" : 1,
-            "Maintainer" : 1,
-            "CrossChainPayments" : "true",
-            "DisallowIssuingByMaintainer" : "true",
-        ]
+  "State": "Success",
+  "Type": "GetCurrencies",
+  "Data": [
+    [
+      "ID" : 1,
+      "Name" : "Bitcoin",
+      "ColdWalletAddress" : "",
+      "TotalBalance" : 100,
+      "Maintainer" : 1,
+      "CrossChainPayments" : "true",
+      "DisallowIssuingByMaintainer" : "true",
+    ],
+    [
+        
+      "ID" : 2,
+      "Name" : "Ether",
+      "ColdWalletAddress" : "",
+      "TotalBalance" : 1,
+      "Maintainer" : 1,
+      "CrossChainPayments" : "true",
+      "DisallowIssuingByMaintainer" : "true",
     ]
-    
+  ]
 }
 ````
-## Get Categories
-Returns all active categories (have active/inplay markets).
 
-Request:
+## `SubscribeSports`
+Returns all active categories (that have active/inplay markets) and subscribe to future changes.
 ```jsonc
+// Request:
 {
-    "Type": "SubscribeSports",
-
-    "RequestTime": "2022-04-22T09:20:14.3856547Z",
-    // Should be close to server's time
-
-    "UserID": -1,
-    // This will be a "short" integer ID (1k to 1m)
-    // No user identity necessary
-
-    "NodeID": 1
-    // This will be the same as the User ID who is running the node
+  "Type": "SubscribeSports",
+  "RequestTime": "2022-04-22T09:20:14.3856547Z",
+  "UserID": -1,
+  "NodeID": 1
 }
 ```
-
-Response:
 ```jsonc
+// Response:
 {
-    "State": "Success",
-
-    "Type": "SubscribeSports",
-
-    
-    
-    "Data": [
-        [
-            "13",
-            "AMERICANFOOTBALL",
-            "AMERICAN FOOTBALL"
-        ],
-        [
-            "14",
-            "BASEBALL",
-            "BASEBALL"
-        ],
-        ...
-        [
-            "2",
-            "TENNIS",
-            "TENNIS"
-        ]
+  "State": "Success",
+  "Type": "SubscribeSports",
+  "Data": [
+    [
+        "13",
+        "AMERICANFOOTBALL",
+        "AMERICAN FOOTBALL"
+    ],
+    [
+        "14",
+        "BASEBALL",
+        "BASEBALL"
+    ],
+    ...
+    [
+        "2",
+        "TENNIS",
+        "TENNIS"
     ]
-    // Array of [ID, slug, name]
-
+  ]
 }
 ````
-## Get Competitions (SubscribeCompetitions)
-Returns all active competitions for all categories (have active/inplay markets).
 
-Request:
+## `SubscribeCompetitions`
+Returns all active competitions (that have active/inplay markets) by category and subscribe to future changes.
 ```jsonc
+// Request:
 {
-    "Type": "SubscribeCompetitions",
-
-    "RequestTime": "2022-04-22T09:21:07.6501979Z",
-    // Should be close to server's time
-
-    "UserID": -1,
-    // This will be a "short" integer ID (1k to 1m)
-    // No user identity necessary
-    
-    "NodeID": 1
-    // This will be the same as the User ID who is running the node
+  "Type": "SubscribeCompetitions",
+  "RequestTime": "2022-04-22T09:21:07.6501979Z",
+  "UserID": -1,
+  "NodeID": 1
 }
 ````
-
-Response:
 ```jsonc
+// Response:
 {
-    "State": "Success",
-
-    "Type": "SubscribeCompetitions",
-
-    "Data": {
-        "1": {
-            { "Sweden - 2nd Div. Sodra Svealand": 4 },
-            { "Ireland - Premier Corners": 5 },
-        },
-        "2": {
-            { "ITF Women Ceska Lipa - QF": 3 },
-        },
-        "12": {
-            { "Australia - NBL1 Women": 2 },
-            { "New Zealand - NBL": 6 }
-        },
-        "35": {}
-    }
-    // Dict where key is category ID with an array of competition names
+  "State": "Success",
+  "Type": "SubscribeCompetitions",
+  "Data": {
+    "1": {
+        { "Sweden - 2nd Div. Sodra Svealand": 4 },
+        { "Ireland - Premier Corners": 5 },
+    },
+    "2": {
+        { "ITF Women Ceska Lipa - QF": 3 },
+    },
+    "12": {
+        { "Australia - NBL1 Women": 2 },
+        { "New Zealand - NBL": 6 }
+    },
+    "35": {}
+  }
 }
 ````
 
-## Get Markets and Orderbooks (SubscribeMarketsByFilter)
-Returns all markets that match the filter and subscribe to future changes. There are three variations of messages that comes from this method:
+## `SubscribeMarketsByFilter`
+Returns all markets that match the filter and subscribe to future changes. There are three variations of responses in this method:
 
 - `SubscribeMarketsByFilter` come in two different structures: first, after the initial  subscription all markets that match the filter are sent in batch using the maximum `PageSize` property; after that any updates on a market are sent individually. Examples of both structures below.
 - If `SubscribeOrderbooks` is enabled, then `ReturnOrderbook` message is sent for every market (example below).
-
-Request:
 ```jsonc
+// Request:
 {
-    "Type": "SubscribeMarketsByFilter",
-
-    "RequestTime": "2022-05-03T19:53:33.1218254Z",
-    // Should be close to server's time
-
-    "UserID": -1,
-    // This will be a "short" integer ID (1k to 1m)
-    // No user identity necessary
-    "MaxResults": 1000,
-    "NodeID": 1,
-    // This will be the same as the User ID who is running the node
-
-    "Data": {
-
-        "MarketFilter": {
-
-            "OnlyActive": true,
-            "Status": 1,     //get all regular markets   0  All, 1 Active, 2 Live / In-play
-
-            "PageSize": 100
-            // Number of markets per page (websocket message)
-        },
-        // These are the options for MarketFilter object:
-        //     int Cat;        
-	//General searches in Runner, Title, Description and Competion
-        //HashSet<string> GeneralAND;
-        //HashSet<string> GeneralNOT;
-        //HashSet<string> GeneralOR;
-	// Market.StatusTypes? Status;
-
-       // HashSet<string> RunnerAND;
-       // HashSet<string> TitleAND;
-       // string Comp;
-        //string Descr;
-
-        //HashSet<Market.MarketTypes> TypeOR;
-        //HashSet<Market.MarketPeriods> PeriodOR;
-        //HashSet<Market.SettleTypes> SettleOR;
-        //bool ToSettle;
-        //bool OnlyMyCreatedMarkets;
-
-
-        //DateTime ChangedAfter;
-        //DateTime SoftChangedAfter;
-        // bool OnlyActive;
-        //decimal MaxMargin;
-        //bool NoZombie;
-
-        //DateTime FromClosT;
-        //DateTime ToClosT;
-
-        //int PageSize;
-	//limit the number of Markets returned
-        //int MaxResults;
-
-        //     Following is a propery to sort markets
-        //     enum Sorting:
-        //          MIX,
-        //          MATCHEDVOLUME,
-        //          CLOSING,
-        //          OPENORDERSVOLUME
-
-        "SubscribeOrderbooks": true
-        // Set this option to true to get orderbook updates
-    }
+  "Type": "SubscribeMarketsByFilter",
+  "RequestTime": "2022-05-03T19:53:33.1218254Z",
+  "UserID": -1,
+  "MaxResults": 1000,
+  "NodeID": 1,
+  "Data": {
+    "MarketFilter": {
+      "OnlyActive": true,
+      "Status": 1,
+      "PageSize": 100
+    },
+    "SubscribeOrderbooks": true
+  }
 }
 ````
-
-Response (single market):
 ```jsonc
+// Response (single market):
 {
-    "State": "Success",
-
-    "Type": "SubscribeMarketsByFilter",
-
-    "Data": {
-        "Margin": 106.211,
-
-        "ID": "890f70d1-f6d7-49c1-a17f-94428df82a8e",
-	
-
-        "LastCh": "2022-06-27T18:01:46.9028667Z",
-        // Last Changed
-
-        "LastSoftCh": "2022-06-27T18:01:46.9028667Z",
-        // Last Soft Changed (orderbook changed)
-	
-        "CreationDate": "2022-06-27T11:01:46.9028667Z",
-        // Last Soft Changed (orderbook changed)
-
-        "MainNodeID": 1,
-        // Node responsible to processing the order matches for this market
-
-        "Comp": "CS:GO - REPUBLEAGUE",
-        // Competition
-      //  ALL= 0, (do not use)        SOCCER = 1,        TENNIS = 2,        GOLF = 3,        CRICKET = 4,      
-      //    RUGBYUNION = 5,        BOXING = 6,        HORSERACING = 7,        MOTORSPORT = 8,        SPECIAL = 10,
-      //  RUGBYLEAGUE = 11,        BASKETBALL = 12,        AMERICANFOOTBALL = 13,        BASEBALL = 14,        HOCKEY = 30,
-     //   POLITICS = 15,        FINANCIAL = 16,        GREYHOUND = 17,        VOLLEYBALL = 18,        HANDBALL = 19,
-     //   DARTS = 20,        BANDY = 21,        WINTERSPORTS = 22,        BOWLS = 24,        POOL = 25,
-     //   SNOOKER = 26,        TABLETENNIS = 27,        CHESS = 28,        FUN = 31,        ESPORTS = 32,
-     //     RESERVED4 = 34,        MIXEDMARTIALARTS = 35,        RESERVED6 = 36,        RESERVED = 37,        CYCLING = 38,
-     //   RESERVED9 = 39,        BITCOIN = 40,        BADMINTON = 42,        DICE = 131,
-
-        "Descr": "Total Away - 1st Map Over/Under 16.5",
-        // Description
-
-        "Title": "forZe vs. Bad News Eagles",
-        
-        "Cat": 32,
-        // Category
-
-        "ClosD": "2022-06-27T19:01:46.8982615Z",
-        // Close date
-
-        "SettlD": "2022-06-27T19:07:46.8982615Z",
-        //Settle Date
-
-        "Status": 1,
-     // ACTIVE,            INPLAY,            SUSPENDED,            CLOSED,            SETTLED,            FINALIZED,            CANCELLED
-        
-        
-        // Runners
-        "Ru": [
-            {
-                "Name": "Over 16.5 ",
-                "mCT": 8000,
-		"RedA": 0  //Reduction Applied
-            },
-            {
-                "Name": "Under 16.5 ",
-                "mCT": 8000
-            }
-        ],
-        
-        "Type": 1,
-        // enum:
-        //     M_ODDS,
-        //     OVER_UNDER,
-        //     OUTRIGHT,
-        //     GAMESPREAD,
-        //     SETSPREAD,
-        //     CORRECT_SCORE,
-        //     FUTURE,
-        //     BASICPREDICTION,
-        //     RESERVED2,
-        //     RESERVED3,
-        //     RESERVED4,
-        //     RESERVED5,
-        //     RESERVED6
-
-        "Period": 1,
-        // enum:
-        //     UNDEFINED,
-        //     FT,
-        //     FIRST_SET,
-        //     SECOND_SET,
-        //     THIRD_SET,
-        //     FOURTH_SET,
-        //     FIFTH_SET,
-        //     FIRST_HALF,
-        //     SECOND_HALF,
-        //     FIRST_QUARTER,
-        //     SECOND_QUARTER,
-        //     THIRD_QUARTER,
-        //     FOURTH_QUARTER,
-        //     FIRST_PERIOD,
-        //     SECOND_PERIOD,
-        //     THIRD_PERIOD,
-
-        "Creator": 2,
-        // User ID who created the market
-
-        // Dict where key is a User ID and if it's allowed to settle this market
-        "Settler": {
-            "2": true
-        },
-
-        "SetFin": 24
-        // The time when the settlement is considered final (in hours past settlement date)
-	"SettleProtocol":0,
-	"SettlT":0 ,  //            BINARY,            CFD,            CFDINVERSE,            EXCHANGE
-	"Comm":0.001,  //Commission of the market  going to the Com(mission)Recip(ients) of the market
-	 "ComRecip": {
-            "2": 0.5,
-	    "1":0.5
-        },
-	"MinVal":0,    //Minimum Allowed Price
-	"MaxVal":0,    // Maximum Allowed Price (0 means Infinity)
-	"Cur":0,      //  Quote Currency ID
-	"CurB":0,    // for Exchanges between Currencies, this is the Trade Currency ID
-	"Flag":0,    // BinaryFlags
-	"evID":12041151212, // Event ID
-        }
-    }
-    // Dict that represent a Market
+  "State": "Success",
+  "Type": "SubscribeMarketsByFilter",
+  "Data": {
+    "Margin": 106.211,
+    "ID": "890f70d1-f6d7-49c1-a17f-94428df82a8e",
+    "LastCh": "2022-06-27T18:01:46.9028667Z",
+    "LastSoftCh": "2022-06-27T18:01:46.9028667Z",
+    "CreationDate": "2022-06-27T11:01:46.9028667Z",
+    "MainNodeID": 1,
+    "Comp": "CS:GO - REPUBLEAGUE",
+    "Descr": "Total Away - 1st Map Over/Under 16.5",
+    "Title": "forZe vs. Bad News Eagles",
+    "Cat": 32,
+    "ClosD": "2022-06-27T19:01:46.8982615Z",
+    "SettlD": "2022-06-27T19:07:46.8982615Z",
+    "Status": 1,
+    "Ru": [
+      {
+        "Name": "Over 16.5 ",
+        "mCT": 8000,
+        "RedA": 0
+      },
+      {
+        "Name": "Under 16.5 ",
+        "mCT": 8000
+      }
+    ],
+    "Type": 1,
+    "Period": 1,
+    "Creator": 2,
+    "Settler": {
+      "2": true
+    },
+    "SetFin": 24,
+    "SettleProtocol":0,
+    "SettlT":0 ,
+    "Comm":0.001,
+    "ComRecip": {
+      "2": 0.5,
+      "1":0.5
+    },
+    "MinVal":0,
+    "MaxVal":0,
+    "Cur":0,
+    "CurB":0,
+    "Flag":0,
+    "evID":12041151212,
+  }
 }
 ```
-
-Response (multiple markets):
 ```jsonc
+// Response (multiple markets):
 {
-    "State": "Success",
-
-    "Type": "SubscribeMarketsByFilter",
-
-    "Page": 1,
-    // Current page
-
-    "Count": 22,
-    // Number of pages
-
-    "Data": [
+  "State": "Success",
+  "Type": "SubscribeMarketsByFilter",
+  "Page": 1,
+  "Count": 22,
+  "Data": [
+    {
+      "Margin": 103.268,
+      "ID": "d81e889f-7b98-4229-941c-ffefac4ed7c3",
+      "LastCh": "2022-05-22T05:44:28.895424Z",
+      "LastSoftCh": "2022-05-22T05:44:28.895424Z",
+      "MainNodeID": 1,
+      "Comp": "Testcompetition",
+      "Descr": "TestDescript",
+      "Title": "TestMarket",
+      "Cat": 12,
+      "ClosD": "2022-08-14T00:00:00",
+      "SettlD": "2022-08-15T00:00:00",
+      "Ru": [
         {
-        "Margin": 103.268,
-        "ID": "d81e889f-7b98-4229-941c-ffefac4ed7c3",
-        "LastCh": "2022-05-22T05:44:28.895424Z",
-        "LastSoftCh": "2022-05-22T05:44:28.895424Z",
-        "MainNodeID": 1,
-        "Comp": "Testcompetition",
-        "Descr": "TestDescript",
-        "Title": "TestMarket",
-        "Cat": 12,
-        "ClosD": "2022-08-14T00:00:00",
-        "SettlD": "2022-08-15T00:00:00",
-        "Ru": [
-            {
-            "VolMatched": 1.9,
-            "Name": "ru1",
-            "mCT": 6000
-            },
-            {
-            "Name": "ru2",
-            "mCT": 6000
-            }
-        ],
-        "Period": 1,
-        "Creator": 1,
-        "Settler": {
-            "1": true
+          "VolMatched": 1.9,
+          "Name": "ru1",
+          "mCT": 6000
         },
-        "SetFin": 24
-        },
-        ...
         {
-        "ID": "92e2a387-9305-49bb-890a-5e8934ecfdf0",
-        "MainNodeID": 1,
-        "Comp": "Testcompetition2",
-        "Descr": "TestDescript2",
-        "Title": "TestMarket2",
-        "Cat": 27,
-        "ClosD": "2022-09-17T00:00:00",
-        "SettlD": "2022-09-18T00:00:00",
-        "Ru": [
-            {
-            "Name": "ru5",
-            "mCT": 6000
-            },
-            {
-            "Name": "ru6",
-            "mCT": 6000
-            }
-        ],
-        "Period": 1,
-        "Creator": 2,
-        "Settler": {
-            "1": true,
-            "2": true
-        },
-        "SetFin": 24
+          "Name": "ru2",
+          "mCT": 6000
         }
-    ]
-    // Array of dicts that represent Markets (check market structure above)
-}
-```
-
-Response (Orderbook):
-```jsonc
-{
-    "State": "Success",
-
-    "Type": "ReturnOrderbook",
-
-    "Data": {
-        "MarketID": "12ef87b0-2658-4e62-83a8-a7ba46f0a6c3",
-
-        "RunnerID": 0,
-        // Runner index on Market "Ru" array
-
-        "Bids": [],
-        // Array of [price, amount]
-
-        "Asks": [ [2.14, 240.11] ]
-        // Array of [price, amount]
+      ],
+      "Period": 1,
+      "Creator": 1,
+      "Settler": {
+        "1": true
+      },
+      "SetFin": 24
+    },
+    {
+      "ID": "92e2a387-9305-49bb-890a-5e8934ecfdf0",
+      "MainNodeID": 1,
+      "Comp": "Testcompetition2",
+      "Descr": "TestDescript2",
+      "Title": "TestMarket2",
+      "Cat": 27,
+      "ClosD": "2022-09-17T00:00:00",
+      "SettlD": "2022-09-18T00:00:00",
+      "Ru": [
+        {
+          "Name": "ru5",
+          "mCT": 6000
+        },
+        {
+          "Name": "ru6",
+          "mCT": 6000
+        }
+      ],
+      "Period": 1,
+      "Creator": 2,
+      "Settler": {
+        "1": true,
+        "2": true
+      },
+      "SetFin": 24
     }
+  ]
+}
+```
+```jsonc
+// Response (orderbook):
+{
+  "State": "Success",
+  "Type": "ReturnOrderbook",
+  "Data": {
+    "MarketID": "12ef87b0-2658-4e62-83a8-a7ba46f0a6c3",
+    "RunnerID": 0,
+    "Bids": [],
+    "Asks": [[2.14, 240.11]]
+  }
 }
 ```
 
-## Get Market by ID (GetMarketByID)
-Returns a market.
+## `GetMarketByID`
+Returns a market given a market ID.
 
-Request:
+
 ```jsonc
+// Request:
 {
   "Type": "GetMarketByID",
   "Nonce": 8,
@@ -562,9 +387,8 @@ Request:
   "Data": { "mid": "d81e889f-7b98-4229-941c-ffefac4ed7c3" }
 }
 ```
-
-Response:
 ```jsonc
+// Response:
 {
   "State": "Success",
   "Type": "GetMarketByID",
@@ -599,23 +423,19 @@ Response:
   }
 }
 ```
-
-Response (Error):
 ```jsonc
+// Response (error):
 {
-    "State": "Error",
-    "Type": "GetMarketByID",
-    "Error": "//TODO"
+  "State": "Error",
+  "Type": "GetMarketByID",
+  "Error": "TODO"
 }
 ```
 
-
-
-## Get Next Available User ID (GetFreeUserID)
-Returns an integer with the next available User ID to be used on account creation.
-
-Request:
+## `GetFreeUserID`
+Returns an integer with the next available user ID to be used on account creation.
 ```jsonc
+// Request:
 {
   "Type":"GetFreeUserID",
   "RequestTime":"2022-07-23T00:20:41.0138136Z",
@@ -623,9 +443,8 @@ Request:
   "NodeID":1
 }
 ```
-
-Response:
 ```jsonc
+// Response:
 {
   "State": "Success",
   "Type": "GetFreeUserID",
@@ -633,11 +452,12 @@ Response:
 }
 ```
 
-## Get User ID from Public Key (GetUserIDFromPubKey)
-Returns an integer if an account with the Public Key is found.
+## `GetUserIDFromPubKey`
+Returns an integer if an account with the public key is found.
 
-Request:
+
 ```jsonc
+// Request:
 {
   "Type":"GetUserIDFromPubKey",
   "RequestTime":"2022-07-23T00:20:41.0138136Z",
@@ -648,19 +468,16 @@ Request:
   }
 }
 ```
-
-Response:
 ```jsonc
+// Response:
 {
   "State": "Success",
   "Type": "GetUserIDFromPubKey",
   "Data": 1
-  // UserID
 }
 ```
-
-Response (error):
 ```jsonc
+// Response (error):
 {
   "State": "Error",
   "Type": "GetUserIDFromPubKey",
@@ -668,63 +485,42 @@ Response (error):
 }
 ```
 
-
-## Get User Balances (SubscribeBalance)
-Returns current user balance and subscribes to future balance changes. This does not require authentication.
-
-Request:
+## `SubscribeBalance`
+Returns user balance and subscribes to future balance changes given a user ID. This does not require authentication.
 ```jsonc
+// Request:
 {
-    "Type": "SubscribeBalance",
-
-    "RequestTime": "2022-04-22T09:21:30.7788438Z",
-    // Should be close to server's time
-
-    "UserID": 2,
-    // This will be a "short" integer ID (1k to 1m)
-
-    "NodeID": 1
-    // This will be the same as the User ID who is running the node
+  "Type": "SubscribeBalance",
+  "RequestTime": "2022-04-22T09:21:30.7788438Z",
+  "UserID": 2,
+  "NodeID": 1
 }
 ```
-
-Response:
 ```jsonc
+// Response:
 {
-    "State": "Success",
-
-    "Type": "SubscribeBalance",
-
-    // Dict where keys are currency ID
-    // TODO: where do we get this list?
-    "Data": {
-        "0": {
-            "AvailableFunds": 9979.01,
-
-            "CreatorUsed": 20,  
-            // Some collateral you have to pay when you create markets
-	    "ReservedFunds":0,  // TotalFunds   Total is 
-	     // Used  (Matched Orders)   + OnHold (Unfinalized settlements) + Staked + Collateral (Settlement Challenges) 
-	     // + CreatorUsed (For Creating Markets) + 	SettleUsed (for Settling markets as untrusted settler until settlement is finalized);
-	 "MaxFunds":0,   // MaxFunds to be gained	       
-         "UsedFunds":0,    //  ReservedFunds - AvailableFunds;
-         "SettleUsed":0, // Collateral for untrusted settlers	 
-         "OnHold":0,   // Amount of Money on Hold until Settlement is finalized    
-         "RemainingRequests":0,  -- Remaining API Requests
-     
-        }
+  "State": "Success",
+  "Type": "SubscribeBalance",
+  "Data": {
+    "0": {
+      "AvailableFunds": 9979.01,
+      "CreatorUsed": 20,  
+      "ReservedFunds":0,
+      "MaxFunds":0,
+      "UsedFunds":0,
+      "SettleUsed":0,
+      "OnHold":0,
+      "RemainingRequests":0,
     }
+  }
 }
 ```
-
-Response (Error):
 ```jsonc
+// Response (error):
 {
-    "State": "Error",
-
-    "Type": "SubscribeBalance",
-
-    "Error": "User does not exist"
+  "State": "Error",
+  "Type": "SubscribeBalance",
+  "Error": "User does not exist"
 }
 ```
 
