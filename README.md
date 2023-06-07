@@ -20,9 +20,11 @@ Public node addresses:
 ```
 
 ## How to sign messages
-Requests that change state requires a signature. In order to provide a valid signature, sort the `Data` object alphabetically and sign it with Ed25519 (or ECDSA if your account is flagged as "isETH") to provide it as `SignatureUser` property inside the storage unit you send to the Node.
+Requests that change state requires a signature. In order to provide a valid signature, sort the `Data` object alphabetically and sign it with Ed25519 (or ECDSA if your account is flagged as `isETH`) to provide it as `SignatureUser` property inside the storage unit you send to the node.
 
-**For signing, all fields that have default values MUST be omitted** - they are only shown for completeness in all request samples below. The creation date of the Data object provided as `CreatedByUser` may not deviate more than 15 seconds from the Node time or the request might get rejected.
+**For signing, all fields that have default values MUST be omitted** - they are only shown for completeness in all request samples below.
+
+The `RequestTime` and `CreatedByUser` property inside `Data` object **may not deviate more than 15 seconds from the node time** or the request might get rejected.
 
 For example, consider signing the following `Data` object of a `ChangeMarketTimes` request:  
 ```json
