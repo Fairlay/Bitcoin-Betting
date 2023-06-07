@@ -22,9 +22,8 @@ Public node addresses:
 ## How to sign messages
 Requests that change state requires a signature. In order to provide a valid signature, sort the `Data` object alphabetically and sign it with Ed25519 (or ECDSA if your account is flagged as "isETH") to provide it as `SignatureUser` property inside the storage unit you send to the Node.
 
-For signing, all fields that have default values MUST be omitted - they are only shown for completeness in all request samples below. The creation date of the Data object provided as `CreatedByUser` may not deviate more than 15 seconds from the Node time or the request might get rejected.
+**For signing, all fields that have default values MUST be omitted** - they are only shown for completeness in all request samples below. The creation date of the Data object provided as `CreatedByUser` may not deviate more than 15 seconds from the Node time or the request might get rejected.
 
-<!-- TODO: add link -->
 For example, consider signing the following `Data` object of a `ChangeMarketTimes` request:  
 ```json
 {
@@ -55,6 +54,17 @@ Your final message/request to be sent to the Node with `ID = 1`:
 }
 ```
 
+## Handling errors
+You should check `State` property on every response. In case of `State == Error`, there will be another property `Error` with the related message.
+
+```jsonc
+// Response (error):
+{
+  "State": "Error",
+  "Type": "GetMarketByID",
+  "Error": "TODO"
+}
+```
 
 ## Index
 - [`ReturnHeartbeat`](#ReturnHeartbeat)  
@@ -440,14 +450,6 @@ Returns a market given a market ID.
   }
 }
 ```
-```jsonc
-// Response (error):
-{
-  "State": "Error",
-  "Type": "GetMarketByID",
-  "Error": "TODO"
-}
-```
 
 ## `GetFreeUserID`
 Returns an integer with the next available user ID to be used on account creation.
@@ -491,14 +493,6 @@ Returns an integer if an account with the public key is found.
   "State": "Success",
   "Type": "GetUserIDFromPubKey",
   "Data": 1
-}
-```
-```jsonc
-// Response (error):
-{
-  "State": "Error",
-  "Type": "GetUserIDFromPubKey",
-  "Error": "User Not Found"
 }
 ```
 
@@ -569,14 +563,6 @@ Returns user balance and subscribes to future balance changes given a user ID. T
       "RemainingRequests":0,
     }
   }
-}
-```
-```jsonc
-// Response (error):
-{
-  "State": "Error",
-  "Type": "SubscribeBalance",
-  "Error": "User does not exist"
 }
 ```
 
@@ -693,14 +679,6 @@ Get unmatched orders and subscribes to future changes. This does not require aut
   ]
 }
 ```
-```jsonc
-// Response (error):
-{
-  "State": "Error",
-  "Type": "SubscribeUOrders",
-  "Error": "User does not exist"
-}
-```
 
 ## `SubscribeMatches`
 Returns all matched user orders and subscribes to future changes. This does not require autentication.
@@ -752,14 +730,6 @@ Returns all matched user orders and subscribes to future changes. This does not 
       }
     }
   ]
-}
-```
-```jsonc
-// Response (error):
-{
-  "State": "Error",
-  "Type": "SubscribeMatches",
-  "Error": "User does not exist"
 }
 ```
 
@@ -927,15 +897,6 @@ Changes closing and settlement dates for any market that was created by the same
   "Data": ""
 }
 ```
-```jsonc
-// Response (error):
-{
-  "State": "Error",
-  "Type": "ChangeMarketTimes",
-  "Nonce": 63804569790630801,
-  "Data": "Market already settled."
-}
-```
 
 ## `CurrencyIssuance` 
 Allows you to issue your own currency. If Maintainer is set to `0` (default), the currency is self maintained and currency can be issued via  `CrossChainPayments` only. `CrossChainPayments` must be enabled if no Maintainer is set. If `DisallowIssuingByMaintainer` is set to `true`, the maintainer may only issue the Currency on creation, and may not change the total amount later on. 
@@ -984,15 +945,6 @@ Allows you to issue your own currency. If Maintainer is set to `0` (default), th
   "Data": null
 }
 ```
-```jsonc
-// Response (error):
-{
-  "State": "Error",
-  "Type": "CurrencyIssuance",
-  "Nonce": 63804569790630801,
-  "Data": "Not enough Balance"
-}
-```
 
 ## `GetBurnValidations`
 Get a list of all burned transactions.
@@ -1031,15 +983,6 @@ Get a list of all burned transactions.
   }
 }
 ```
-```jsonc
-// Response (error):
-{
-  "State": "Error",
-  "Type": "GetBurnValidations",
-  "Nonce": 63804569790630801,
-  "Data": "Invalid User"
-}
-```
 
 
 ## `Transfer`
@@ -1070,14 +1013,5 @@ Funds that are burned, can be retrieved via Smart Chain Bridges on other Chains.
   "Type": "Transfer",
   "Nonce": 63804569790630801,
   "Data": null
-}
-```
-```jsonc
-// Response (error):
-{
-  "State": "Error",
-  "Type": "Transfer",
-  "Nonce": 63804569790630801,
-  "Data": "Not enough Balance"
 }
 ```
