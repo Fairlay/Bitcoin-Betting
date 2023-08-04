@@ -976,7 +976,8 @@ Get a list of all burned transactions.
   "Type": "GetBurnValidations",
   "Data": {
     "NodeID": 1,
-    "UserID": 13
+    "UserID": 13,
+    "MaxResults":10
   }
 }
 ```
