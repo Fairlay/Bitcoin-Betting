@@ -71,11 +71,8 @@ You should check `State` property on every response. In case of `State == Error`
 ```
 
 ## What messages to sign
-Only messages that write to the Ledger are required to have a signature.  Balance or Order subscriptions do not require a signature. For all these requests, it is recommended to omit 
-  "RequestTime", "Nonce" and "CreatedByUser"!
+Only messages that write to the Ledger are required to have a signature.  Balance or Order subscriptions do not require a signature. For all these requests, it is recommended to omit "RequestTime", "Nonce" and "CreatedByUser"!
 
-
-```
 
 ## Index
 - [`ReturnHeartbeat`](#ReturnHeartbeat)  
