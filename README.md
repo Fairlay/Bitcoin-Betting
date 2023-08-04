@@ -26,11 +26,13 @@ Requests that change state requires a signature. In order to provide a valid sig
 
 The `RequestTime` and `CreatedByUser` property inside `Data` object **may not deviate more than 15 seconds from the node time** or the request might get rejected.
 
+Nonce, RequestTime and CreatedByUser  may be omitted, but this might compromise security.
+
 For example, consider signing the following `Data` object of a `ChangeMarketTimes` request:  
 ```jsonc
 {
   "ClosD":"2022-11-20T19:50:00Z",
-  "CreatedByUser":"2022-11-20T19:35:45.4294401Z",
+  "CreatedByUser":638267133247192363,
   "Mid":"c91d1993-7115-49f1-b3cd-ab9dc88821a2",
   "NodeID":1,
   "SetlD":"2022-11-20T21:50:00Z",
@@ -47,7 +49,7 @@ Your final message/request to be sent to the Node with `ID = 1`:
   "SignatureUser":"/khiPwpPNk8gFSyrp81t1ZcbUNmF8w233bQCvhz4U5PzCcALbPiipsvWqR+AQ+cJJVHtk0RMtihpM3DHdMxSBg==",
   "Data": {
     "ClosD":"2022-11-20T19:50:00Z",
-    "CreatedByUser":"2022-11-20T19:35:45.4294401Z",
+    "CreatedByUser":638267133247192363,
     "Mid":"c91d1993-7115-49f1-b3cd-ab9dc88821a2",
     "NodeID":1,
     "SetlD":"2022-11-20T21:50:00Z",
@@ -66,6 +68,13 @@ You should check `State` property on every response. In case of `State == Error`
   "Type": "GetMarketByID",
   "Error": "No market found"
 }
+```
+
+## What messages to sign
+Only messages that write to the Ledger are required to have a signature.  Balance or Order subscriptions do not require a signature. For all these requests, it is recommended to omit 
+  "RequestTime", "Nonce" and "CreatedByUser"!
+
+
 ```
 
 ## Index
@@ -141,7 +150,7 @@ Returns all active currencies on platform.
 // Request:
 {
   "Type": "GetCurrencies",
-  "RequestTime": "2022-04-22T09:20:14.3856547Z",
+  "RequestTime": "2022-04-22T09:20:14.3856547Z", //(optional)
   "UserID": -1,
   "NodeID": 1
 }
@@ -181,7 +190,6 @@ Returns all active categories (that have active/inplay markets) and subscribe to
 // Request:
 {
   "Type": "SubscribeSports",
-  "RequestTime": "2022-04-22T09:20:14.3856547Z",
   "UserID": -1,
   "NodeID": 1
 }
@@ -222,7 +230,6 @@ Returns all active competitions (that have active/inplay markets) by category an
 // Request:
 {
   "Type": "SubscribeCompetitions",
-  "RequestTime": "2022-04-22T09:21:07.6501979Z",
   "UserID": -1,
   "NodeID": 1
 }
@@ -260,7 +267,6 @@ Returns all markets that match the filter and subscribe to future changes. There
 // Request:
 {
   "Type": "SubscribeMarketsByFilter",
-  "RequestTime": "2022-05-03T19:53:33.1218254Z",
   "UserID": -1,
   "MaxResults": 1000,
   "NodeID": 1,
@@ -469,7 +475,6 @@ Returns an integer with the next available user ID to be used on account creatio
 // Request:
 {
   "Type":"GetFreeUserID",
-  "RequestTime":"2022-07-23T00:20:41.0138136Z",
   "UserID":-1,
   "NodeID":1
 }
@@ -489,7 +494,6 @@ Returns an integer if an account with the public key is found.
 // Request:
 {
   "Type":"GetUserIDFromPubKey",
-  "RequestTime":"2022-07-23T00:20:41.0138136Z",
   "UserID":-1,
   "NodeID":1,
   "Data":{
@@ -551,7 +555,6 @@ Returns user balance and subscribes to future balance changes given a user ID. T
 // Request:
 {
   "Type": "SubscribeBalance",
-  "RequestTime": "2022-04-22T09:21:30.7788438Z",
   "UserID": 2,
   "NodeID": 1
 }
@@ -583,7 +586,6 @@ Get unmatched orders and subscribes to future changes. This does not require aut
 {
   "Type": "SubscribeUOrders",
   "Nonce": 6,
-  "RequestTime": "2022-07-13T19:01:27.772938Z",
   "UserID": 1,
   "NodeID": 1,
   "Data": {
@@ -698,7 +700,6 @@ Returns all matched user orders and subscribes to future changes. This does not 
 {
   "Type": "SubscribeMatches",
   "Nonce": 5,
-  "RequestTime": "2022-07-13T18:54:23.5043806Z",
   "UserID": 1,
   "NodeID": 1,
   "Data": {
@@ -976,12 +977,9 @@ Get a list of all burned transactions.
 // Request:
 {
   "Type": "GetBurnValidations",
-  "Nonce": 63804569790630801,
-  "SignatureUser": "FOOuU5oibmQatnBx4VrxMvwA6...P8bqm7J+38gz+xP945a4Cg==",
   "Data": {
     "NodeID": 1,
-    "UserID": 13,
-    "CreatedByUser": "2022-07-19T11:05:17.5852297Z"
+    "UserID": 13
   }
 }
 ```
@@ -999,11 +997,11 @@ Get a list of all burned transactions.
       "Nonce": 12345678,
       "Address": "0x12345",
       "SignatureValidator": "0x1234567",
-      "CreationTime": "2022-11-19T11:08:48.9997487Z"
+      "CreationTime": "2023-08-04T05:00:00.9997487Z"
     }],     
     "UserID": 13,
     "NodeID": 1,
-    "CreatedByUser": "2022-11-19T11:08:48.9997487Z"
+    "CreatedByUser": 638267133247192363
   }
 }
 ```
