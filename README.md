@@ -546,6 +546,97 @@ Response:
 }
 ```
 
+## `ISSUEINVITE`
+Issuing an invite. In order to issue an invite to the platform, you must hash your custom secure invite code with SHA256 and provide the UTF-8 encoded string as InviteCodeHash. Issueing an invite costs 0.01mBTC.
+
+
+Request:
+```jsonc
+{
+  "Type": "AccountCreation",
+  "Nonce": 1,
+  "SignatureUser": "1HXMLy1s4zWDnu...SEFER+R2Mc/KMIfhY+OvDe8Nfuw34rECA==",
+  "Data": {
+    "CreationMode": 1,
+    "InviteCodeHash":"97da58f1c01fd2f573b006687afa5d81e46a5116ada08d9fcb58efaa872c1fcb"
+    "UserID": 1,
+    "NodeID": 1,
+    "CreatedByUser": "2022-07-19T11:01:25.8980825Z"
+  }
+}
+```
+
+Response:
+```jsonc
+{
+   "State": "Success",
+   "Type": "AccountCreation",
+   "Nonce": 1,
+   "Data": null
+}
+```
+
+## `REDEEMINVITE`
+Issuing an invite
+
+Request:
+```jsonc
+{
+  "Type": "AccountCreation",
+  "Nonce": 1,
+  "SignatureUser": "1HXMLy1s4zWDnu...SEFER+R2Mc/KMIfhY+OvDe8Nfuw34rECA==",
+  "Data": {
+    "CreationMode": 2,
+    "NewAccountID": 220,
+    "PubKey": "3mVC3iAAQA...to2dk00ekGqojg==",
+    "IsETH":false,
+    "InviteCode":"2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b"   
+    "NodeID": 1,
+    "CreatedByUser": "2022-07-19T11:01:25.8980825Z"
+  }
+}
+```
+
+Response:
+```jsonc
+{
+   "State": "Success",
+   "Type": "AccountCreation",
+   "Nonce": 1,
+   "Data": null
+}
+```
+
+## `DELETEINVITE`
+Issuing an invite. In order to issue an invite to the platform, you must hash your custom secure invite code with SHA256 and provide the UTF-8 encoded string as InviteCodeHash. Issueing an invite costs 0.01mBTC.
+
+
+Request:
+```jsonc
+{
+  "Type": "AccountCreation",
+  "Nonce": 1,
+  "SignatureUser": "1HXMLy1s4zWDnu...SEFER+R2Mc/KMIfhY+OvDe8Nfuw34rECA==",
+  "Data": {
+    "CreationMode": 3,
+    "InviteCodeHash":"97da58f1c01fd2f573b006687afa5d81e46a5116ada08d9fcb58efaa872c1fcb"
+    "UserID": 1,
+    "NodeID": 1,
+    "CreatedByUser": "2022-07-19T11:01:25.8980825Z"
+  }
+}
+```
+
+Response:
+```jsonc
+{
+   "State": "Success",
+   "Type": "AccountCreation",
+   "Nonce": 1,
+   "Data": null
+}
+```
+
 ## `SubscribeBalance`
 Returns user balance and subscribes to future balance changes given a user ID. This does not require authentication.
 ```jsonc
