@@ -636,6 +636,38 @@ Response:
 }
 ```
 
+## `AccountSettings`
+For Create Requests all fields that have default values MUST be omitted. They are just listed to ensure completeness.
+AbsenceCancelMS is only for professional Market Makers. In case the user has not submitted any order for the past X  milliseconds, the User is marked offline and no open orders will be matched.
+ForceConfirmMatched: if this is set to True and as the Market Maker of a match, you are not confirming the match in time, the match will automatically be voided and a penalty deducted
+DisableOnHold:   Disable the withholdings of the largest win of the last 24 hours. An additional commission will apply if you opt-in and is accumulated in an insurance fund. Additional insurance commission will range from  from 1  to 20 basis points based on the Competition.   Negative balances of any user account will be convered from the insurance fund.
+
+Request:
+```jsonc
+{
+  "Type": "AccountSetting",
+  "Nonce": 1,
+  "SignatureUser": "1HXMLy1s4zWDnu...SEFER+R2Mc/KMIfhY+OvDe8Nfuw34rECA==",
+  "Data": {
+    "AccountID": 2,
+    "AbsenceCancelMS": null,
+    "ForceConfirmMatched": null,
+    "DisableOnHold": true,
+    "NodeID": 1,
+    "CreatedByUser": "2022-07-19T11:01:25.8980825Z"
+  }
+}
+```
+
+Response:
+```jsonc
+{
+   "State": "Success",
+   "Type": "AccountSetting",
+   "Nonce": 1,
+   "Data": null
+}
+```
 ## `SubscribeBalance`
 Returns user balance and subscribes to future balance changes given a user ID. This does not require authentication.
 ```jsonc
