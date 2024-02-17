@@ -15,9 +15,9 @@ Please take note that all JSON messages/requests must be sent with UTF8 encoding
 
 Public node addresses:
 ```
+wss://node82.sytes.net:82
 wss://freenode.hopto.org:82
 ws://213.252.245.184:81
-wss://node82.sytes.net:82
 ```
 
 ## How to sign messages
