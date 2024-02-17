@@ -17,8 +17,8 @@ Public node addresses:
 ```
 wss://freenode.hopto.org:82
 ws://213.252.245.184:81
-wss://node82.sytes.net:81
-wss://bitcoin-betting.org:81
+wss://node82.sytes.net:82
+wss://bitcoin-betting.org:82
 ```
 
 ## How to sign messages
