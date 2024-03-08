@@ -103,6 +103,9 @@ Get the next available user ID
 - [`GetUserIDFromPubKey`](#GetUserIDFromPubKey)  
 Get user ID given a public key
 
+- [`GetAccountSettings`](#GetAccountSettings)  
+Get user ID given a public key
+
 - [`AccountCreation`](#AccountCreation)
 
 - [`SubscribeBalance`](#SubscribeBalance)  
@@ -500,6 +503,24 @@ Returns an integer if an account with the public key is found.
   "Data":{
     "PublicKey":"3mVC3iAAQAA8SYKHTVi1MMIf7L+EIJL5jIOov5oNto2dk00ekGqojg=="
   }
+}
+```
+```jsonc
+// Response:
+{
+  "State": "Success",
+  "Type": "GetUserIDFromPubKey",
+  "Data": 1
+}
+```
+## `GetAccountSettings`
+Returns an integer if an account with the public key is found.
+```jsonc
+// Request:
+{
+  "Type":"GetAccountSettings",
+  "UserID":1,
+  "NodeID":144
 }
 ```
 ```jsonc
