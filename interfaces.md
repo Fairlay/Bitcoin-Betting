@@ -282,9 +282,12 @@ interface UserOrder {
 interface UnmatchedOrder {
     SUID: string
     Price: number
+    Cur:  int
     RemAmount: number
+    RemAmountD: [int] : number 
     State: UnmatchedOrderState
     Amount: number
+    AmountD: [int] : number 
     ID: string
     makerCT: number
     UserID: number
@@ -317,13 +320,14 @@ enum MatchedOrderState {
 interface MatchedOrder {
     ID: string
     State: MatchedOrderState
+    Cur: int
     CreationDate: Date
     Price: number
     Amount: number
 	DecResult: number
     // Used for markets with continuous settlement 
 
-	R: number
+	R: int
     // Flag
 
 	Red: number
