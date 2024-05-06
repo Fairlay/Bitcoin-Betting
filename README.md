@@ -772,10 +772,19 @@ Get unmatched orders and subscribes to future changes. This does not require aut
       "UnmatchedOrder": {
         "SUID": "370567508BA10F0E42BD414AC93AC56A36C8702B7F94F32762E22970FCAE32DC",
         "Price": 1.7,
+         "Cur" :0,
         "RemAmount": 2.0,
+        "RemAmountD": {
+           0: 10,
+           1:5
+        }
         "State": 2,   
         "Amount": 2.0,
-        "ID": "ce8bdedc-b345-44f3-b54e-11ea3f44975f",
+        "AmountD": {
+           0: 10,
+           1:5
+        }
+         "ID": "ce8bdedc-b345-44f3-b54e-11ea3f44975f",
         "makerCT": 6000,
         "UserID": 1,
         "Type" :1,
