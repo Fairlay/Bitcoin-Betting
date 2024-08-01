@@ -573,7 +573,7 @@ Response:
 ```
 
 ## `ISSUEINVITE`
-Issuing an invite. In order to issue an invite to the platform, you must hash your custom secure invite code with SHA256 and provide the UTF-8 encoded string as InviteCodeHash. Issueing an invite costs 0.01mBTC.  The InviteCode must be at least 11 characters long. 
+Issuing an invite. In order to issue an invite to the platform, you must hash your custom secure invite code (Only Uppercase letters) with SHA256 and provide the UTF-8 encoded string as InviteCodeHash. Issueing an invite costs at least 0.001mBTC  (StartingBalance).  The InviteCode must be at least 11 characters long. 
 
 
 Request:
@@ -586,8 +586,9 @@ Request:
     "CreationMode": 1,
     "InviteCodeHash":"97da58f1c01fd2f573b006687afa5d81e46a5116ada08d9fcb58efaa872c1fcb"
     "UserID": 1,
+    "StartingBalance":0.001,
     "NodeID": 1,
-    "CreatedByUser": "2022-07-19T11:01:25.8980825Z"
+    "CreatedByUser": "2024-07-19T11:01:25.8980825Z"
   }
 }
 ```
