@@ -16,11 +16,11 @@ The main interface to access the network is the DeFI-App  https://app.bitcoin-be
 
 The developers of the protocol are aware, that having an completely decentralized platform for any kind of market open for everyone without entry restrictions may lead to severe negative external effects. Thus the Platform is Invite-Only. Having an Invite-Only-Platform shall maintain a high quality user base and keep out bad actors.  
 
-New accounts can only be created by existing accounts. This can be done directly or by issuing an arbitrary Invite Code. Once you have an account, deposits can be made by passing your UserId to the deposit function of the Ethereum Smart Contract.  
+New accounts can only be created by existing accounts. This can be done directly by issuing an arbitrary Invite Code. Once you have an account, deposits can be made by passing your UserId to the deposit function of the Ethereum Smart Contract.  
 
-If bad actors enter the platform anyway, a majority vote of all nodes in the network can ban certain accounts and all their referrals. Referrers of bad actors may also be banned. Thus it is recommended to only invite new people you know and trust.
+If bad actors enter the platform anyway, a majority vote of all nodes in the network can ban certain accounts and all their referrals. Referrers of mulitple bad actors may also be banned. Thus it is recommended to only invite new users that are trustworthy.
 
-Referring a new user will be rewarded with a 10% share of all generated commissions by that user and by all subordinate referrals of that user. 
+Referring a new user will be rewarded with a 10% share of all generated commissions by that user and of all subordinate referrals of that user. 
 
 ## API
 
