@@ -1,5 +1,5 @@
 
-# Websocket API documentation  for Bitcoin Betting
+# Bitcoin Betting Documentation
 
 ## What is Bitcoin Betting
 
