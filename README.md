@@ -3,7 +3,7 @@
 
 ## What is Bitcoin Betting
 
-Bitcoin Betting is a  decentralized P2P Prediction Market and Betting Exchange consisting of a vast network of nodes. It utilizes its custom-tailored Decentralized Ledger based on the concept of Directed Acyclic Graphs specifically designed to match the needs of a fast, secure and efficient decentralized platform for processing millions of prediction markets and billions of orders every day.  
+Bitcoin Betting is a  decentralized P2P Prediction Market and Betting Exchange consisting of a vast network of nodes. It utilizes its custom-tailored Decentralized Ledger based on the concept of Directed Acyclic Graphs specifically designed to match the needs of a fast, secure and efficient decentralized platform for processing millions of markets and hundreds of millions of orders every day.  
 
 Supported currencies for most markets on the platform are currently Ethereum and (Wrapped) Bitcoin.  Deposits and Withdrawals happen via an Bridge - a certain Smart Contract on the Ethereum Blockchain. However, any user is free to issue their own currency, transfer it and create markets utilizing this currency.
 
