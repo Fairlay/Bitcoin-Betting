@@ -688,7 +688,9 @@ Response:
 For Create Requests all fields that have default values MUST be omitted. They are just listed to ensure completeness.
 AbsenceCancelMS is only for professional Market Makers. In case the user has not submitted any order for the past X  milliseconds, the User is marked offline and no open orders will be matched.
 ForceConfirmMatched: if this is set to True and as the Market Maker of a match, you are not confirming the match in time, the match will automatically be voided and a penalty deducted
-DisableOnHold:   Disable the withholdings of the largest win of the last 24 hours. An additional commission will apply if you opt-in and is accumulated in an insurance fund. Additional insurance commission will range from  from 1  to 20 basis points based on the Competition.   Negative balances of any user account will be convered from the insurance fund.
+DisableOnHold:   Disable the withholdings of the largest win of the last 24 hours. An additional commission will apply if you opt-in and is accumulated in an insurance fund. Additional insurance commission will range from  from 1  to 20 basis points based on the Competition.   Negative balances of any user account will be covered from the insurance fund.
+
+"SelfExclude": will self exclude your account from posting any orders until set date. Also transfers to other users and invites are not possible.
 
 Request:
 ```jsonc
@@ -701,6 +703,7 @@ Request:
     "AbsenceCancelMS": null,
     "ForceConfirmMatched": null,
     "DisableOnHold": true,
+   "SelfExclude":  "2022-07-19T11:01:25.8980825Z",
     "NodeID": 1,
     "MinerFee":0.00001,
     "CreatedByUser": "2022-07-19T11:01:25.8980825Z"
