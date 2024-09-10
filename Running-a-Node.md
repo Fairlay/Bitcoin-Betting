@@ -6,6 +6,11 @@ To be able to mine and receive the mining fees you need to have an account / inv
 ## 1. Check requirements 
 
 You need a server with Ubuntu 20.04 or higher, 16 GB of RAM and at least 2 vCPU cores.  Furthermore, if you like to connect to your node from the browser, it is required to register a domain and a SSL certificate. 
+if you only have 8 GB, it might also be possible to run the node.  
+
+In this case check:
+
+https://www.baeldung.com/linux/increase-swap-space
 
 ##  2. Install Tmux, Unzip, Dotnet and other depencencies.
 ```
@@ -74,6 +79,4 @@ dotnet HHServer2.dll
 ```
 sudo ufw disable
 ```
-//Less than 16 GB Ram?    Increase Swap
 
-https://www.baeldung.com/linux/increase-swap-space
