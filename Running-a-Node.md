@@ -67,6 +67,7 @@ nano config.json
 
 ## 7. Run the Node
 ```
+tmux new-session -s bbet-node 
 dotnet HHServer2.dll
 ```
 //if there is no connection  check the firewall to allow traffic on port 81 and 82, for example try:
