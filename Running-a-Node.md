@@ -14,9 +14,9 @@ wget -q https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-pr
 && sudo apt-get -y upgrade && mkdir bbet-node && cd bbet-node && echo "setw -g mouse on" >> /root/.tmux.conf && echo "set-option -g history-limit 50000" >> /root/.tmux.conf
 ```
 ## 3. Download and extract the latest version.
-'''
+```
 wget -O bbet-node.zip https://ipfs.io/ipfs/QmQ5a3RWwSSbtJr15XtQz8X93kVnv4fPrmKxydkXoSCmW3 && unzip bbet-node.zip
-'''
+```
 
 ## 4. Register a domain  (optional)
 
@@ -60,9 +60,9 @@ openssl pkcs12 -export -in /etc/letsencrypt/live/mydomain.test/cert.pem -inkey /
 
 
 ## 6. Edit the config file
-
+```
 nano config.json
-
+```
 //update your private key, user id, password for the pfx file, api-key
 
 ## 7. Run the Node
