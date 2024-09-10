@@ -8,24 +8,23 @@ To be able to mine and receive the mining fees you need to have an account / inv
 You need a server with Ubuntu 20.04 or higher, 16 GB of RAM and at least 2 vCPU cores.  Furthermore, if you like to connect to your node from the browser, it is required to register a domain and a SSL certificate. 
 
 ##  2. Install Tmux, Unzip, Dotnet and other depencencies.
-
-'wget -q https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && sudo dpkg -i packages-microsoft-prod.deb && sudo apt-get -y update && sudo apt-get -y install software-properties-common 
+```
+wget -q https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && sudo dpkg -i packages-microsoft-prod.deb && sudo apt-get -y update && sudo apt-get -y install software-properties-common 
 && sudo add-apt-repository universe && sudo apt-get -y update && sudo apt-get -y install apt-transport-https && sudo apt-get -y install dotnet-sdk-8.0 && sudo apt-get -y install unzip && sudo apt-get -y install tmux && sudo apt-get -y update 
 && sudo apt-get -y upgrade && mkdir bbet-node && cd bbet-node && echo "setw -g mouse on" >> /root/.tmux.conf && echo "set-option -g history-limit 50000" >> /root/.tmux.conf
-'
-
+```
 ## 3. Download and extract the latest version.
-
+'''
 wget -O bbet-node.zip https://ipfs.io/ipfs/QmQ5a3RWwSSbtJr15XtQz8X93kVnv4fPrmKxydkXoSCmW3 && unzip bbet-node.zip
-'
+'''
 
-## 4. register a domain  (optional)
+## 4. Register a domain  (optional)
 
 ### 4.1. Install Apache
 ```
 sudo apt install apache2 && sudo ufw allow 'Apache' && sudo apt -y install certbot python3-certbot-apache
 ```
-### 4.2. Register your domain name 
+### 4.2. Register your domain name at your service provider
 
 Now register the domainname and link it to the IP.
 
