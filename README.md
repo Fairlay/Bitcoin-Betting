@@ -24,7 +24,7 @@ Referring a new user will be rewarded with a 10% share of all generated commissi
 
 ## Restricted Regions
 
-By default, certain IP's are restricted from connecting to a node. Any node operator is free to extend the list. By default among some less important countries,  all US IPs are banned. The node operator is free to extend or reduce the list by editing the IPRanges.ini config file. 
+By default, certain IPs like US IPs are restricted from connecting to a node. Any node operator is free to add or remove regions from the list by editing the IPRanges.ini config file. 
 
 ## Getting in touch
 
@@ -42,6 +42,28 @@ https://app.bitcoin-betting.com
 New Proposals and updates from the DAO will also be published on:
 
 https://x.com/_bitcoinbetting
+
+## Commission
+
+For any market settlement, a small commission is collected. The base commission excluding reduction is usually not higher than 0.25% for markets that settle automatically and not more than 2% for markets that have to be settled manually. For binary markets, commissions are only collected on wins.
+
+## VIP Model
+
+Users can obtain a VIP Status from Level 1 to 10. Among other benefits, a user can enjoy lower commissions with a higher VIP status. The commission reductions are as follows:
+
+VIP 1:   2%
+VIP 2:   5%
+VIP 3:   10%
+VIP 4:   15%
+VIP 5:   20%
+VIP 6:   30%
+VIP 7:   40%
+VIP 8:   45%
+VIP 9:   54%
+VIP 10:  60%
+
+The VIP Status is determined on the VIP points. VIP points decay by 5% each week and can be earned by paying commissions on the platform.
+
 
 ## Ownership
 
