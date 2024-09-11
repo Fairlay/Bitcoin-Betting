@@ -15,7 +15,7 @@ Furthermore any user is free to issue their own currency, token or other asset, 
 ## User Interfaces
 
 The main user interface to access the platform is the DeFi-App  https://app.bitcoin-betting.com.  It is a static site (hosted on IPFS)  that runs client-side Javascript code in the browser to interact directly with one of the selected nodes.  
-Furtermore standalone application should become available for anyone with custom needs.
+Furthermore standalone application should become available for anyone with custom needs.
 
 ## Mobile Support
 
@@ -23,11 +23,11 @@ It is recommended to use the App MetaMask on all mobile devices to safeguard one
 
 ## No Personal Data Collection
 
-Bitcoin Betting is accessible to anyone. No personal data is ever collected. Not even names or email addresses. The identy management is entirely handled by your wallet. Any transaction that is submitted to the ledger must be signed by that wallet. 
+Bitcoin Betting is accessible to anyone. No personal data is ever collected. Not even names or email addresses. The identity management is entirely handled by your wallet. Any transaction that is submitted to the ledger must be signed by that wallet. 
 
 ## Privacy & Block Explorers
 
-All tranactions on Bitcoin Betting are public and accessible via so called "Block Explorers". It is recommended to not save any personal data in the ledger. Bitcoin Betting is thus not suitable for money laundering or other criminial activities. All transactions are easily traceable. 
+All transactions on Bitcoin Betting are public and accessible via so called "Block Explorers". It is recommended to not save any personal data in the ledger. Bitcoin Betting is thus not suitable for money laundering or other criminal activities. All transactions are easily traceable. 
 
 ## Getting Access  and Referral Bonus System
 
@@ -37,7 +37,7 @@ New accounts can only be created by existing accounts. This can be done directly
 
 If bad actors enter the platform anyway, the issuer of the invite has a certain period, in which he can revoke any invite and optionally all their referrals. After the revoke request is initiated, the affected account can only withdraw funds but not place any new orders. 
 
-Referrers of mulitple bad actors may also be banned. Thus it is recommended to only invite new users that are trustworthy.
+Referrers of multiple bad actors may also be banned. Thus it is recommended to only invite new users that are trustworthy.
 
 Referring a new user will be rewarded with a 10% share of all generated commissions by that user and of all subordinate referrals of that user. 
 
@@ -91,7 +91,7 @@ Anyone who wants to support the network is free to run their own node (please ch
 
 ## API
 
-Pleaes check the API documentation.md file for further details as well as the javascript samples.
+Please check the API documentation.md file for further details as well as the javascript samples.
 
 
 ## Restricted Regions
@@ -112,8 +112,8 @@ DAG's are graphs that link so called Storage Units together. Each new Storage Un
 
 ## Efficient usage of disk space
 
-Bitcoin Betting is using the limited storage resources efficiently by only minig transactions permanently that are relevant. 
-Transactions like order cancellations, markets with no orders, open orders that were never matched and similar transactions are only kept in the mempool. Once it weill become clear, that these transaction are no longer used, they will be removed from the mempool. Only transactions that will have an permanent effect on the account balances will be saved forever.
+Bitcoin Betting is using the limited storage resources efficiently by only mining transactions permanently that are relevant. 
+Transactions like order cancellations, markets with no orders, open orders that were never matched and similar transactions are only kept in the mempool. Once it will become clear, that these transaction are no longer used, they will be removed from the mempool. Only transactions that will have a permanent effect on the account balances will be saved forever.
 
 ## Storage Unit Types
 
@@ -121,7 +121,7 @@ On the platform, dozens of types of Storage Units are possible.  The most used o
 
 ### Currency Issuance
 
-It is possible to issue your own currency of your choosing. This can happen either in a centralized way, where one user is responsible for issuing and destroying units of that currency or in a trustless way, by interactiving with a bridge on a different blockchain. 
+It is possible to issue your own currency of your choosing. This can happen either in a centralized way, where one user is responsible for issuing and destroying units of that currency or in a trustless way, by interacting with a bridge on a different blockchain. 
 
 For example ETH can be deposited to a smart contract on the Ethereum Blockchain and whenever the nodes are informed about such a transaction, they issue the currency automatically to the indicated user account.  
 
@@ -133,11 +133,11 @@ Within that request type it is also possible to burn units of any currency. Once
 
 ### Invite Users
 
-It is possible to invite new users. For a limited time it is possible to revoke invites.  For all comissions paid by the invited user and their referrals, the referrer will get 10% of all generated commissions.
+It is possible to invite new users. For a limited time it is possible to revoke invites.  For all commissions paid by the invited user and their referrals, the referrer will get 10% of all generated commissions.
 
 ### Create Markets
 
-Different markets are allowed on the platform. Binary / Prediction Markets are the most common, but also CFD or direct exchange markets are integrated among others. The market creator is free to determine settler, market conditions and commisssions for that market. A maximum of 2% commissions is however enforced.
+Different markets are allowed on the platform. Binary / Prediction Markets are the most common, but also CFD or direct exchange markets are integrated among others. The market creator is free to determine settler, market conditions and commissions for that market. A maximum of 2% commissions is however enforced.
 
 ### Order Alterations
 
@@ -154,19 +154,19 @@ Markets will be settled by the user accounts indicated in the market settings up
 
 ### Settlement Challenges
 
-It is possible to challenge settlements. In case of a challenge, the settler has a certain time period to deal with the settlment challenge. Each settlment challenge requires a small amount of collateral to be put in.
+It is possible to challenge settlements. In case of a challenge, the settler has a certain time period to deal with the settlement challenge. Each settlement challenge requires a small amount of collateral to be put in.
 
-### Node Ban / Node Replacment
+### Node Ban / Node Replacement
 
-Having a predetermined node to process orders of a certain market involves some risk in case the node is unavailable. If however a nodeb becomes unreachable or inconsistent for a few minutes, order processing will continue on a different also predetermined node. For this reason, each node that wants to process orders has to determine a Replacement Node. In case the original node goes down, the Replacement Node will issue a Node Ban request and take over the order procesing for all their markets. Once this request has been mined, all other nodes will know, that order processing has now moved to a different node and will direct their traffic for that market to the Replacment Node.   Once the original node comes online again, it will issue an Unban Request to revert the state.
+Having a predetermined node to process orders of a certain market involves some risk in case the node is unavailable. If however a node becomes unreachable or inconsistent for a few minutes, order processing will continue on a different node. For this reason, each node has to determine a Replacement Node. In case the original node goes down, the Replacement Node will issue a Node Ban request and take over the order processing for all their markets. Once this request has been mined, all other nodes will know, that order processing has now moved to a different node and will direct their traffic for that market to the Replacement Node.   Once the original node comes online again, it will issue an Unban Request to revert the state.
 
 ## Double Spends
 
 In case of double spends, the nodes that have conflicting states will stop sharing conflicting transactions with each other. In such a "chain split" event the node operator will either manually decide the correct state or automatically follow a majority vote based on the node's settings. The votes are weighted based on the funds staked in the user account that is associated with a node.  
 
-## Pruining and faster syncing
+## Pruning and faster syncing
 
-Bitcoin Betting nodes are regulary saving the current state of the node. This will allow a node operator to sync his node from a certain state instead of having to process and verify all Storage Units from inception.  Also this will enable pruining of the ledger if it should become necessary.  
+Bitcoin Betting nodes are regularly saving the current state of the node. This will allow a node operator to sync his node from a certain state instead of having to process and verify all Storage Units from inception.  Also this will enable pruning of the ledger if it should become necessary.  
 
 
 
