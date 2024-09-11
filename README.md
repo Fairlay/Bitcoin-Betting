@@ -35,9 +35,18 @@ By default, certain IP's are restricted from connecting to a node. Any node oper
 Bitcoin Betting utilizes Directed Acyclic Graphs technology to store and process transactions. This technology allows different nodes or parts of the network to work on their own branches and only merge them with other nodes if it is beneficial to do so.  For example a node in Venezuela can continue to operate normally and process markets and orders 
 if the connection to Venezuela drops for a day for some reason. It will merge normally with the network when the connection is reestablished as long as no one tried to do a double spent or similar things. Alternatively, private companies could set up their own node to host their private internal prediction markets and only release the data when it is beneficial to do so.
 
-## Transactions
+## Storage Units
 
-On the platform, dozens of types of transactions are possible.  The most used ones are described here.
+DAG's are graphs that link so called Storage Units together. Each new Storage Unit is always referencing at least one, in most cases two or three existing Storage Units. This will form a partial order on the set of all Storage Units.  
+
+## Efficient usage of disk space
+
+Bitcoin Betting is using the limited storage resources efficiently by only minig transactions permanently that are relevant. 
+Transactions like order cancellations, markets with no orders, open orders that were never matched and similar transactions are only kept in the mempool. Once it weill become clear, that these transaction are no longer used, they will be removed from the mempool. Only transactions that will have an permanent effect on the account balances will be saved forever.
+
+## Storage Unit Types
+
+On the platform, dozens of types of Storage Units are possible.  The most used ones are described here.
 
 ### Currency Issuance
 
@@ -82,11 +91,11 @@ The short cut of having a predetermined node to process orders of a certain mark
 
 ## Double spends
 
-In case of double spends, the nodes that have conflicting states will stop sharing conflicting transactions with each other. In such a "chain split" event the node operator will either manually decide the correct state or automatically follow a majority vote. The votes are weighted based on the funds staked in the user account that is associated with a node.  
+In case of double spends, the nodes that have conflicting states will stop sharing conflicting transactions with each other. In such a "chain split" event the node operator will either manually decide the correct state or automatically follow a majority vote based on the node's settings. The votes are weighted based on the funds staked in the user account that is associated with a node.  
 
+## Pruining and faster syncing
 
-
-
+Bitcoin Betting nodes are regulary saving the current state of the node. This will allow a node operator to sync his node from a certain state instead of having to process and verify all Storage Units from inception.  Also this will enable pruining of the ledger if it should become necessary.  
 
 
 
