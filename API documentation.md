@@ -1,4 +1,4 @@
-#API documentation
+# API documentation
 
 By default, each node also offers an API to external users. To incentivize node owners to do so, each mined transaction that is processed by a node incurs a small fee of around 1 satoshi.
 The API is Websocket only. REST is not supported to ensure efficient use of each Node's limited resources.  
