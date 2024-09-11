@@ -54,7 +54,7 @@ It is possible to issue your own currency of your choosing. This can happen eith
 
 For example ETH can be deposited to a smart contract on the Ethereum Blockchain and whenever the nodes are informed about such a transaction, they issue the currency automatically to the indicated user account.  
 
-### Transfer funds
+### Transfer Funds
 
 Units of any currency can be transferred to any other user. 
 
@@ -85,11 +85,11 @@ Markets will be settled by the user accounts indicated in the market settings up
 
 It is possible to challenge settlements. In case of a challenge, the settler has a certain time period to deal with the settlment challenge. Each settlment challenge requires a small amount of collateral to be put in.
 
-### Ban nodes
+### Node Ban / Node Replacment
 
-The short cut of having a predetermined node to process orders of a certain market, might sound like a bad idea. But in case the node goes down for a few minutes, order processing will continue on a different predetermined node.   For this reason, each node that wants to process orders has to determine a Replacement Node. In case the original node goes down, the Replacement Node will issue a Ban Node request and take over the order procesing. Once this request has been mined, all other nodes will know, that order processing has now moved to a different node and will direct their traffic for that market to the new node.   Once the original node comes online again, it will issue an Unban Request to revert the state.
+Having a predetermined node to process orders of a certain market involves some risk in case the node is unavailable. If however a nodeb becomes unreachable or inconsistent for a few minutes, order processing will continue on a different also predetermined node. For this reason, each node that wants to process orders has to determine a Replacement Node. In case the original node goes down, the Replacement Node will issue a Node Ban request and take over the order procesing for all their markets. Once this request has been mined, all other nodes will know, that order processing has now moved to a different node and will direct their traffic for that market to the Replacment Node.   Once the original node comes online again, it will issue an Unban Request to revert the state.
 
-## Double spends
+## Double Spends
 
 In case of double spends, the nodes that have conflicting states will stop sharing conflicting transactions with each other. In such a "chain split" event the node operator will either manually decide the correct state or automatically follow a majority vote based on the node's settings. The votes are weighted based on the funds staked in the user account that is associated with a node.  
 
