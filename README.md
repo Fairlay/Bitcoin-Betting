@@ -1,13 +1,11 @@
 
-# Bitcoin Betting Documentation
+# Bitcoin Betting
 
 ## What is Bitcoin Betting
 
 Bitcoin Betting is a  decentralized P2P Prediction Market and Betting Exchange consisting of a vast network of nodes. It utilizes its custom-tailored Decentralized Ledger based on the concept of Directed Acyclic Graphs specifically designed to match the needs of a fast, secure and efficient decentralized platform for processing millions of markets and hundreds of millions of orders every day.  
 
 Supported currencies for most markets on the platform are currently Ethereum and (Wrapped) Bitcoin.  Deposits and withdrawals happen via an Bridge - a special Smart Contract on the Ethereum Blockchain. However, any user is free to issue their own currency, transfer it and create markets utilizing this currency.
-
-Anyone who wants to support the network is free to run their own node (please check Running a Node.md) and perform all transactions directly on that node. All relevant transactions are permanently stored on all nodes. Certain transactions like open orders or markets with no orders are only stored in the mempool and thus do not fill up the valuable ledger space. 
 
 The main interface to access the network is the DeFi-App  https://app.bitcoin-betting.com.  It is a static site (also available on IPFS)  that runs client-side Javascript code in the browser to interact directly with one of the nodes.   It is recommended to use the App MetaMask on all mobile devices to safeguard one's private keys and use their browser to be able to easily sign requests.  
 
@@ -27,6 +25,37 @@ Referring a new user will be rewarded with a 10% share of all generated commissi
 ## Restricted Regions
 
 By default, certain IP's are restricted from connecting to a node. Any node operator is free to extend the list. By default among some less important countries,  all US IPs are banned. The node operator is free to extend or reduce the list by editing the IPRanges.ini config file. 
+
+## Getting in touch
+
+The platform is fully governed by the Bitcoin Betting DAO.  All protocol and UI changes are decided by the DAO. Furthermore the DAO will receive all commissions that are ever collected. 
+Proposals can be initiated via:
+
+https://app.aragon.org/#/daos/ethereum/bitcoin-betting.dao.eth/dashboard 
+
+Any bug report or feature proposal that is accepted by the DAO will usually be rewarded directly by sending WBTC to the Ethereum address of the initiator of the proposal.
+
+A governance forum is planned, in the meantime matters can be discussed in the chat on:
+
+https://app.bitcoin-betting.com
+
+New Proposals and updates from the DAO will also be published on:
+
+https://x.com/_bitcoinbetting
+
+## Ownership
+
+It is also possible to trade ownership tokens of Bitcoin Betting: bbet tokens (Contract address 0x60b8b2bf009a90d3864068bff2c2cb37d86b12ec).   There exist a maximum of 1 million bbet tokens that represent full ownership of all source code, IP, domains and funds associated with Bitcoin Betting excluding user funds.
+
+These tokens can be traded on uniswap for example or P2P. 
+
+## Running a Node
+
+Anyone who wants to support the network is free to run their own node (please check Running a Node.md) and perform all transactions directly on that node, collect transaction / mining fees and more. 
+
+## API
+
+Pleaes check the API documentation.md file for further details as well as the javascript samples.
 
 # Technical Details 
 
