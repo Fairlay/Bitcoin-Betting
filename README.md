@@ -7,8 +7,19 @@ Bitcoin Betting is a  decentralized P2P Prediction Market and Betting Exchange c
 
 Supported currencies for most markets on the platform are currently Ethereum and (Wrapped) Bitcoin.  Deposits and withdrawals happen via an Bridge - a special Smart Contract on the Ethereum Blockchain. However, any user is free to issue their own currency, transfer it and create markets utilizing this currency.
 
-The main interface to access the network is the DeFi-App  https://app.bitcoin-betting.com.  It is a static site (also available on IPFS)  that runs client-side Javascript code in the browser to interact directly with one of the nodes.   It is recommended to use the App MetaMask on all mobile devices to safeguard one's private keys and use their browser to be able to easily sign requests.  
+The main interface to access the network is the DeFi-App  https://app.bitcoin-betting.com.  It is a static site (also available on IPFS)  that runs client-side Javascript code in the browser to interact directly with one of the nodes.   
 
+## Mobile Support
+
+It is recommended to use the App MetaMask on all mobile devices to safeguard one's private keys and use their browser to be able to easily sign requests. User Experience with regular browsers and other Wallets can be frustrating on certain devices. 
+
+## No Personal Data Collection
+
+Bitcoin Betting is accessible to anyone. No personal data is ever collected. Not even names or email addresses. The identy management is entirely handled by your wallet. Any transaction that is submitted to the ledger must be signed by that wallet. 
+
+## Privacy & Block Explorers
+
+All tranactions on Bitcoin Betting are public and accessible via so called "Block Explorers". It is recommended to not save any personal data in the ledger. Bitcoin Betting is thus not suitable for money laundering or other criminial activities. All transactions are easily traceable. 
 
 ## Getting Access  and Referral Bonus System
 
@@ -21,27 +32,6 @@ If bad actors enter the platform anyway, the issuer of the invite has a certain 
 Referrers of mulitple bad actors may also be banned. Thus it is recommended to only invite new users that are trustworthy.
 
 Referring a new user will be rewarded with a 10% share of all generated commissions by that user and of all subordinate referrals of that user. 
-
-## Restricted Regions
-
-By default, certain IPs like US IPs are restricted from connecting to a node. Any node operator is free to add or remove regions from the list by editing the IPRanges.ini config file. 
-
-## Getting in touch
-
-The platform is fully governed by the Bitcoin Betting DAO.  All protocol and UI changes are decided by the DAO. Furthermore the DAO will receive all commissions that are ever collected. 
-Proposals can be initiated via:
-
-https://app.aragon.org/#/daos/ethereum/bitcoin-betting.dao.eth/dashboard 
-
-Any bug report or feature proposal that is accepted by the DAO will usually be rewarded directly by sending WBTC to the Ethereum address of the initiator of the proposal.
-
-A governance forum is planned, in the meantime matters can be discussed in the chat on:
-
-https://app.bitcoin-betting.com
-
-New Proposals and updates from the DAO will also be published on:
-
-https://x.com/_bitcoinbetting
 
 ## Commission
 
@@ -64,6 +54,22 @@ VIP 10:  60%
 
 The VIP Status is determined based on the VIP points. VIP points decay by 5% each week and can be earned by paying commissions on the platform.
 
+## Getting in touch
+
+The platform is fully governed by the Bitcoin Betting DAO.  All protocol and UI changes are decided by the DAO. Furthermore the DAO will receive all commissions that are ever collected. 
+Proposals can be initiated via:
+
+https://app.aragon.org/#/daos/ethereum/bitcoin-betting.dao.eth/dashboard 
+
+Any bug report or feature proposal that is accepted by the DAO will usually be rewarded directly by sending WBTC to the Ethereum address of the initiator of the proposal.
+
+A governance forum is planned, in the meantime matters can be discussed in the chat on:
+
+https://app.bitcoin-betting.com
+
+New Proposals and updates from the DAO will also be published on:
+
+https://x.com/_bitcoinbetting
 
 ## Ownership
 
@@ -78,6 +84,12 @@ Anyone who wants to support the network is free to run their own node (please ch
 ## API
 
 Pleaes check the API documentation.md file for further details as well as the javascript samples.
+
+
+## Restricted Regions
+
+By default, certain IPs like US IPs are restricted from connecting to a node. Any node operator is free to add or remove regions from the list by editing the IPRanges.ini config file. 
+
 
 # Technical Details 
 
