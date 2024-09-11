@@ -11,7 +11,7 @@ The main interface to access the network is the DeFi-App  https://app.bitcoin-be
 
 ## Mobile Support
 
-It is recommended to use the App MetaMask on all mobile devices to safeguard one's private keys and use their browser to be able to easily sign requests. User Experience with regular browsers and other Wallets can be frustrating on certain devices. 
+It is recommended to use the App MetaMask on all mobile devices to safeguard one's private keys and use their browser to be able to easily sign requests. User Experience with regular browsers and other wallets can be frustrating on certain devices. 
 
 ## No Personal Data Collection
 
