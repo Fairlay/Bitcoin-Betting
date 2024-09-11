@@ -5,12 +5,12 @@
 
 Bitcoin Betting is a  decentralized P2P Prediction Market and Betting Exchange consisting of a vast network of nodes. It utilizes its custom-tailored Decentralized Ledger based on the concept of Directed Acyclic Graphs specifically designed to match the needs of a fast, secure and efficient decentralized platform for processing millions of markets and hundreds of millions of orders every day.  
 
-## Funding
+## Funding and supported currencies
 
 Supported currencies for most markets on the platform are currently Ethereum and (Wrapped) Bitcoin.  Deposits and withdrawals happen via Bridges - certain Smart Contracts on the Ethereum Blockchain that safeguard your funds in a trustless manner. 
-Deposits and withdrawals will usually take less than 30 seconds.  Thus all funds that are bridged via Ethereum are securely held in the Smart Contract, which is secured against any known attack vector. 
+Deposits and withdrawals will usually take less than 30 seconds.  Thus no central party is holding any customer funds, instead all are securely held in the Smart Contract, which is secured against any known attack vector. 
 
-Furthermore any user is free to issue their own currency, token or other asset, transfer it and create markets utilizing this currency.  
+Furthermore any user is free to issue their own currency, token or other asset, transfer it and create markets utilizing this currency.  Stablecoins are not welcomed on the platform as they are not suitable for long-term orders due to their diminishing value.
 
 ## User Interfaces
 
