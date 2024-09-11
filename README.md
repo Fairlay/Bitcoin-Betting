@@ -14,12 +14,12 @@ Furthermore any user is free to issue their own currency, token or other asset, 
 
 ## User Interfaces
 
-The main user interface to access the platform is the DeFi-App  https://app.bitcoin-betting.com.  It is a static site (hosted on IPFS)  that runs client-side Javascript code in the browser to interact directly with one of the selected nodes.  
-Furthermore standalone application should become available for anyone with custom needs.
+The main user interface to access the platform is the DeFi-App https://app-bitcoin--betting-com.ipns.dweb.link.  It is a static site (hosted on IPFS)  that runs client-side Javascript code in the browser to interact directly with one of the selected nodes.  
+Furthermore standalone-applications should become available for anyone with custom needs.
 
 ## Mobile Support
 
-It is recommended to use the App MetaMask on all mobile devices to safeguard one's private keys and use their browser to be able to easily sign requests easily. User experience with regular browsers and other wallets can be frustrating on certain devices. 
+It is recommended to use the App MetaMask on all mobile devices to safeguard one's private keys and use their browser to be able to sign requests easily. User experience with regular browsers and other wallets can be frustrating on certain devices. 
 
 ## No Personal Data Collection
 
