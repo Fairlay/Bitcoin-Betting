@@ -56,18 +56,18 @@ For binary markets, commissions are only collected on wins.
 
 Users can obtain a VIP Status from Level 1 to 10. Among other benefits, a user can enjoy lower commissions with a higher VIP status. The commission reductions are as follows:
 
-VIP 1:   2%
-VIP 2:   5%
-VIP 3:   10%
-VIP 4:   15%
-VIP 5:   20%
-VIP 6:   30%
-VIP 7:   40%
-VIP 8:   45%
-VIP 9:   54%
-VIP 10:  60%
+- VIP 1:   2%
+- VIP 2:   5%
+- VIP 3:   10%
+- VIP 4:   15%
+- VIP 5:   20%
+- VIP 6:   30%
+- VIP 7:   40%
+- VIP 8:   45%
+- VIP 9:   54%
+- VIP 10:  60%
 
-The VIP Status is determined based on the VIP points. VIP points decay by 5% each week and can be earned by paying commissions on the platform.
+The VIP Status is determined based on the VIP points. VIP points decay by 5% each week and can be earned by paying commission on the platform.
 
 ## Getting in touch
 
