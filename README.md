@@ -33,9 +33,9 @@ It is recommended to not save any personal data in the ledger. Bitcoin Betting i
 
 ## Getting Access  and Referral Bonus System
 
-The developers of the protocol are aware, that having an completely decentralized platform for any kind of market open for everyone without entry restrictions may lead to severe negative external effects. Thus the Platform is invite-only. Having an Invite-Only-Platform shall maintain a high quality user base and keep out bad actors.  
+The developers of the protocol are aware, that having an completely decentralized platform for any kind of market open to everyone without entry restrictions may lead to severe negative external effects. Thus the platform is invite-only. Having an Invite-Only-Platform shall maintain a high quality user base and keep out bad actors.  
 
-New accounts can only be created by existing accounts. This can be done directly by issuing an arbitrary Invite Code. Once you have an account, deposits can be made by passing your UserId to the deposit function of the Ethereum Smart Contract.  
+New accounts can only be created by existing accounts. This can be done directly by issuing an arbitrary Invite Code. Once you have an account, deposits can be made by passing your User Id to the deposit function of the Ethereum Smart Contract.  
 
 If bad actors enter the platform anyway, the issuer of the invite has a certain period, in which he can revoke any invite and optionally all their referrals. After the revoke request is initiated, the affected account can only withdraw funds but not place any new orders. 
 
@@ -45,7 +45,12 @@ Referring a new user will be rewarded with a 10% share of all generated commissi
 
 ## Commission
 
-For any market settlement, a small commission is collected. The base commission excluding reduction is usually not higher than 0.25% for markets that settle automatically and not more than 2% for markets that have to be settled manually. For binary markets, commissions are only collected on wins.
+For any market settlement, a small commission is collected. The commission is always set by the creator of a market. It is recommended that the base commission (excluding VIP reduction) is 
+
+- not higher than 0.25% for markets, that settle automatically and
+- not higher than 2% for markets that have to be settled manually.
+
+For binary markets, commissions are only collected on wins.
 
 ## VIP Model
 
