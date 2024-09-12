@@ -98,7 +98,7 @@ Anyone who wants to support the network is free to run their own node (please ch
 
 ## API
 
-Please check the API documentation.md file for further details as well as the javascript samples.
+Please check the API documentation.md file for further details as well as the Javascript samples.
 
 
 ## Restricted Regions
@@ -110,12 +110,12 @@ By default, certain IPs like US IPs are restricted from connecting to a node. An
 
 ## DAGs
 
-Bitcoin Betting utilizes Directed Acyclic Graphs technology to store and process transactions. This technology allows different nodes or parts of the network to work on their own branches and only merge them with other nodes if it is beneficial to do so.  For example a node in Venezuela can continue to operate normally and process markets and orders 
-if the connection to Venezuela drops for a day for some reason. It will merge normally with the network when the connection is reestablished as long as no one tried to do a double spent or similar things. Alternatively, private companies could set up their own node to host their private internal prediction markets and only release the data when it is beneficial to do so.
+Bitcoin Betting utilizes Directed Acyclic Graphs to store and process transactions. Unlike with blockchains this technology allows different nodes or parts of the network to work on their own branches seperately and only merge them with other nodes if it is possible or beneficial to do so.  For example, a node in Venezuela can continue to operate normally and process local markets and orders 
+with local users if the connection to Venezuela drops for a day for some reason. It will merge normally with the network again, when the connection is reestablished as long as there are no conflicts with the transactions (double spending for example). Alternatively, private companies could set up their own node to host their private internal prediction markets and only release the data when it is safe to do so.
 
 ## Storage Units
 
-DAG's are graphs that link so called Storage Units together. Each new Storage Unit is always referencing at least one, in most cases two or three existing Storage Units. This will form a partial order on the set of all Storage Units.  
+DAGs are graphs that link so called Storage Units together. Each new Storage Unit is always referencing at least one, in most cases two or three existing Storage Units. This will form a partial order on the set of all Storage Units.  
 
 ## Efficient usage of disk space
 
@@ -124,7 +124,7 @@ Transactions like order cancellations, markets with no orders, open orders that 
 
 ## Storage Unit Types
 
-On the platform, dozens of types of Storage Units are possible.  The most used ones are described here.
+On the platform, dozens of types of Storage Units are implemented.  The most used ones are described here.
 
 ### Currency Issuance
 
@@ -167,13 +167,14 @@ It is possible to challenge settlements. In case of a challenge, the settler has
 
 Having a predetermined node to process orders of a certain market involves some risk in case the node is unavailable. If however a node becomes unreachable or inconsistent for a few minutes, order processing will continue on a different node. For this reason, each node has to determine a Replacement Node. In case the original node goes down, the Replacement Node will issue a Node Ban request and take over the order processing for all their markets. Once this request has been mined, all other nodes will know, that order processing has now moved to a different node and will direct their traffic for that market to the Replacement Node.   Once the original node comes online again, it will issue an Unban Request to revert the state.
 
-## Double Spends
+## Double Spending
 
-In case of double spends, the nodes that have conflicting states will stop sharing conflicting transactions with each other. In such a "chain split" event the node operator will either manually decide the correct state or automatically follow a majority vote based on the node's settings. The votes are weighted based on the funds staked in the user account that is associated with a node.  
+In case of double spending, the nodes that have conflicting states will stop sharing conflicting transactions with each other. In such a "chain split" event the node operator will either manually decide the correct state or automatically follow a majority vote based on the node's settings. The votes are weighted based on the funds staked in the user account that is associated with a node.  
+In reality, double spending or conflicting transactions should not happen naturally. It can only happen if a malicious user sends prepared transactions to two nodes at the very same time. Such behaviour would be recognized immediately and result in a ban of the user.
 
 ## Pruning and faster syncing
 
-Bitcoin Betting nodes are regularly saving the current state of the node. This will allow a node operator to sync his node from a certain state instead of having to process and verify all Storage Units from inception.  Also this will enable pruning of the ledger if it should become necessary.  
+Bitcoin Betting nodes are regularly saving the current state of the node. This will allow a node operator to sync his node from a certain state instead of having to process and verify all Storage Units from inception.  Also this will enable pruning of the ledger if it should become necessary in the future.
 
 
 
