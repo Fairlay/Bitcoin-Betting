@@ -75,6 +75,7 @@ You should check `State` property on every response. In case of `State == Error`
 {
   "State": "Error",
   "Type": "GetMarketByID",
+  "Nonce":63804569790630801,
   "Error": "No market found"
 }
 ```
@@ -155,7 +156,8 @@ Returns all active currencies on platform.
 ```jsonc
 // Request:
 {
-  "Type": "GetCurrencies"
+  "Type": "GetCurrencies",
+  "Nonce":63804569790630801,
 }
 ```
 ```jsonc
@@ -163,6 +165,7 @@ Returns all active currencies on platform.
 {
   "State": "Success",
   "Type": "GetCurrencies",
+  "Nonce":63804569790630801,
   "Data": [
     [
       "ID" : 1,
@@ -192,14 +195,16 @@ Returns all active categories (that have active/inplay markets) and subscribe to
 ```jsonc
 // Request:
 {
-  "Type": "SubscribeSports"
+  "Type": "SubscribeSports",
+  "Nonce":63804569790630801,
 }
 ```
 ```jsonc
 // Response:
 {
   "State": "Success",
-  "Type": "SubscribeSports",
+  "Type": "SubscribeSports",,
+  "Nonce":63804569790630801,
   "Data": [
     [
         "13",
@@ -230,14 +235,16 @@ Returns all active competitions (that have active/inplay markets) by category an
 ```jsonc
 // Request:
 {
-  "Type": "SubscribeCompetitions"
+  "Type": "SubscribeCompetitions",
+  "Nonce":63804569790630801,
 }
 ````
 ```jsonc
 // Response:
 {
   "State": "Success",
-  "Type": "SubscribeCompetitions",
+  "Type": "SubscribeCompetitions",,
+  "Nonce":63804569790630801,
   "Data": {
     "1": {
         { "Sweden - 2nd Div. Sodra Svealand": 4 },
@@ -267,6 +274,7 @@ Returns all markets that match the filter and subscribe to future changes. There
 {
   "Type": "SubscribeMarketsByFilter",
   "MaxResults": 1000,
+  "Nonce":63804569790630801,
   "Data": {
     "MarketFilter": {
       "Cat":2,
@@ -278,65 +286,13 @@ Returns all markets that match the filter and subscribe to future changes. There
   }
 }
 ````
-```jsonc
-// Response (single market):
-{
-  "State": "Success",
-  "Type": "SubscribeMarketsByFilter",
-  "Data": {
-    "Margin": 106.211,
-    "ID": "890f70d1-f6d7-49c1-a17f-94428df82a8e",
-    "LastCh": "2022-06-27T18:01:46.9028667Z",
-    "LastSoftCh": "2022-06-27T18:01:46.9028667Z",
-    "CreationDate": "2022-06-27T11:01:46.9028667Z",
-    "MainNodeID": 1,
-    "Comp": "CS:GO - REPUBLEAGUE",
-    "Descr": "Total Away - 1st Map Over/Under 16.5",
-    "Title": "forZe vs. Bad News Eagles",
-    "Cat": 32,
-    "ClosD": "2022-06-27T19:01:46.8982615Z",
-    "SettlD": "2022-06-27T19:07:46.8982615Z",
-    "Status": 1,
-    "Ru": [
-      {
-        "Name": "Over 16.5 ",
-        "mCT": 8000,
-        "RedA": 0
-      },
-      {
-        "Name": "Under 16.5 ",
-        "mCT": 8000
-      }
-    ],
-    "Type": 1,
-    "Period": 1,
-    "Creator": 2,
-    "Settler": {
-      "2": true
-    },
-    "SetFin": 24,
-    "SettleProtocol": 0,
-    "SettlT": 0,
 
-    "Comm": 0.001,
-    "ComRecip": {
-      "2": 0.5,
-      "1": 0.5
-    },
-    "MinVal": 0,
-    "MaxVal": 0,
-    "Cur": 0,
-    "CurB": 0,
-    "Flag": 0,
-    "evID": 12041151212,
-  }
-}
-```
 ```jsonc
 // Response (multiple markets):
 {
   "State": "Success",
   "Type": "SubscribeMarketsByFilter",
+  "Nonce":63804569790630801,
   "Page": 1,
   "Count": 22,
   "Data": [
@@ -423,6 +379,7 @@ Returns a market given a market ID.
 // Request:
 {
   "Type": "GetMarketByID",
+  "Nonce":63804569790630801,
   "Data": { "mid": "d81e889f-7b98-4229-941c-ffefac4ed7c3" }
 }
 ```
@@ -431,7 +388,7 @@ Returns a market given a market ID.
 {
   "State": "Success",
   "Type": "GetMarketByID",
-  "Nonce": 8,
+  "Nonce":63804569790630801,
   "Data": {
     "Margin": 103.268,
     "ID": "d81e889f-7b98-4229-941c-ffefac4ed7c3",
@@ -468,7 +425,8 @@ Returns an integer with the next available user ID to be used on account creatio
 ```jsonc
 // Request:
 {
-  "Type":"GetFreeUserID"
+  "Type":"GetFreeUserID",
+  "Nonce":63804569790630801
 }
 ```
 ```jsonc
@@ -476,6 +434,7 @@ Returns an integer with the next available user ID to be used on account creatio
 {
   "State": "Success",
   "Type": "GetFreeUserID",
+  "Nonce":63804569790630801,
   "Data": 5
 }
 ```
@@ -485,7 +444,8 @@ Returns an integer if an account with the public key is found.
 ```jsonc
 // Request:
 {
-  "Type":"GetUserIDFromPubKey"
+  "Type":"GetUserIDFromPubKey",
+  "Nonce":63804569790630801
   "Data":{
     "PublicKey":"3mVC3iAAQAA8SYKHTVi1MMIf7L+EIJL5jIOov5oNto2dk00ekGqojg=="
   }
@@ -496,6 +456,7 @@ Returns an integer if an account with the public key is found.
 {
   "State": "Success",
   "Type": "GetUserIDFromPubKey",
+  "Nonce":63804569790630801,
   "Data": 1
 }
 ```
@@ -505,7 +466,7 @@ Returns an integer if an account with the public key is found.
 // Request:
 {
   "Type":"GetAccountSettings",
-"Nonce":1232131255457
+  "Nonce":1232131255457
 }
 ```
 ```jsonc
