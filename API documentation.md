@@ -265,13 +265,12 @@ Returns all markets that match the filter and subscribe to future changes. There
 // Request:
 {
   "Type": "SubscribeMarketsByFilter",
-  "UserID": -1,
   "MaxResults": 1000,
-  "NodeID": 1,
   "Data": {
     "MarketFilter": {
+      "Cat":2,
       "OnlyActive": true,
-      "Status": 1,
+      "Status": 1,    //INPLAY
       "PageSize": 100
     },
     "SubscribeOrderbooks": true
