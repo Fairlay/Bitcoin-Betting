@@ -18,13 +18,13 @@ wss://node928.info:82
 ```
 
 ## How to sign and send messages
-Requests that change state requires a signature. In order to provide a valid signature, sort the `Data` object alphabetically and sign it with Ed25519 (or ECDSA if your account is flagged as `isETH`) to provide it as `SignatureUser` property inside the storage unit you send to the node.
+Requests that change state requires a signature. In order to provide a valid signature, sort the `Data` object alphabetically and sign it with ECDSA  (or Ed25519 if your account is not flagged as `isETH`) to provide it as `SignatureUser` property inside the storage unit you send to the node.
 
 **For signing, all fields that have default values MUST be omitted** - they are only shown for completeness in all request samples below.
 
 The `CreatedByUser` property inside `Data` object **may not deviate more than 20 seconds from the node time** or the request might get rejected.
 
-Nonce and CreatedByUser  may be omitted, but this might compromise security.   It is recommended to use current ticks as nonce.   Received messages can be matched to requests by comparing the nonce provided.   
+Nonce and CreatedByUser  may be omitted, but this might compromise security.   It is recommended to use current ticks as nonce.   Received messages can be matched to requests by comparing the nonce provided in the request.   
 
 UserID can be omitted for all requests that are not tied to a certain user.
 
@@ -32,23 +32,23 @@ NodeID can be provided to ensure, that mining is done by the choosen node.
 
 MinerFee is required for all requests that write in the ledger.
 
-Only messages that write to the Ledger are required to have a signature.  Balance or Order subscriptions do not require a signature. For all non-write requests, it is recommended to omit "MinerFee", "NodeID" and "CreatedByUser"!
+Only messages that write to the Ledger are required to have a signature.  Balance or order subscriptions do not require a signature. For all non-write requests, it is recommended to omit "MinerFee", "NodeID" and "CreatedByUser"!
 
 
 For example, consider signing the following `Data` object of a `ChangeMarketTimes` request:  
 ```jsonc
 {
-  "ClosD":"2022-11-20T19:50:00Z",
+  "ClosD":"2023-11-20T19:50:00Z",
   "CreatedByUser":638267133247192363,
   "MinerFee":0.00001,
   "Mid":"c91d1993-7115-49f1-b3cd-ab9dc88821a2",
-  "NodeID":1,
+  "NodeID":16,
   "SetlD":"2022-11-20T21:50:00Z",
   "UserID":2
 }
 ```
 
-Your final message/request to be sent to the Node with `ID = 1`:
+Your final message/request to be sent to the Node with `ID = 16`:
 
 ```jsonc
 {
@@ -56,11 +56,11 @@ Your final message/request to be sent to the Node with `ID = 1`:
   "Nonce":63804569790630801,
   "SignatureUser":"/khiPwpPNk8gFSyrp81t1ZcbUNmF8w233bQCvhz4U5PzCcALbPiipsvWqR+AQ+cJJVHtk0RMtihpM3DHdMxSBg==",
   "Data": {
-    "ClosD":"2022-11-20T19:50:00Z",
+    "ClosD":"2023-11-20T19:50:00Z",
     "CreatedByUser":638267133247192363,
     "MinerFee":0.00001,
     "Mid":"c91d1993-7115-49f1-b3cd-ab9dc88821a2",
-    "NodeID":1,
+    "NodeID":16,
     "SetlD":"2022-11-20T21:50:00Z",
     "UserID":2
   }
