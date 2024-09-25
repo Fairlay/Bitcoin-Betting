@@ -187,9 +187,7 @@ Returns all active categories (that have active/inplay markets) and subscribe to
 ```jsonc
 // Request:
 {
-  "Type": "SubscribeSports",
-  "UserID": -1,
-  "NodeID": 1
+  "Type": "SubscribeSports"
 }
 ```
 ```jsonc
@@ -227,9 +225,7 @@ Returns all active competitions (that have active/inplay markets) by category an
 ```jsonc
 // Request:
 {
-  "Type": "SubscribeCompetitions",
-  "UserID": -1,
-  "NodeID": 1
+  "Type": "SubscribeCompetitions"
 }
 ````
 ```jsonc
@@ -422,10 +418,7 @@ Returns a market given a market ID.
 // Request:
 {
   "Type": "GetMarketByID",
-  "Nonce": 8,
   "RequestTime": "2022-07-13T19:16:03.0247397Z",
-  "UserID": -1,
-  "NodeID": 1,
   "Data": { "mid": "d81e889f-7b98-4229-941c-ffefac4ed7c3" }
 }
 ```
@@ -471,9 +464,7 @@ Returns an integer with the next available user ID to be used on account creatio
 ```jsonc
 // Request:
 {
-  "Type":"GetFreeUserID",
-  "UserID":-1,
-  "NodeID":1
+  "Type":"GetFreeUserID"
 }
 ```
 ```jsonc
@@ -490,9 +481,7 @@ Returns an integer if an account with the public key is found.
 ```jsonc
 // Request:
 {
-  "Type":"GetUserIDFromPubKey",
-  "UserID":-1,
-  "NodeID":1,
+  "Type":"GetUserIDFromPubKey"
   "Data":{
     "PublicKey":"3mVC3iAAQAA8SYKHTVi1MMIf7L+EIJL5jIOov5oNto2dk00ekGqojg=="
   }
@@ -513,7 +502,7 @@ Returns an integer if an account with the public key is found.
 {
   "Type":"GetAccountSettings",
   "UserID":1,
-  "NodeID":144
+  "NodeID":104
 }
 ```
 ```jsonc
