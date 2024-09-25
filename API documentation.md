@@ -3,7 +3,7 @@
 By default, each node also offers an API to external users. To incentivize node owners to do so, each mined transaction that is processed by a node incurs a small fee of around 1 satoshi.
 The API is Websocket only.
 
-All Models & Enums can be found here: [https://github.com/Fairlay/Bitcoin-Betting-Csharp/tree/main/BBetModels/DataStructures]
+All Models & Enums can be found here: https://github.com/Fairlay/Bitcoin-Betting-Csharp/tree/main/BBetModels/DataStructures
 
 
 ## How to connect
