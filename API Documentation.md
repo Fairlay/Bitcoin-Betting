@@ -30,9 +30,9 @@ UserID can be omitted for all requests that are not tied to a certain user.
 
 NodeID can be provided to ensure, that mining is done by the choosen node. 
 
-MinerFee is required for all requests that write in the ledger.
+MinerFeeStr is required for all requests that write in the ledger.  
 
-Only messages that write to the Ledger are required to have a signature.  Balance or order subscriptions do not require a signature. For all non-write requests, it is recommended to omit "MinerFee", "NodeID" and "CreatedByUser"!
+Only messages that write to the Ledger are required to have a signature.  Balance or order subscriptions do not require a signature. For all non-write requests, it is recommended to omit "MinerFeeStr", "NodeID" and "CreatedByUser"!
 
 
 For example, consider signing the following `Data` object of a `ChangeMarketTimes` request:  
@@ -40,7 +40,7 @@ For example, consider signing the following `Data` object of a `ChangeMarketTime
 {
   "ClosD":"2023-11-20T19:50:00Z",
   "CreatedByUser":638267133247192363,
-  "MinerFee":0.00001,
+  "MinerFeeStr": "0.00001",
   "Mid":"c91d1993-7115-49f1-b3cd-ab9dc88821a2",
   "NodeID":16,
   "SetlD":"2022-11-20T21:50:00Z",
@@ -58,7 +58,7 @@ Your final message/request to be sent to the Node with `ID = 16`:
   "Data": {
     "ClosD":"2023-11-20T19:50:00Z",
     "CreatedByUser":638267133247192363,
-    "MinerFee":0.00001,
+    "MinerFeeStr": "0.00001",
     "Mid":"c91d1993-7115-49f1-b3cd-ab9dc88821a2",
     "NodeID":16,
     "SetlD":"2022-11-20T21:50:00Z",
@@ -496,7 +496,7 @@ Request:
     "IsETH":false,
     "UserID": 1,
     "NodeID": 1,
-    "MinerFee":0.00001,
+    "MinerFeeStr": "0.00001",
     "CreatedByUser": "2022-07-19T11:01:25.8980825Z"
   }
 }
@@ -565,8 +565,8 @@ Request:
     "PubKey": "3mVC3iAAQA...to2dk00ekGqojg==",
     "IsETH":false,
     "InviteCode":"2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b"   
-    "NodeID": 1,
-    "MinerFee":0.00001,
+    "NodeID": 1,    
+    "MinerFeeStr": "0.00001",
     "CreatedByUser": "2022-07-19T11:01:25.8980825Z"
   }
 }
@@ -597,7 +597,7 @@ Request:
     "InviteCodeHash":"97da58f1c01fd2f573b006687afa5d81e46a5116ada08d9fcb58efaa872c1fcb"
     "UserID": 1,
     "NodeID": 1,
-    "MinerFee":0.00001,
+    "MinerFeeStr": "0.00001",
     "CreatedByUser": "2022-07-19T11:01:25.8980825Z"
   }
 }
@@ -634,7 +634,7 @@ Request:
     "DisableOnHold": true,
    "SelfExclude":  "2022-07-19T11:01:25.8980825Z",
     "NodeID": 1,
-    "MinerFee":0.00001,
+    "MinerFeeStr": "0.00001",
     "CreatedByUser": "2022-07-19T11:01:25.8980825Z"
   }
 }
@@ -877,7 +877,7 @@ Use to create, change or cancel an order created by the same user. Take note tha
      },
     "UserID": 1,
     "NodeID": 1,
-    "MinerFee":0.00001,
+    "MinerFeeStr": "0.00001",
     "CreatedByUser": "2022-07-19T11:08:48.9997487Z",
     "LayAsL": false,
     // Set this to true if you place a lay order on a binary market and you like to have the amount as liability of the order.
@@ -910,7 +910,7 @@ Use to create, change or cancel an order created by the same user. Take note tha
     },
     "UserID": 1,
     "NodeID": 1,
-    "MinerFee":0.00001,
+    "MinerFeeStr": "0.00001",
     "CreatedByUser": "2022-07-19T11:08:48.9997487Z"
   }
 }
@@ -954,7 +954,7 @@ Creates a new market. Take note that all fields that have default values MUST be
     },
     "UserID": 1,
     "NodeID": 1,
-    "MinerFee":0.00001,
+    "MinerFeeStr": "0.00001",
     "CreatedByUser": "2022-07-19T11:05:17.5852297Z"
   }
 }
@@ -1013,7 +1013,7 @@ Changes closing and settlement dates for any market that was created by the same
     "SetlD":"2022-11-20T21:50:00Z",
     "UserID": 1,
     "NodeID": 1,
-    "MinerFee":0.00001,
+    "MinerFeeStr": "0.00001",
     "CreatedByUser": "2022-07-19T11:05:17.5852297Z"
   }
 }
@@ -1048,7 +1048,7 @@ Allows you to issue your own currency. If Maintainer is set to `0` (default), th
       // "TotalBalance": 0,
       // "Maintainer": 0,
      },
-    "MinerFee":0.00001,
+    "MinerFeeStr": "0.00001",
     "NodeID": 1,
     "UserID":1
   }
@@ -1140,7 +1140,7 @@ Funds that are burned, can be retrieved via Smart Chain Bridges on other Chains.
     "TType": 10,
     "NodeID": 1,
     "Amount": 10.5,
-    "MinerFee":0.00001,
+    "MinerFeeStr": "0.00001",
     "CreatedByUser": "2022-07-19T11:05:17.5852297Z"
   }
 }
