@@ -505,8 +505,7 @@ Returns an integer if an account with the public key is found.
 // Request:
 {
   "Type":"GetAccountSettings",
-  "UserID":1,
-  "NodeID":104
+"Nonce":1232131255457
 }
 ```
 ```jsonc
@@ -514,6 +513,7 @@ Returns an integer if an account with the public key is found.
 {
   "State": "Success",
   "Type": "GetUserIDFromPubKey",
+  "Nonce":1232131255457
   "Data": 1
 }
 ```
