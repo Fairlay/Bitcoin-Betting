@@ -1,7 +1,9 @@
 # API documentation
 
 By default, each node also offers an API to external users. To incentivize node owners to do so, each mined transaction that is processed by a node incurs a small fee of around 1 satoshi.
-The API is Websocket only. REST is not supported to ensure efficient use of each Node's limited resources.  
+The API is Websocket only.
+
+All Models & Enums can be found here: [https://github.com/Fairlay/Bitcoin-Betting-Csharp/tree/main/BBetModels/DataStructures]
 
 
 ## How to connect
@@ -15,14 +17,23 @@ wss://bitcoin-betting.org:82
 wss://node928.info:82
 ```
 
-## How to sign messages
+## How to sign and send messages
 Requests that change state requires a signature. In order to provide a valid signature, sort the `Data` object alphabetically and sign it with Ed25519 (or ECDSA if your account is flagged as `isETH`) to provide it as `SignatureUser` property inside the storage unit you send to the node.
 
 **For signing, all fields that have default values MUST be omitted** - they are only shown for completeness in all request samples below.
 
-The `RequestTime` and `CreatedByUser` property inside `Data` object **may not deviate more than 15 seconds from the node time** or the request might get rejected.
+The `CreatedByUser` property inside `Data` object **may not deviate more than 20 seconds from the node time** or the request might get rejected.
 
-Nonce, RequestTime and CreatedByUser  may be omitted, but this might compromise security.
+Nonce and CreatedByUser  may be omitted, but this might compromise security.   It is recommended to use current ticks as nonce.   Received messages can be matched to requests by comparing the nonce provided.   
+
+UserID can be omitted for all requests that are not tied to a certain user.
+
+NodeID can be provided to ensure, that mining is done by the choosen node. 
+
+MinerFee is required for all requests that write in the ledger.
+
+Only messages that write to the Ledger are required to have a signature.  Balance or Order subscriptions do not require a signature. For all non-write requests, it is recommended to omit "MinerFee", "NodeID" and "CreatedByUser"!
+
 
 For example, consider signing the following `Data` object of a `ChangeMarketTimes` request:  
 ```jsonc
@@ -67,9 +78,6 @@ You should check `State` property on every response. In case of `State == Error`
   "Error": "No market found"
 }
 ```
-
-## What messages to sign
-Only messages that write to the Ledger are required to have a signature.  Balance or Order subscriptions do not require a signature. For all these requests, it is recommended to omit "RequestTime", "Nonce" and "CreatedByUser"!
 
 
 ## Index
@@ -147,10 +155,7 @@ Returns all active currencies on platform.
 ```jsonc
 // Request:
 {
-  "Type": "GetCurrencies",
-  "RequestTime": "2022-04-22T09:20:14.3856547Z", //(optional)
-  "UserID": -1,
-  "NodeID": 1
+  "Type": "GetCurrencies"
 }
 ```
 ```jsonc
@@ -418,7 +423,6 @@ Returns a market given a market ID.
 // Request:
 {
   "Type": "GetMarketByID",
-  "RequestTime": "2022-07-13T19:16:03.0247397Z",
   "Data": { "mid": "d81e889f-7b98-4229-941c-ffefac4ed7c3" }
 }
 ```
