@@ -5,6 +5,8 @@ The API is Websocket only.
 
 All Models & Enums can be found here: https://github.com/Fairlay/Bitcoin-Betting-Csharp/tree/main/BBetModels/DataStructures
 
+You can find sample clients for Javascript, C# and Python here: https://github.com/Fairlay/
+
 
 ## How to connect
 
