@@ -858,6 +858,7 @@ Returns all matched user orders and subscribes to future changes. This does not 
 
 ## `OrderAlteration`
 Use to create, change or cancel an order created by the same user. Take note that all fields that have default values MUST be omitted. So putting `"Side":0` for example will be rejected by any node.
+OrderAlteration is used to create, cancel and replace orders.  I case of cancellation drop the UnmatchedOrder entirely.
 ```jsonc
 // Request:
 {
@@ -883,7 +884,8 @@ Use to create, change or cancel an order created by the same user. Take note tha
     "CreatedByUser": "2022-07-19T11:08:48.9997487Z",
     "LayAsL": false,
     // Set this to true if you place a lay order on a binary market and you like to have the amount as liability of the order.
-
+    "OldOrderID":"d1b125a2-dc39-4c5a-afaf-40c975ac014e",
+     // In case you want to cancel an existing order, just provide OldOrderID.  
     "Local": false,
    // Indicates whether the order shall be shared with all other nodes. Local = true will require a lower Miner Fee. By default all markets are shared accross all nodes
   }
