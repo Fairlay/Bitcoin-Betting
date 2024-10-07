@@ -7,10 +7,6 @@ To be able to mine and receive the mining fees you need to have an account / inv
 
 You need a server with Ubuntu 18.04 or higher, 16 GB of RAM and at least 2 vCPU cores.  Furthermore, if you like to connect to your node from the browser, it is required to register a domain and a SSL certificate. 
 
-If you only have 8 GB, it might also be possible to run the node. In this case check:
-
-https://www.baeldung.com/linux/increase-swap-space
-
 ##  2. Install Tmux, Unzip, Dotnet and other depencencies.
 ```
 wget -q https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && sudo dpkg -i packages-microsoft-prod.deb && sudo apt-get -y update && sudo apt-get -y install software-properties-common 
