@@ -15,7 +15,7 @@ wget -q https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-pr
 ```
 ## 3. Download and extract the latest version.
 ```
-wget -O bbet-node.zip https://ipfs.io/ipfs/QmcWoYikpPj5LAuo17hVwG4riewtLZPvM1TdXkHbGYtcRp && unzip bbet-node.zip
+wget -O bbet-node.zip https://ipfs.io/ipfs/QmeQMLBrSSWaNrRdeaoEMcLueHJPAbB2Wfmf5S525rATSn && unzip bbet-node.zip
 ```
 
 ## 4. Register a domain  (optional)
