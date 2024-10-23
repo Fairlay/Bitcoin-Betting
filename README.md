@@ -107,10 +107,8 @@ By default, certain IPs like US IPs are restricted from connecting to a node. An
 
 ## OnHold
 
-Missettlements happen rarely on Bitcoin Betting, but cannot be avoided.  To be able to resettle markets without having one user left with a negative balance, a certain amount will be placed "OnHold"  up to 24 hours after the last settlement.  The "OnHold" amount is designed in a way that if any single event of the last 24 hours resettles to a different outcome, that the user will not be left with a negative balance.  
+Wrong settlements happen rarely, but cannot be avoided at all. To be able to resettle markets without having one user left with a negative balance, a certain amount will be placed "OnHold"  up to 24 hours after the last settlement.  The "OnHold" amount is designed in a way that if any single event of the last 24 hours resettles to any other outcome, the user will not be left with a negative balance.  
 It is possible to disable "OnHold" by paying a certain insurance fee. The insurance fee is dependent on the Sport and Competition. Here the current list: 
-
-
 
     ESPORTS  0.004m
     BITCOIN  0m
@@ -133,6 +131,7 @@ It is possible to disable "OnHold" by paying a certain insurance fee. The insura
             default  0.0005m   
     default  0.001m
 
+All insurance fees go to a certain insurance fund that will be used if any user is left with a negative balance due to a resettlement. 
 
 # Technical Details 
 
