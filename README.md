@@ -105,6 +105,34 @@ Please check the API documentation.md file for further details as well as the Ja
 
 By default, certain IPs like US IPs are restricted from connecting to a node. Any node operator is free to add or remove regions from the list by editing the IPRanges.ini config file. 
 
+## OnHold
+
+Missettlements happen rarely on Bitcoin Betting, but cannot be avoided.  To be able to resettle markets without having one user left with a negative balance, a certain amount will be placed "OnHold"  up to 24 hours after the last settlement.  The "OnHold" amount is designed in a way that if any single event of the last 24 hours resettles to a different outcome, that the user will not be left with a negative balance.  
+It is possible to disable "OnHold" by paying a certain insurance fee. The insurance fee is dependent on the Sport and Competition. Here the current list: 
+
+
+
+    ESPORTS  0.004m
+    BITCOIN  0m
+    DICE     0m
+    SOCCER  0.0005m
+    TENNIS   0.0005m
+    HOCKEY       
+            NHL  0.0002m
+            default 0.0005m        
+    VOLLEYBALL  0.0005m
+    HANDBALL  0.0005m
+    GOLF  0.002m
+    AMERICANFOOTBALL  0.0002m
+    BASEBALL       
+            MLB  0.0002m
+            default  0.002m        
+    BASKETBALL       
+            case NBA  0.0002m
+            case NCAA  0.002m
+            default  0.0005m   
+    default  0.001m
+
 
 # Technical Details 
 
