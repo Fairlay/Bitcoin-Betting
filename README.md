@@ -27,7 +27,7 @@ Bitcoin Betting is accessible to anyone. No personal data is ever collected. Not
 
 ## Privacy & Block Explorers
 
-All transactions on Bitcoin Betting are public and accessible via so called "Block Explorers".  A current very simple alpha version is integrated into each node and can be found for example under  http://node928.info:3793/, http://bitcoin-betting.org:3793/  or  http://node82.sytes.net:3793
+All transactions on Bitcoin Betting are public and accessible via so called "Block Explorers".  A current very simple alpha version is integrated into each node and can be found for example under  https://node928.info:1443/, https://bitcoin-betting.org:1443/  or  https://node82.sytes.net:1443
 
 It is recommended to not save any personal data in the ledger. Bitcoin Betting is thus not suitable for money laundering or other criminal activities as all transactions are easily traceable. 
 
