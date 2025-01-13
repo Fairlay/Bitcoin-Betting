@@ -1231,3 +1231,14 @@ Send a chat message to the chat. Does not require any signature.
   "Data": null
 }
 ```
+
+To subscribe to the Chat, send:
+
+{
+  "Type": "SubscribeChat",
+  "Nonce": 6,
+  "UserID": 123,
+  "NodeID": 104,
+  "Data": {
+  }
+}
