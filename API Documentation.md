@@ -140,6 +140,15 @@ Get a list of all burned transactions
 - [`Transfer`](#Transfer)  
 Withdraw your funds by sending or burning
 
+
+- [`AllowDirectDebit`](#AllowDirectDebit)  
+Allow any other user to deduct funds from your account
+
+- [`ChatMsg`](#ChatMsg)  
+Send a Message to the Chat.
+
+
+
 ## [Additional class documentation](interfaces.md)
 ---
 ## `ReturnHeartbeat`
@@ -1154,6 +1163,70 @@ Funds that are burned, can be retrieved via Smart Chain Bridges on other Chains.
 {
   "State": "Success",
   "Type": "Transfer",
+  "Nonce": 63804569790630801,
+  "Data": null
+}
+```
+
+## `AllowDirectDebit`
+
+Allows user 1 to withdraw up to 10 mETH  from your account (every 24 hours), while the transaction is irrevokable after 24 hours. 
+To disable any direct debits, set the Allowance to 0.
+
+```jsonc
+// Request:
+{
+  "Type": "Transfer",
+  "Nonce": 63804569790630801,
+  "SignatureUser": "FOOuU5oibmQatnBx4VrxMvwA6...P8bqm7J+38gz+xP945a4Cg==",
+  "Data": {
+    "ID": "2646b51a-bd6b-498d-b246-ae80ecbc3f3c",
+    "Cur": 1,
+    "To": 1,
+   "IsDirectDebitAllowance" : True,
+"DebitPendingPeriodSeconds": 86400,
+    "Allowance": 10,
+    "NodeID": 104,
+    "MinerFeeStr": "0.00001",
+    "CreatedByUser": "2024-07-19T11:05:17.5852297Z"
+  }
+}
+```
+```jsonc
+// Response:
+{
+  "State": "Success",
+  "Type": "Transfer",
+  "Nonce": 63804569790630801,
+  "Data": null
+}
+```
+
+## `ChatMsg`
+
+Send a chat message to the chat. Does not require any signature.
+
+```jsonc
+// Request:
+{
+  "Type": "ChatMsg",
+  "Nonce": 63804569790630801,
+    "UserID": 111,
+  "Data": {
+
+    "Message": "My Message",
+   "RoomID" : 0,
+    "NodeID": 104,
+    "MinerFeeStr": "0.00001",
+    "CreatedByUser": "2024-07-19T11:05:17.5852297Z"
+  }
+}
+```
+```jsonc
+// Response:
+{
+  "State": "Success",
+  "Type": "ChatMsg",
   "Nonce": 63804569790630801,
   "Data": null
 }
