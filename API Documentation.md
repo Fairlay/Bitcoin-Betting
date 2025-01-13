@@ -1233,7 +1233,7 @@ Send a chat message to the chat. Does not require any signature.
 ```
 
 To subscribe to the Chat, send:
-
+```jsonc
 {
   "Type": "SubscribeChat",
   "Nonce": 6,
@@ -1242,3 +1242,4 @@ To subscribe to the Chat, send:
   "Data": {
   }
 }
+```
