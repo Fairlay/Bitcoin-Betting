@@ -135,6 +135,13 @@ All insurance fees go to a certain insurance fund that will be used if any user 
 
 # Technical Details 
 
+## Manual Interaction with Smart Contract
+
+1. Go to remix.ethereum.org or a similar tool.
+2. Upload the abi file you find in this repository: SmartContract.abi.
+3. On Remix go to deploy & run transactions and enter the smart contract address 0x5978C6153A06B141cD0935569F600a83Eb44AeAa.
+4. When you found the deployed contract, you can deposit, withdraw or reset the daily withdrawal limit. Please note depositing requires a claiming transaction on the bitcoin betting exchange that can be transmitted via API, a node or via the front-end.
+
 ## DAGs
 
 Bitcoin Betting utilizes Directed Acyclic Graphs to store and process transactions. Unlike with blockchains this technology allows different nodes or parts of the network to work on their own branches seperately and only merge them with other nodes if it is possible or beneficial to do so.  For example, a node in Venezuela can continue to operate normally and process local markets and orders 
